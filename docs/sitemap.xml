@@ -40,6 +40,9 @@
     <loc>/reference/par_flatSeason.html</loc>
   </url>
   <url>
+    <loc>/reference/par_flatTrend.html</loc>
+  </url>
+  <url>
     <loc>/reference/par_sinSeason.html</loc>
   </url>
   <url>
@@ -56,5 +59,11 @@
   </url>
   <url>
     <loc>/reference/seasonalFoI.sin.html</loc>
+  </url>
+  <url>
+    <loc>/reference/trendFoI.flat.html</loc>
+  </url>
+  <url>
+    <loc>/reference/trendFoI.html</loc>
   </url>
 </urlset>

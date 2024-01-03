@@ -2,7 +2,7 @@
 % Please edit documentation in R/foi-seasonal.R
 \name{seasonalFoI}
 \alias{seasonalFoI}
-\title{Add a seasonal pattern to the FoI function}
+\title{Add a seasonal pattern to the FoI trace function}
 \usage{
 seasonalFoI(t, par)
 }
@@ -15,5 +15,5 @@ seasonalFoI(t, par)
 \link{numeric}
 }
 \description{
-Add a seasonal pattern to the FoI function
+Add a seasonal pattern to the FoI trace function
 }

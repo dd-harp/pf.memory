@@ -1,5 +1,5 @@
 
-#' Add a seasonal pattern to the FoI function
+#' Add a seasonal pattern to the FoI trace function
 #'
 #' @param t the time
 #' @param par a [list]
@@ -10,7 +10,7 @@ seasonalFoI = function(t, par){
   UseMethod("seasonalFoI", par)
 }
 
-#' The "no seasonality" pattern
+#' The "no seasonality" function
 #'
 #' @inheritParams seasonalFoI
 #'

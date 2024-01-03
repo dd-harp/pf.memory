@@ -78,12 +78,86 @@
 
     
     
-<p>In this vignette we demon</p>
+<p>We let <span class="math inline">\(h(t)\)</span> denote the FoI. To
+construct <span class="math inline">\(h(t)\)</span>, we let <span class="math inline">\(\bar h\)</span> be a parameter that sets the
+overall level of exposure. We assume exposure has a seasonal pattern,
+<span class="math inline">\(S(t)\)</span>, and a temporal trend, <span class="math inline">\(T(t)\)</span>, and <span class="math display">\[h(t) = \bar h \cdot S(t) \cdot T(t).\]</span></p>
+<p>Motivated by the evidence for age-dependent exposure, the rate of
+exposure in a cohort is assumed to change with age. We use the
+age-weighting function, <span class="math inline">\(\omega(a)\)</span>,
+consistent with the available evidence from both anopheline [1-2] and
+aedine [3] mosquitoes. Each cohort is indexed by its birth day, <span class="math inline">\(\tau\)</span>. The FoI at age <span class="math inline">\(a\)</span> for the cohort born on day <span class="math inline">\(\tau\)</span>, which is at time <span class="math inline">\(t=a+\tau\)</span>, is defined for <span class="math inline">\(a&gt;0\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+h_\tau(a) = \bar h \cdot \omega(a) \cdot S(a+\tau) \cdot T(a+\tau)
+\end{equation}\]</span></p>
+<p>We can thus compare exposure and infection for cohorts of different
+ages, of the same age at different times.</p>
+<p>To pressure test the models, we developed a class of functions to
+simulate exposure with respect to time or age. Supplement 1 includes a
+highly configurable and extensible library of FoI functions, output from
+this R-markdown file as <code>Supplement1.R</code> using
+<code>purl</code> from the R package <code>knitr</code>.</p>
+<p>The <code>FoI</code> is defined as an <strong>S3</strong> class
+function that returns the FoI at ages <code>a</code> for a cohort with
+birthdate <code>tau</code>, for a function defined by <code>par</code>.
+The optional passed parameter <code>hhat</code> overrides the value of
+<code>hbar</code> set in <code>par</code> when it is not
+<code>null</code>:</p>
+<ul>
+<li><p><span class="math inline">\(\bar h\)</span> or <code>hbar</code>
+sets the overall level of exposure</p></li>
+<li><p><span class="math inline">\(S(t)\)</span> or
+<code>seasonalFoI</code> defines a seasonal pattern</p></li>
+<li><p><span class="math inline">\(T(t)\)</span> or
+<code>trendFoI</code> defines a temporal trend</p></li>
+<li><p><span class="math inline">\(\omega(a)\)</span> or
+<code>ageFoI</code> defines a change in exposure with respect to age
+relative to the mean population FoI</p></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">plotFoI</span><span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">h</span>, <span class="va">FoIpar</span>, <span class="va">tau</span><span class="op">=</span><span class="fl">0</span>, <span class="va">Tmax</span><span class="op">=</span><span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, <span class="va">clrs</span><span class="op">=</span><span class="cn">NULL</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">L</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">clrs</span><span class="op">)</span><span class="op">)</span> <span class="va">clrs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="va">L</span><span class="op">)</span></span>
+<span>  <span class="va">tms</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">Tmax</span></span>
+<span>  <span class="va">tm</span> <span class="op">=</span> <span class="va">tms</span><span class="op">/</span><span class="fl">365</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tm</span>, <span class="fl">365</span><span class="op">*</span><span class="fu"><a href="../reference/FoI.html">FoI</a></span><span class="op">(</span><span class="va">tms</span>, <span class="va">FoIpar</span>, <span class="va">tau</span>, hhat<span class="op">=</span><span class="va">h</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"n"</span>, </span>
+<span>       xlab <span class="op">=</span> <span class="st">"Host Age (Years)"</span>, ylab <span class="op">=</span> <span class="st">"aFoI"</span><span class="op">)</span> </span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">L</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">tm</span>, <span class="fl">365</span><span class="op">*</span><span class="fu"><a href="../reference/FoI.html">FoI</a></span><span class="op">(</span><span class="va">tms</span>,<span class="va">FoIpar</span>, <span class="va">tau</span>, hhat<span class="op">=</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">clrs</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">clrs8b</span> <span class="op">&lt;-</span> <span class="fu">viridis</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">viridis</a></span><span class="op">(</span><span class="fl">8</span>, option <span class="op">=</span> <span class="st">"B"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">FoIfigure</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">hh</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">.5</span>, <span class="fl">.2</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">/</span><span class="fl">365</span>, </span>
+<span>                     <span class="va">tau</span><span class="op">=</span><span class="fl">0</span>, <span class="va">clrs</span> <span class="op">=</span> <span class="va">clrs8b</span>, <span class="va">Tmax</span><span class="op">=</span><span class="fl">5</span><span class="op">*</span><span class="fl">365</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">plotFoI</span><span class="op">(</span><span class="va">hh</span>, <span class="va">foiP4</span>, <span class="va">tau</span>, <span class="va">Tmax</span>, <span class="va">clrs</span><span class="op">)</span> </span>
+<span>  <span class="fu">plotFoI</span><span class="op">(</span><span class="va">hh</span>, <span class="va">foiP3</span>, <span class="va">tau</span>, <span class="va">Tmax</span>, <span class="va">clrs</span><span class="op">)</span> </span>
+<span><span class="op">}</span> </span></code></pre></div>
+<p><img src="FoI-TraceFunctions_files/figure-html/FoIFigure-1.png" width="576"></p>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li><p>G. R. Port, P. F. L. Boreham, J. H. Bryan, The relationship of
+host size to feeding by mosquitoes of the Anopheles Gambiae Giles
+complex (Diptera: Culicidae). Bulletin of Entomological Research 70,
+133–144 (1980).</p></li>
+<li><p>P. Carnevale, J. L. Frézil, M. F. Bosseno, F. Le Pont, J.
+Lancien, [The aggressiveness of Anopheles gambiae A in relation to the
+age and sex of the human subjects]. Bull. World Health Organ. 56,
+147–154 (1978).</p></li>
+<li><p>K. A. Liebman, et al., Determinants of Heterogeneous Blood
+Feeding Patterns by Aedes Aegypti in Iquitos, Peru. PLoS Negl. Trop.
+Dis. 8, e2702 (2014).</p></li>
+</ol>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 
@@ -91,7 +165,7 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by John M. Henry, David L. Smith.</p>
+<p>Developed by David L. Smith, John M. Henry.</p>
 </div>
 
 <div class="pkgdown">

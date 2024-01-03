@@ -3,8 +3,8 @@ Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
 Authors@R: c(
-      person("John M.", "Henry", email = "henry529@uw.edu", role = c("aut","cre"), comment = c(ORCID = "0000-0001-8684-2003")),
-      person("David L.", "Smith", email = "smitdave@uw.edu", role = "aut", comment = c(ORCID = "0000-0003-4367-3849"))
+      person("David L.", "Smith", email = "smitdave@uw.edu", role = c("aut","cre"), comment = c(ORCID = "0000-0003-4367-3849")),
+      person("John M.", "Henry", email = "henry529@uw.edu", role = "aut", comment = c(ORCID = "0000-0001-8684-2003"))
     )
 Maintainer: David L Smith <smitdave@uw.edu>
 Description: More about what it does (maybe more than one line)
@@ -17,6 +17,7 @@ Roxygen: list(markdown = TRUE)
 Imports: 
   stats
 Suggests: 
-  knitr
+  knitr, 
+  viridis
 VignetteBuilder: knitr
   

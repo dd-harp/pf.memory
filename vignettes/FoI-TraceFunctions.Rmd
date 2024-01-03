@@ -2,7 +2,7 @@
 title: "FoI Trace Functions"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{FoI Trace}
+  %\VignetteIndexEntry{FoI Trace Functions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,7 +12,72 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(pf.memory)
 ```
 
 
-In this vignette we demon
+We let $h(t)$ denote the FoI. To construct $h(t)$, we let $\bar h$ be a parameter that sets the overall level of exposure. We assume exposure has a seasonal pattern, $S(t)$, and a temporal trend, $T(t)$, and $$h(t) = \bar h \cdot S(t) \cdot T(t).$$ 
+
+Motivated by the evidence for age-dependent exposure, the rate of exposure in a cohort is assumed to change with age. We use the age-weighting function, $\omega(a)$, consistent with the available evidence from both anopheline [1-2] and aedine [3] mosquitoes. Each cohort is indexed by its birth day, $\tau$. The FoI at age $a$ for the cohort born on day $\tau$, which is at time $t=a+\tau$, is defined for $a>0$: 
+
+\begin{equation}
+h_\tau(a) = \bar h \cdot \omega(a) \cdot S(a+\tau) \cdot T(a+\tau) 
+\end{equation}
+
+We can thus compare exposure and infection for cohorts of different ages, of the same age at different times. 
+
+To pressure test the models, we developed a class of functions to simulate exposure with respect to time or age. Supplement 1 includes a highly configurable and extensible library of FoI functions, output from this R-markdown file as `Supplement1.R` using `purl` from the R package `knitr`. 
+
+The `FoI` is defined as an **S3** class function that returns the FoI at ages `a` for a cohort with birthdate `tau`, for a function defined by `par`. The optional passed parameter `hhat` overrides the value of `hbar` set in `par` when it is not `null`: 
+
++ $\bar h$ or `hbar` sets the overall level of exposure
+    
++ $S(t)$ or `seasonalFoI` defines a seasonal pattern
+    
++ $T(t)$ or `trendFoI` defines a temporal trend 
+
++ $\omega(a)$ or `ageFoI` defines a change in exposure with respect to age relative to the mean population FoI
+
+```{r FoI Trace, echo=F, purl=F}
+foiP1 = list(hbar = 5/365, agePar = par_flatAge(), seasonPar = par_flatSeason(), trendPar = par_flatTrend()) 
+foiP2 = list(hbar = 5/365, agePar = par_flatAge(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
+foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
+foiP4 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_flatSeason(), trendPar = par_flatTrend()) 
+```
+
+```{r plotFoI functions} 
+plotFoI= function(h, FoIpar, tau=0, Tmax=5*365, clrs=NULL){
+  L = length(h)
+  if(is.null(clrs)) clrs = rep("black", L)
+  tms = 1:Tmax
+  tm = tms/365 
+  plot(tm, 365*FoI(tms, FoIpar, tau, hhat=h), type = "n", 
+       xlab = "Host Age (Years)", ylab = "aFoI") 
+  for(i in 1:L) lines(tm, 365*FoI(tms,FoIpar, tau, hhat=h[i]), col = clrs[i])
+}
+```
+
+```{r plotFoI} 
+clrs8b <- viridis::viridis(8, option = "B")
+
+FoIfigure = function(hh=c(8, 4, 2, 1, .5, .2, 0.1)/365, 
+                     tau=0, clrs = clrs8b, Tmax=5*365){
+  par(mfcol = c(1,2), mar =c(4,4,1,1))
+  plotFoI(hh, foiP4, tau, Tmax, clrs) 
+  plotFoI(hh, foiP3, tau, Tmax, clrs) 
+} 
+```
+
+
+```{r FoIFigure, fig.height=2.5, fig.width=6, echo=F, purl=FALSE, warning=FALSE}
+FoIfigure() 
+```
+
+## References
+
+1. G. R. Port, P. F. L. Boreham, J. H. Bryan, The relationship of host size to feeding by mosquitoes of the Anopheles Gambiae Giles complex (Diptera: Culicidae). Bulletin of Entomological Research 70, 133–144 (1980).
+
+2. P. Carnevale, J. L. Frézil, M. F. Bosseno, F. Le Pont, J. Lancien, [The aggressiveness of Anopheles gambiae A in relation to the age and sex of the human subjects]. Bull. World Health Organ. 56, 147–154 (1978).
+
+3. K. A. Liebman, et al., Determinants of Heterogeneous Blood Feeding Patterns by Aedes Aegypti in Iquitos, Peru. PLoS Negl. Trop. Dis. 8, e2702 (2014).
+

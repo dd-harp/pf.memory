@@ -2,7 +2,7 @@
 % Please edit documentation in R/foi-seasonal.R
 \name{seasonalFoI.flat}
 \alias{seasonalFoI.flat}
-\title{The "no seasonality" pattern}
+\title{The "no seasonality" function}
 \usage{
 \method{seasonalFoI}{flat}(t, par)
 }
@@ -15,5 +15,5 @@
 \link{numeric}
 }
 \description{
-The "no seasonality" pattern
+The "no seasonality" function
 }
