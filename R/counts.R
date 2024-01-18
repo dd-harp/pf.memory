@@ -1,5 +1,24 @@
 
 
+#' Title
+#'
+#' @param a
+#' @param FoIpar
+#' @param bins
+#' @param dx
+#' @param hhat
+#' @param tau
+#' @param r
+#' @param pMu
+#' @param pRBC
+#' @param pSig
+#' @param pWda
+#' @param pC
+#'
+#' @return
+#' @export
+#'
+#' @examples
 pCountsPa = function(a, FoIpar, bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
                      pMu=par_alpha2mu.0(),
