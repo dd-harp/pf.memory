@@ -1,4 +1,16 @@
 
+#' Compute the mean MoI directly
+#'
+#' @param a the host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#'
+#' @return
+#' @export
+#'
+#' @examples
 meanMoI = function(a, FoIpar, hhat=NULL, tau=0, r=1/200){
   moif = function(a, FoIpar, hhat, tau,r){
     integrate(zda, 0, a, a=a, FoIpar=FoIpar,hhat=hhat,tau=tau,r=r)$value
@@ -7,6 +19,17 @@ meanMoI = function(a, FoIpar, hhat=NULL, tau=0, r=1/200){
     (return(sapply(a,moif,FoIpar=FoIpar,hhat=hhat,tau=tau,r=r)))}
 }
 
+#' Compute the first derivatives for the queuing model M/M/infinity
+#'
+#' @param a the host age
+#' @param M the state variables
+#' @param p the parameters
+#' @param FoIpar parameters that define an FoI function
+#'
+#' @return
+#' @export
+#'
+#' @examples
 dMoIda = function(a,M,p,FoIpar){with(as.list(c(M,p)),{
   foi = FoI(a,FoIpar,tau,h)
   i = 1:N
@@ -17,6 +40,19 @@ dMoIda = function(a,M,p,FoIpar){with(as.list(c(M,p)),{
   list(c(dM))
 })}
 
+#' Solve the queuing model M/M/infinity
+#'
+#' @param h the force of infection
+#' @param FoIpar a FoI trace function
+#' @param r the clearance rate for a simple infection
+#' @param tau the cohort birthday
+#' @param Tmax The maximum runtime (in days)
+#' @param dt The output frequency (in days)
+#'
+#' @return
+#' @export
+#'
+#' @examples
 solveMMinfty = function(h,FoIpar,r=1/200,tau=0,Tmax=730, dt=1){
   tms = seq(0, Tmax, by = dt)
   N = round(max(4*h/r,20))
@@ -31,6 +67,17 @@ solveMMinfty = function(h,FoIpar,r=1/200,tau=0,Tmax=730, dt=1){
 
 
 
+#' Plot the distribution of the MoI at time t
+#'
+#' @param moi the mean moi
+#' @param t the time
+#' @param clr1 the color
+#' @param withm
+#'
+#' @return
+#' @export
+#'
+#' @examples
 MoIDistPlot = function(moi, t, clr1 = "red", withm = FALSE){
   N = dim(moi)[2]-2
   mm = 1:N -1
@@ -41,14 +88,36 @@ MoIDistPlot = function(moi, t, clr1 = "red", withm = FALSE){
   }
 }
 
-
-
+#' Compute the derivatives for MoI using a hybrid model
+#'
+#' @param a the host age
+#' @param M the state variables
+#' @param p the parameters
+#' @param FoIpar parameters that define an FoI function
+#'
+#' @return
+#' @export
+#'
+#' @examples
 dmda = function(a,M,p,FoIpar){with(as.list(c(M,p)),{
   foi = FoI(a,FoIpar,tau,h)
   dm = foi - r*m
   list(c(dm))
 })}
 
+#' Solve the hybrid model for the MoI
+#'
+#' @param h the force of infection
+#' @param FoIpar a FoI trace function
+#' @param r the clearance rate for a simple infection
+#' @param tau the cohort birthday
+#' @param Tmax The maximum runtime (in days)
+#' @param dt The output frequency (in days)
+#'
+#' @return a [matrix] with the orbits
+#' @export
+#'
+#' @examples
 solve_dm = function(h, FoIpar, r=1/200, tau=0, Tmax=730, dt=1){
   tms = seq(0, Tmax, by = dt)
   prms = c(h=h,r=r,tau=tau)
