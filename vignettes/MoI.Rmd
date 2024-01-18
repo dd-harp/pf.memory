@@ -95,7 +95,7 @@ $$\frac{dm}{da} = h - rm$$
 
 The unction `dmda` computes the derivative, and we can solve the hybrid equation using `solve_dm` and plot the output: 
 
-```{r, fig.height=4, fig.width=7,}
+```{r x, fig.height=4, fig.width=7}
 solve_dm(3/365, foiP3) -> mt 
 plot(mt$time, mt$m, type = "l", xlab = "Age (in Days)", ylab = expression(m[tau](a)))
 ```
