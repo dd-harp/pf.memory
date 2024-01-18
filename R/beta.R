@@ -1,5 +1,15 @@
 
 
+#' Title
+#'
+#' @param x
+#' @param mu
+#' @param pSig
+#'
+#' @return
+#' @export
+#'
+#' @examples
 dbeta1 = function(x, mu,
                   pSig=par_sigma.0()){
 

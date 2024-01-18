@@ -101,7 +101,7 @@ momentAoI = function(a, FoIpar, hhat=5/365, tau=0, r=1/200, n=1){
 #' @param a the host age
 #' @param M the state variables
 #' @param p the parameters
-#' @param FoIpar
+#' @param FoIpar parameters that define an FoI function
 #'
 #' @return the derivatives of the MoI and the AoI
 #' @export

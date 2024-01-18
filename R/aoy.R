@@ -1,10 +1,10 @@
 
-#' The distribution
+#' The distribution function for the age of the youngest infection (AoY)
 #'
 #' @param alpha the age of infection
 #' @param a the age of a cohort
-#' @param FoIpar
-#' @param hhat
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
 #' @param tau the cohort birthday
 #' @param r the clearance rate of a simple infection
 #'
@@ -19,6 +19,21 @@ pAoY = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   (1-exp(-moi*cdf))/X
 }
 
+#' Alternative method for computing the distribution function for the age of the youngest infection (AoY)
+#' @description
+#' This method computes the distribution function for the AoY by summing over AoI distributions
+#'
+#' @param alpha the age of infection
+#' @param a the age of a cohort
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate of a simple infection
+#'
+#' @return
+#' @export
+#'
+#' @examples
 pAoY_long= function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   moi = meanMoI(a, FoIpar, hhat, tau, r)
   py = dAoI(alpha, a, FoIpar, hhat, tau, r)
@@ -32,7 +47,19 @@ pAoY_long= function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
 }
 
 
-
+#' The density function for the age of the youngest infection (AoY)
+#'
+#' @param alpha the age of infection
+#' @param a the age of a cohort
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate of a simple infection
+#'
+#' @return
+#' @export
+#'
+#' @examples
 dAoY = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   # The function call
   dAoYcompute = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
@@ -45,7 +72,20 @@ dAoY = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
 }
 
 
-
+#' The random generation function for the age of the youngest infection (AoY)
+#'
+#' @param N the number of observations
+#' @param a the host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param alphamin the minimum value of the AoI to return
+#'
+#' @return
+#' @export
+#'
+#' @examples
 rAoY = function(N, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=0){
   minit = function(i, alphas, iix, jix){
     min(alphas[iix[i]:jix[i]])
@@ -62,7 +102,19 @@ rAoY = function(N, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=0){
 
 
 
-
+#' Compute the moments for the AoI density function for a cohort of age a
+#'
+#' @param a the host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param n the moment desired
+#'
+#' @return
+#' @export
+#'
+#' @examples
 momentAoY = function(a, FoIpar, hhat=5/365, tau=0, r=1/200, n=1){
 
   ffAoYda = function(a, FoIpar, hhat, tau, r, n){
@@ -76,40 +128,75 @@ momentAoY = function(a, FoIpar, hhat=5/365, tau=0, r=1/200, n=1){
     sapply(a, ffAoYda, FoIpar=FoIpar, hhat=hhat, tau=tau, r=r, n=n)}
 }
 
-
-
-
-
-
-
-
-
+#' The distribution function for the youngest age of N infections
+#'
+#' @param alpha the age of infection
+#' @param a the age of a cohort
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate of a simple infection
+#'
+#' @return
+#' @export
+#'
+#' @examples
 pAoYN = function(N, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   alpha = 0:a
   py = pAoI(alpha, a, FoIpar, hhat, tau, r)
   1-(1-py)^N
 }
 
+#' The density function for the youngest age of N infections
+#'
+#' @param N the number of infections
+#' @param a the age of a cohort
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate of a simple infection
+#'
+#' @return
+#' @export
+#'
+#' @examples
 dAoYN = function(N, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   cdf = pAoYN(N, a, FoIpar, hhat, tau, r)
   pdf = diff(cdf)
   pdf/sum(pdf)
 }
 
+#' The random generation function for the age of the youngest of N infections
+#'
+#' @param R the number of observations
+#' @param N the number of infections
+#' @param a the host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param alphamin the minimum value of the AoI to return
+#'
+#' @return
+#' @export
+#'
+#' @examples
 rAoYN = function(R, N, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=0){
   matrix(rAoI(R*N,a,FoIpar,hhat,tau,r,alphamin), nrow=N, ncol=R)
 }
 
-
-
-
-
-
-
-
-
-
-
+#' Compute the derivatives of the approximate moments of the AoY dynamically
+#' @description The
+#'
+#' @param a the host age
+#' @param M the state variables
+#' @param par the parameters
+#' @param FoIpar parameters that define an FoI function
+#'
+#' @return the derivatives of the MoI and the AoI
+#' @export
+#'
+#' @examples
 dAoYda = function(a,M,par,FoIpar){with(as.list(c(M,par)),{
   foi = FoI(a,FoIpar,tau,h)
 
@@ -128,6 +215,19 @@ dAoYda = function(a,M,par,FoIpar){with(as.list(c(M,par)),{
   list(c(dp, dm, dy,dx))
 })}
 
+#' Solve the system of differential equations to compute the approximate moments of the AoY over time.
+#'
+#' @param h the force of infection
+#' @param FoIpar a FoI trace function
+#' @param r the clearance rate for a simple infection
+#' @param tau the cohort birthday
+#' @param Tmax The maximum runtime (in days)
+#' @param dt The output frequency (in days)
+#'
+#' @return a matrix describing the orbits
+#' @export
+#'
+#' @examples
 solve_dAoYda = function(h, FoIpar, r=1/200, tau=0, Tmax=730, dt=1){
   tms = seq(0, Tmax, by = dt)
   prms = c(h=h,r=r,FoI=FoI,tau=tau)
