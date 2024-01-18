@@ -8,7 +8,6 @@
 #' @export
 #'
 #' @examples
-
 Detect = function(xi, a=0, Cpar=par_nbCounts()){
   UseMethod("Detect", Cpar)
 }
@@ -22,7 +21,6 @@ Detect = function(xi, a=0, Cpar=par_nbCounts()){
 #' @export
 #'
 #' @examples
-
 dCounts = function(hatxi, xi, a=0, Cpar=par_nbCounts()){
   UseMethod("dCounts", Cpar)
 }
@@ -37,7 +35,6 @@ dCounts = function(hatxi, xi, a=0, Cpar=par_nbCounts()){
 #' @export
 #'
 #' @examples
-
 pCounts = function(hatxi, xi, a=0, Cpar=par_nbCounts()){
   UseMethod("pCounts", Cpar)
 }
@@ -52,7 +49,6 @@ pCounts = function(hatxi, xi, a=0, Cpar=par_nbCounts()){
 #' @export
 #'
 #' @examples
-
 binnedCounts = function(xi, TensBins=TRUE, a=0, Cpar=par_nbCounts()){
   UseMethod("binnedCounts", Cpar)
 }
@@ -67,7 +63,6 @@ binnedCounts = function(xi, TensBins=TRUE, a=0, Cpar=par_nbCounts()){
 #' @export
 #'
 #' @examples
-
 par_nbCounts = function(q=6, sz=0.31, bvm = par_lRBC.0()){
   par = list()
   class(par) <- "nb"
@@ -87,7 +82,6 @@ par_nbCounts = function(q=6, sz=0.31, bvm = par_lRBC.0()){
 #' @export
 #'
 #' @examples
-
 Detect.nb = function(xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
   lRBC = log10RBC(a, bvm)
   1-dnbinom(0, mu=10^(xi-lRBC+q), size=sz)
@@ -105,7 +99,6 @@ Detect.nb = function(xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
 #' @export
 #'
 #' @examples
-
 dCounts.nb = function(hatxi, xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
   lRBC = log10RBC(a, bvm)
   dnbinom(round(10^hatxi), mu=10^(xi-lRBC+q), size=sz)
@@ -123,7 +116,6 @@ dCounts.nb = function(hatxi, xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
 #' @export
 #'
 #' @examples
-
 pCounts.nb = function(hatxi, xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
   lRBC = log10RBC(a, bvm)
   pnbinom(10^hatxi, mu=10^(xi-lRBC+q), size=sz)
@@ -141,7 +133,6 @@ pCounts.nb = function(hatxi, xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
 #' @export
 #'
 #' @examples
-
 binnedCounts.nb = function(xi, a=0, Cpar=par_nbCounts(), bins=NULL){
   if(is.null(bins)) bins=c(1:5,13)
   p0 = Detect(xi,a,Cpar)
