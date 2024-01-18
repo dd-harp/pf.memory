@@ -1,10 +1,13 @@
 
 
-#' Title
+#' Density function for the beta distribution, an alternative parameterization
+#' @description
+#' The beta distribution is parameterized using the mean and a function `sigma` that computes the variance
+#' as a function of the mean
 #'
-#' @param x
-#' @param mu
-#' @param pSig
+#' @param x a vector of quantiles
+#' @param mu the mean value for the distribution (0 <= mu <= 1)
+#' @param pSig parameters to dispatch the S3 function [sigma]
 #'
 #' @return
 #' @export
@@ -17,13 +20,33 @@ dbeta1 = function(x, mu,
   dbeta(x, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
 }
 
-pbeta1 = function(x, mu,
+#' Disribution function for the beta distribution, an alternative parameterization
+#'
+#' @param p a vector of probabilities
+#' @param mu the mean value for the distribution (0 <= mu <= 1)
+#' @param pSig parameters to dispatch the S3 function [sigma]
+#'
+#' @return
+#' @export
+#'
+#' @examples
+pbeta1 = function(p, mu,
                   pSig=par_sigma.0()){
 
   var = sigma(mu, pSig)
-  pbeta(x, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
+  pbeta(p, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
 }
 
+#' The quantile function for the beta distribution, an alternative parameterization
+#'
+#' @param x a vector of quantiles
+#' @param mu the mean value for the distribution (0 <= mu <= 1)
+#' @param pSig parameters to dispatch the S3 function [sigma]
+#'
+#' @return
+#' @export
+#'
+#' @examples
 qbeta1 = function(x, mu,
                   pSig=par_sigma.0()){
 
@@ -31,6 +54,18 @@ qbeta1 = function(x, mu,
   qbeta(x, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
 }
 
+
+#' The random generation function for the beta distribution, an alternative parameterization
+#' Title
+#'
+#' @param n number of observations
+#' @param mu the mean value for the distribution (0 <= mu <= 1)
+#' @param pSig parameters to dispatch the S3 function [sigma]
+#'
+#' @return
+#' @export
+#'
+#' @examples
 rbeta1 = function(n, mu,
                   pSig=par_sigma.0()){
 
@@ -39,14 +74,42 @@ rbeta1 = function(n, mu,
 }
 
 
+#' A function to compute the variance of the beta distrution as a function of the mean.
+#'
+#' @param mu the mean value for the distribution (0 <= mu <= 1)
+#' @param par parameters to dispatch and configure the instances
+#'
+#' @return
+#' @export
+#'
+#' @examples
 sigma = function(mu, par){
   UseMethod("sigma", par)
 }
 
+#' A function that returns constrained values of the variance for the beta distrution as a function of the mean.
+#'
+#' @param mu the mean value for the distribution (0 <= mu <= 1)
+#' @param par parameters to dispatch and configure the instances
+#'
+#' @return
+#' @export
+#'
+#' @examples
 sigma.0 = function(mu, par){with(par,{
   pmin(abs(cc)*mu^(1+abs(bb))*(1-mu)^(1+abs(aa)), mu*(1-mu))
 })}
 
+#' Parameters to configure [sigma.0]
+#'
+#' @param aa a shape parameter
+#' @param bb a shape parameter
+#' @param cc a shape parameter
+#'
+#' @return
+#' @export
+#'
+#' @examples
 par_sigma.0 = function(aa=3.11, bb=2.14, cc=1.74){
   par = list()
   class(par) <- "0"
