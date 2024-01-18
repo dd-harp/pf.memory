@@ -1,6 +1,17 @@
 
-
-
+#' The density function for the age of infection (AoI)
+#'
+#' @param alpha the parasite age of infection
+#' @param a the host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#'
+#' @return
+#' @export
+#'
+#' @examples
 dAoI = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   dAoIcompute = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
     zda(alpha, a, FoIpar, hhat, tau, r)/meanMoI(a, FoIpar, hhat, tau, r)
@@ -13,10 +24,19 @@ dAoI = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   }
 }
 
-
-
-
-
+#' The distribution function for the age of infection (AoI)
+#'
+#' @param alpha the parasite age of infection
+#' @param a the host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#'
+#' @return
+#' @export
+#'
+#' @examples
 pAoI = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   pAoIfunction = function(alpha, a, FoIpar, hhat, tau, r){
     integrate(dAoI,0,alpha,a=a,FoIpar=FoIpar,hhat=hhat,tau=tau,r=r)$value
@@ -25,14 +45,20 @@ pAoI = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
     return(sapply(alpha, pAoIfunction, a=a, FoIpar=FoIpar, hhat=hhat, tau=tau, r=r))}
 }
 
-
-
-
-
-
-
-
-
+#' The random generation function for the age of infection (AoI)
+#'
+#' @param N the number of observations
+#' @param a the host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param alphamin the minimum value of the AoI to return
+#'
+#' @return
+#' @export
+#'
+#' @examples
 rAoI = function(N, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=0){
   if(N==0) return(-1)
   alpha = alphamin:a
@@ -42,9 +68,19 @@ rAoI = function(N, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=0){
   sample(alpha[-length(alpha)], N, replace=T, prob=pdf)
 }
 
-
-
-
+#' Compute the moments for the AoI density function for a cohort of age a
+#'
+#' @param a the host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param n the moment desired
+#'
+#' @return
+#' @export
+#'
+#' @examples
 momentAoI = function(a, FoIpar, hhat=5/365, tau=0, r=1/200, n=1){
 
   fAda = function(a, FoIpar, hhat=5/365, tau=0, r=1/200, n=1){
@@ -59,14 +95,18 @@ momentAoI = function(a, FoIpar, hhat=5/365, tau=0, r=1/200, n=1){
     sapply(a, fAda,FoIpar=FoIpar,hhat=hhat,tau=tau, r=r, n=n)}
 }
 
-
-
-
-
-
-
-
-
+#' Compute the derivatives of the AoI moments dynamically
+#' @description The
+#'
+#' @param a the host age
+#' @param M the state variables
+#' @param p the parameters
+#' @param FoIpar
+#'
+#' @return the derivatives of the MoI and the AoI
+#' @export
+#'
+#' @examples
 dAoIda = function(a,M,p,FoIpar){with(as.list(c(M,p)),{
   foi = FoI(a,FoIpar,tau,h)
   m0 = pmax(m,1e-6)
@@ -78,18 +118,24 @@ dAoIda = function(a,M,p,FoIpar){with(as.list(c(M,p)),{
   list(c(dm, dx1, dxn))
 })}
 
+#' Solve the system of differential equations to compute the moments of the AoI over time.
+#'
+#' @param h the force of infection
+#' @param FoIpar a FoI trace function
+#' @param r the clearance rate for a simple infection
+#' @param tau the cohort birthday
+#' @param Tmax The maximum runtime (in days)
+#' @param dt The output frequency (in days)
+#' @param N The total number of moments to compute
+#'
+#' @return a matrix describing the orbits
+#' @export
+#'
+#' @examples
 solve_dAoI = function(h, FoIpar, r=1/200, tau=0, Tmax=730, dt=1, N=3){
+  stopifnot(N>2)
   tms = seq(0, Tmax, by = dt)
-  prms = c(h=h,r=r,tau=tau,N=N)
+  prms = c(h=h, r=r, tau=tau, N=N)
   inits = c(m=0, xn = rep(0,N))
-  data.frame(lsode(inits, times=tms, dAoIda, prms, FoIpar=FoIpar))
+  data.frame(deSolve::ode(inits, times=tms, dAoIda, prms, FoIpar=FoIpar))
 }
-
-
-
-
-
-
-
-
-
