@@ -1,5 +1,22 @@
 
 
+#' Compute the CDF and PDF of parasite densities in a host cohort
+#'
+#' @param meshX
+#' @param a host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param pMu parameters to compute [alpha2mu]
+#' @param pRBC parameters to compute [log10RBC]
+#' @param pSig parameters to dispatch [sigma]
+#' @param pWda parameters to dispatch [Wda]
+#'
+#' @return a [numeric] vector of length meshX
+#' @export
+#'
+#' @examples
 Bda = function(meshX, a, FoIpar,
                hhat=NULL, tau=0, r=1/200,
                pMu=par_alpha2mu.0(),
@@ -41,18 +58,65 @@ Bda = function(meshX, a, FoIpar,
   cdflist
 }
 
+#' The density function for parasite densities in a host cohort
+#'
+#' @param meshX
+#' @param a host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param pMu parameters to compute [alpha2mu]
+#' @param pRBC parameters to compute [log10RBC]
+#' @param pSig parameters to dispatch [sigma]
+#' @param pWda parameters to dispatch [Wda]
+#'
+#' @return a [numeric] vector of length meshX
+#' @export
+#'
+#' @examples
 dBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu.0(), pRBC=par_lRBC.0(), pSig=par_sigma.0(), pWda=par_Wda.delta()){
   Bda(meshX, a, FoIpar,hhat, tau, r, pMu, pRBC, pSig, pWda)$PDFm
 }
 
+#' The distribution function for parasite densities in a host cohort
+#'
+#' @param meshX
+#' @param a host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param pMu parameters to compute [alpha2mu]
+#' @param pRBC parameters to compute [log10RBC]
+#' @param pSig parameters to dispatch [sigma]
+#' @param pWda parameters to dispatch [Wda]
+#'
+#' @return a numeric vector of length meshX
+#' @export
+#'
+#' @examples
 pBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu.0(), pRBC=par_lRBC.0(), pSig=par_sigma.0(), pWda=par_Wda.delta()){
   Bda(meshX, a, FoIpar,hhat, tau, r, pMu, pRBC, pSig, pWda)$CDFm
 }
 
-
-
-
-
+#' Random generation for parasite densities in a host cohort
+#'
+#' @param N
+#' @param a host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param pMu parameters to compute [alpha2mu]
+#' @param pRBC parameters to compute [log10RBC]
+#' @param pSig parameters to dispatch [sigma]
+#' @param pWda parameters to dispatch [Wda]
+#'
+#' @return a [numeric] vector of length N
+#' @export
+#'
+#' @examples
 rBda = function(N, a, FoIpar,
                 hhat=NULL, r=1/200, tau=0, alphamin=7,
                 pMu=par_alpha2mu.0(),
@@ -76,19 +140,38 @@ rBda = function(N, a, FoIpar,
 
 
 
-rRda = function(N, R, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=7,
+#' Random generation for M parasite densities in a host cohort with MoI
+#'
+#' @param R the number of observations
+#' @param M the MoI
+#' @param a host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param alphamin the minimum value of alpha allowed
+#' @param pMu parameters to compute [alpha2mu]
+#' @param pRBC parameters to compute [log10RBC]
+#' @param pSig parameters to dispatch [sigma]
+#' @param pWda parameters to dispatch [Wda]
+#'
+#' @return a R by M [matrix]
+#' @export
+#'
+#' @examples
+rRda = function(M, R, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=7,
                 pMu=par_alpha2mu.0(),
                 pRBC=par_lRBC.0(),
                 pSig=par_sigma.0(),
                 pWda=par_Wda.delta()){
   W = Wda(a, FoIpar, hhat, tau, pWda)
   # MoI, excluding zeros
-  Ny = R*N
+  Ny = R*M
   hatalpha = rAoI(Ny, a, FoIpar, hhat, tau, r, alphamin)
   # their expected values
   hatmu = alpha2mu(hatalpha, W, pMu)
   hatx = rDensityPmu(Ny,hatmu,a,pRBC,pSig)
   lRBC = 10^hatx
-  matrix(lRBC,nrow=R, ncol=N)
+  matrix(lRBC,nrow=R, ncol=M)
 }
 

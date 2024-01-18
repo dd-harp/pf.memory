@@ -204,7 +204,7 @@ qDensityPalpha = function(x, alpha,
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
 #' @param pSig parameters to dispatch [sigma]
-#' @param pWda
+#' @param pWda parameters to dispatch [Wda]
 #'
 #' @return a [numeric] vector of length(x)
 #' @export
@@ -246,7 +246,7 @@ dDensityPa = function(x, a, FoIpar,
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
 #' @param pSig parameters to dispatch [sigma]
-#' @param pWda
+#' @param pWda parameters to dispatch [Wda]
 #'
 #' @return a [numeric] vector of length(x)
 #' @export
