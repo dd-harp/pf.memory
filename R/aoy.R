@@ -1,4 +1,17 @@
 
+#' The distribution
+#'
+#' @param alpha the age of infection
+#' @param a the age of a cohort
+#' @param FoIpar
+#' @param hhat
+#' @param tau the cohort birthday
+#' @param r the clearance rate of a simple infection
+#'
+#' @return
+#' @export
+#'
+#' @examples
 pAoY = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   moi = meanMoI(a, FoIpar, hhat, tau, r)
   X = 1-exp(-moi)
