@@ -1,26 +1,72 @@
-
-
-
-
-
-
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 Detect = function(xi, a=0, Cpar=par_nbCounts()){
   UseMethod("Detect", Cpar)
 }
 
+#' density function of counts
+#'
+#' @param a host cohort age
+#' @param xi mean log10 parasite densities
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
+
 dCounts = function(hatxi, xi, a=0, Cpar=par_nbCounts()){
   UseMethod("dCounts", Cpar)
 }
+
+#' cumulative density function of counts
+#'
+#'@param hatxi
+#' @param a host cohort age
+#' @param xi mean log10 parasite densities
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 pCounts = function(hatxi, xi, a=0, Cpar=par_nbCounts()){
   UseMethod("pCounts", Cpar)
 }
 
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
+
 binnedCounts = function(xi, TensBins=TRUE, a=0, Cpar=par_nbCounts()){
   UseMethod("binnedCounts", Cpar)
 }
+
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 par_nbCounts = function(q=6, sz=0.31, bvm = par_lRBC.0()){
   par = list()
@@ -31,6 +77,17 @@ par_nbCounts = function(q=6, sz=0.31, bvm = par_lRBC.0()){
   par
 }
 
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
+
 Detect.nb = function(xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
   lRBC = log10RBC(a, bvm)
   1-dnbinom(0, mu=10^(xi-lRBC+q), size=sz)
@@ -38,7 +95,16 @@ Detect.nb = function(xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
 
 
 
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 dCounts.nb = function(hatxi, xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
   lRBC = log10RBC(a, bvm)
@@ -47,7 +113,16 @@ dCounts.nb = function(hatxi, xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
 
 
 
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 pCounts.nb = function(hatxi, xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
   lRBC = log10RBC(a, bvm)
@@ -56,7 +131,16 @@ pCounts.nb = function(hatxi, xi, a=0, Cpar=par_nbCounts()){with(Cpar,{
 
 
 
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 binnedCounts.nb = function(xi, a=0, Cpar=par_nbCounts(), bins=NULL){
   if(is.null(bins)) bins=c(1:5,13)
@@ -69,7 +153,16 @@ binnedCounts.nb = function(xi, a=0, Cpar=par_nbCounts(), bins=NULL){
 
 
 
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 par_poisCounts = function(q=6, bvm = par_lRBC.0()){
   par = list()
@@ -79,6 +172,18 @@ par_poisCounts = function(q=6, bvm = par_lRBC.0()){
   par
 }
 
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
+#'
+
 Detect.pois = function(xi, a=0, Cpar=par_poisCounts()){with(Cpar,{
   lRBC = log10RBC(a, bvm)
   1-dpois(0, 10^(xi-lRBC+q))
@@ -86,7 +191,16 @@ Detect.pois = function(xi, a=0, Cpar=par_poisCounts()){with(Cpar,{
 
 
 
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 dCounts.pois = function(hatxi, xi, a=0, Cpar=par_poisCounts()){with(Cpar,{
   lRBC = log10RBC(a, bvm)
@@ -95,7 +209,16 @@ dCounts.pois = function(hatxi, xi, a=0, Cpar=par_poisCounts()){with(Cpar,{
 
 
 
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 pCounts.pois = function(hatxi, xi, a=0, Cpar=par_poisCounts()){with(Cpar,{
   lRBC = log10RBC(a, bvm)
@@ -104,7 +227,16 @@ pCounts.pois = function(hatxi, xi, a=0, Cpar=par_poisCounts()){with(Cpar,{
 
 
 
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 binnedCounts.pois = function(xi, a=0, Cpar=par_poisCounts(), bins=NULL){
   if(is.null(bins)) bins=c(1:5,13)
@@ -114,16 +246,47 @@ binnedCounts.pois = function(xi, a=0, Cpar=par_poisCounts(), bins=NULL){
 }
 
 
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 plotCounts.TensBins = function(pdf, llwd=2, tol = 1e-3, clr="black", mtl=""){
   plot(1:6, pdf, type = "h", lwd=llwd, xaxt = "n", xlab = expression(P), ylab="Frequency", xlim = c(0,7), ylim = c(0,1), col = clr, main = mtl)
   axis(1, c(1:7)-0.5, c(1, expression(10), expression(10^2), expression(10^3), expression(10^4), expression(10^5), expression(infinity)))
 }
 
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
+
 addCounts.TensBins = function(pdf, llwd=2, offset = 0.1, clr="darkgreen"){
   lines(1:6+offset, pdf, type = "h", lwd=llwd, col = clr)
 }
+
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 DetectPa = function(a, FoIpar,
                     hhat=NULL,tau=0, r=1/200,
@@ -143,7 +306,16 @@ DetectPa = function(a, FoIpar,
   return (sapply(a, pD, FoIpar=FoIpar, hhat=hhat, tau=tau, r=r, pMu=pMu, pSig=pSig, pRBC=pRBC, pWda=pWda, pC=pC))
 }
 
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 DetectPM = function(a, FoIpar,
                     hhat=NULL,tau=0, r=1/200,
@@ -158,7 +330,16 @@ DetectPM = function(a, FoIpar,
   1 - exp(-moi*D)
 }
 
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param Cpar parameters that define a detection function
+#'
+#' @return binary detection result
+#' @export
+#'
+#' @examples
 
 DetectBda = function(a, FoIpar, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
@@ -176,7 +357,24 @@ DetectBda = function(a, FoIpar, dx=0.1,
   sum(Bx*Bs)
 }
 
-
+#' Detection of infection given parasitemia
+#'
+#' @param xi
+#' @param a host cohort age
+#' @param FOIpar
+#' @param hhat
+#' @param tau
+#' @param r
+#' @param pMu
+#' @param pRBC
+#' @param pSig
+#' @param pWda
+#' @param pC
+#'
+#' @return detection probability
+#' @export
+#'
+#' @examples
 
 MoIPM = function(a, FoIpar,
                  hhat=NULL,tau=0, r=1/200,
