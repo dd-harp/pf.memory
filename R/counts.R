@@ -1,21 +1,21 @@
 
 
-#' Title
+#' Compute the distribution of parasite counts for simple infections
 #'
-#' @param a
-#' @param FoIpar
-#' @param bins
-#' @param dx
-#' @param hhat
-#' @param tau
-#' @param r
-#' @param pMu
-#' @param pRBC
-#' @param pSig
-#' @param pWda
+#' @param a host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param bins a set of break points for computing counts
+#' @param dx the width of the mesh for computing the CDF of parasite densities
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param pMu parameters to compute [alpha2mu]
+#' @param pRBC parameters to compute [log10RBC]
+#' @param pSig parameters to dispatch [sigma]
+#' @param pWda parameters to dispatch [Wda]
 #' @param pC
 #'
-#' @return
+#' @return a [list]
 #' @export
 #'
 #' @examples
@@ -35,7 +35,6 @@ pCountsPa = function(a, FoIpar, bins=NULL, dx=0.1,
   cdfP = function(xi, a, Cpar){
     pD = Detect(xi,a,Cpar)
     counts = pCounts(bins, xi, a, Cpar)
-    #browser()
   }
   Bx=sapply(meshX, cdfP, a=a, Cpar=pC)
   list(bins=bins,cdf=rowSums(Bx*Pda))
@@ -43,6 +42,25 @@ pCountsPa = function(a, FoIpar, bins=NULL, dx=0.1,
 
 
 
+#' Compute the density of parasite counts for simple infections
+#'
+#' @param a host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param bins a set of break points for computing counts
+#' @param dx the width of the mesh for computing the CDF of parasite densities
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param pMu parameters to compute [alpha2mu]
+#' @param pRBC parameters to compute [log10RBC]
+#' @param pSig parameters to dispatch [sigma]
+#' @param pWda parameters to dispatch [Wda]
+#' @param pC
+#'
+#' @return a [list]
+#' @export
+#'
+#' @examples
 dCountsPa = function(a, FoIpar,  bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
                      pMu=par_alpha2mu.0(),
@@ -61,6 +79,25 @@ dCountsPa = function(a, FoIpar,  bins=NULL, dx=0.1,
 
 
 
+#' Compute the distribution of parasite counts in complex infections
+#'
+#' @param a host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param bins a set of break points for computing counts
+#' @param dx the width of the mesh for computing the CDF of parasite densities
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param pMu parameters to compute [alpha2mu]
+#' @param pRBC parameters to compute [log10RBC]
+#' @param pSig parameters to dispatch [sigma]
+#' @param pWda parameters to dispatch [Wda]
+#' @param pC
+#'
+#' @return a [list]
+#' @export
+#'
+#' @examples
 pCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
                      pMu=par_alpha2mu.0(),
@@ -77,6 +114,25 @@ pCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
 
 
 
+#' Compute the density of parasite counts in complex infections
+#'
+#' @param a host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param bins a set of break points for computing counts
+#' @param dx the width of the mesh for computing the CDF of parasite densities
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param pMu parameters to compute [alpha2mu]
+#' @param pRBC parameters to compute [log10RBC]
+#' @param pSig parameters to dispatch [sigma]
+#' @param pWda parameters to dispatch [Wda]
+#' @param pC
+#'
+#' @return a [list]
+#' @export
+#'
+#' @examples
 dCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
                      pMu=par_alpha2mu.0(),
@@ -92,6 +148,24 @@ dCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
 }
 
 
+#' Compute the mean parasite counts in simple infections
+#'
+#' @param a host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param dx the width of the mesh for computing the CDF of parasite densities
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param pMu parameters to compute [alpha2mu]
+#' @param pRBC parameters to compute [log10RBC]
+#' @param pSig parameters to dispatch [sigma]
+#' @param pWda parameters to dispatch [Wda]
+#' @param pC
+#'
+#' @return a [list]
+#' @export
+#'
+#' @examples
 meanCountsPa = function(a, FoIpar, dx=0.1,
                         hhat=NULL,tau=0, r=1/200,
                         pMu=par_alpha2mu.0(),
@@ -106,6 +180,24 @@ meanCountsPa = function(a, FoIpar, dx=0.1,
 
 
 
+#' Compute the mean parasite counts in complex infections
+#'
+#' @param a host cohort age
+#' @param FoIpar parameters that define an FoI function
+#' @param dx the width of the mesh for computing the CDF of parasite densities
+#' @param hhat a local scaling parameter for the FoI
+#' @param tau the cohort birthday
+#' @param r the clearance rate for a simple infection
+#' @param pMu parameters to compute [alpha2mu]
+#' @param pRBC parameters to compute [log10RBC]
+#' @param pSig parameters to dispatch [sigma]
+#' @param pWda parameters to dispatch [Wda]
+#' @param pC
+#'
+#' @return a [list]
+#' @export
+#'
+#' @examples
 meanCountsBa = function(a, FoIpar, dx=0.1,
                         hhat=NULL,tau=0, r=1/200,
                         pMu=par_alpha2mu.0(),
