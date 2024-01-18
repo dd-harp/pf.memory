@@ -38,16 +38,27 @@ $$
 
 The function `zda` uses this formula to compute the density of parasite infections in a cohort of humans as it ages. 
 
-## Plotting 
-
 To illustrate, we must first set up a function to describe exposure: 
 
-```{r plot FoI, fig.height=4, fig.width=7}
+```{r}
 foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend())
 
 a2years  = 0:730
+```
+
+```{r plot FoI, fig.height=4, fig.width=7}
 plot(a2years, FoI(a2years, foiP3), type = "l", xlab = "a - age (in days)", ylab = expression(Z[tau](alpha, a)))
 ```
+
+Now, for this pattern of exposure, we can compute  the density of parasites of age 60 days in a host cohort of six year olds: 
+```{r zde eg}
+alpha = 60
+a = 6*365
+zda(60, 6*365, foiP3) 
+```
+
+## Plotting 
+
 
 At age 2, the density of infections of various ages for the cohort born on day $0$ reflects the history of exposure. Here, we're plotting the age of infection.  
 ```{r plot zda 1, fig.height=4, fig.width=7, purl=F}
