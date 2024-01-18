@@ -59,7 +59,7 @@ solveMMinfty = function(h,FoIpar,r=1/200,tau=0,Tmax=730, dt=1){
   prms = c(h=h,r=r,N=N,tau=tau)
   inits = rep(0,N)
   inits[1]=1
-  lsode(inits, times=tms, dMoIda, prms, FoIpar=FoIpar) -> out
+  deSolve::ode(inits, times=tms, dMoIda, prms, FoIpar=FoIpar) -> out
   time = out[,1]; moi = out[,-1]
   m = moi %*% c(0:(N-1))
   list(time=time, moi=moi, m=m)
