@@ -1,0 +1,75 @@
+---
+title: "Parasite Infection Dynamics"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Parasite Infection Dynamics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+devtools::load_all() 
+```
+
+```{r suppressMessages=T}
+library(viridisLite)
+library(viridis)
+```
+
+## Introduction 
+
+Let $z_\tau(\alpha,a)$ denote the density function for infections of age $\alpha$ in a host cohort of age $a$ born on day $\tau$. The dynamics of $z(\alpha,a)$ are described by the following:
+
+$$
+\frac{\partial z}{\partial a} + \frac{\partial z}{\partial \alpha} = - r z
+$$
+
+
+with the boundary condition:
+$$
+    z_\tau(0,a) = h_\tau(a)
+$$
+
+Solutions describe the density of infections of age $\alpha$ in a cohort (born on day $\tau$) of age $a$: 
+
+$$
+z_\tau(\alpha,a) = h_\tau(a-\alpha) e^{-r \alpha}
+$$
+
+The function `zda` uses this formula to compute the density of parasite infections in a cohort of humans as it ages. 
+
+## Plotting 
+
+To illustrate, we must first set up a function to describe exposure: 
+
+```{r plot FoI, fig.height=4, fig.width=7}
+foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend())
+
+a2years  = 0:730
+plot(a2years, FoI(a2years, foiP3), type = "l", xlab = "a - age (in days)", ylab = expression(Z[tau](alpha, a)))
+```
+
+At age 2, the density of infections of various ages for the cohort born on day $0$ reflects the history of exposure. Here, we're plotting the age of infection.  
+```{r plot zda 1, fig.height=4, fig.width=7, purl=F}
+clrs12a <- turbo(12) 
+alphaM = seq(0,365*3, by =1)
+zz = zda(alphaM, 730, foiP3)
+plot(alphaM/365, zz, type = "l", 
+     xlab = expression(alpha), ylab = expression(z[d](alpha,a)))
+```
+***
+
+Now, we can imagine what `zda` would look like for several different host cohorts at age two, but who were born at different times.  
+
+There is un underlying pattern, and the curves are different because the hosts were born at different months. Here the annual FoI is 5 infections, per person, per year ($\bar h = 5/365$): 
+
+```{r plot zda, fig.height=4, fig.width=7, purl=F}
+clrs12a <- turbo(12) 
+alphaM = seq(0,365*3, by =1)
+zz = zda(alphaM, 730, foiP3, tau=90)
+plot(alphaM/365, zz, type = "n", 
+     xlab = expression(alpha), ylab = expression(z[d](alpha,a)))
+for(i in 1:12){
+  lines(alphaM/365, zda(alphaM, 730, foiP3, tau=30*i), col = clrs12a[i]) 
+}
+```
