@@ -11,7 +11,7 @@
 #'
 #' @return a [numeric] vector of length(a)
 #' @export
-Wda = function(a, FoIpar, hhat=NULL, tau=0, par=par_Wda.0()){
+Wda = function(a, FoIpar, hhat=NULL, tau=0, par=par_Wda_none()){
   UseMethod("Wda", par)
 }
 
@@ -21,17 +21,17 @@ Wda = function(a, FoIpar, hhat=NULL, tau=0, par=par_Wda.0()){
 #'
 #' @return a [numeric] vector of 0's of length(a)
 #' @export
-Wda.0 = function(a, FoIpar, hhat=NULL, tau=0,  par=par_Wda.0()){
+Wda.none = function(a, FoIpar, hhat=NULL, tau=0,  par=par_Wda_none()){
   0*a
 }
 
-#' Make a parameter set for [Wda.0]
+#' Make a parameter set for [Wda.none]
 #'
 #' @return a [list]
 #' @export
-par_Wda.0 = function(){
+par_Wda_none = function(){
   par = list()
-  class(par) <- "0"
+  class(par) <- "none"
   return(par)
 }
 
@@ -42,7 +42,7 @@ par_Wda.0 = function(){
 #'
 #' @return a [numeric] vector of length(a)
 #' @export
-Wda.delta = function(a, FoIpar, hhat=NULL, tau=0, par=par_Wda.0()){with(par,{
+Wda.delta = function(a, FoIpar, hhat=NULL, tau=0, par=par_Wda_delta()){with(par,{
   Wd = function(a,FoIpar,hhat,tau,delta){
     ff = function(s,a,FoIpar,hhat,tau,delta)  FoI(a-s,FoIpar,tau,hhat)*exp(-delta*(a-s))
     integrate(ff,0,a,a=a,FoIpar=FoIpar,hhat=hhat,tau=tau,delta=delta)$value
@@ -55,13 +55,13 @@ Wda.delta = function(a, FoIpar, hhat=NULL, tau=0, par=par_Wda.0()){with(par,{
 })}
 
 
-#' Make a parameter set for [Wda.delta]
+#' Make a parameter set for [Wda.none]
 #'
 #' @param delta a decay rate
 #'
 #' @return a [list]
 #' @export
-par_Wda.delta = function(delta=0.001){
+par_Wda_delta = function(delta=0.001){
   par = list()
   class(par) <- "delta"
   par$delta=delta

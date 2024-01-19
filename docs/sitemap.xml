@@ -70,6 +70,9 @@
     <loc>/reference/Wda.html</loc>
   </url>
   <url>
+    <loc>/reference/Wda.none.html</loc>
+  </url>
+  <url>
     <loc>/reference/ageFoI.flat.html</loc>
   </url>
   <url>
@@ -83,6 +86,9 @@
   </url>
   <url>
     <loc>/reference/alpha2mu.W.html</loc>
+  </url>
+  <url>
+    <loc>/reference/alpha2mu.base.html</loc>
   </url>
   <url>
     <loc>/reference/alpha2mu.html</loc>
@@ -172,6 +178,9 @@
     <loc>/reference/log10RBC.html</loc>
   </url>
   <url>
+    <loc>/reference/log10RBC.static.html</loc>
+  </url>
+  <url>
     <loc>/reference/meanCountsBa.html</loc>
   </url>
   <url>
@@ -235,10 +244,19 @@
     <loc>/reference/par_Wda.delta.html</loc>
   </url>
   <url>
+    <loc>/reference/par_Wda_delta.html</loc>
+  </url>
+  <url>
+    <loc>/reference/par_Wda_none.html</loc>
+  </url>
+  <url>
     <loc>/reference/par_alpha2mu.0.html</loc>
   </url>
   <url>
     <loc>/reference/par_alpha2mu.W.html</loc>
+  </url>
+  <url>
+    <loc>/reference/par_alpha2mu_base.html</loc>
   </url>
   <url>
     <loc>/reference/par_expSeason.html</loc>
@@ -256,6 +274,9 @@
     <loc>/reference/par_lRBC.0.html</loc>
   </url>
   <url>
+    <loc>/reference/par_lRBC_static.html</loc>
+  </url>
+  <url>
     <loc>/reference/par_nbCounts.html</loc>
   </url>
   <url>
@@ -263,6 +284,9 @@
   </url>
   <url>
     <loc>/reference/par_sigma.0.html</loc>
+  </url>
+  <url>
+    <loc>/reference/par_sigma_abc.html</loc>
   </url>
   <url>
     <loc>/reference/par_sinSeason.html</loc>
@@ -323,6 +347,9 @@
   </url>
   <url>
     <loc>/reference/sigma.0.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sigma.abc.html</loc>
   </url>
   <url>
     <loc>/reference/sigma.html</loc>

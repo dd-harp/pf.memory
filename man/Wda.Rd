@@ -4,7 +4,7 @@
 \alias{Wda}
 \title{Compute immune tracking variables as a function of host age and exposure}
 \usage{
-Wda(a, FoIpar, hhat = NULL, tau = 0, par = par_Wda.0())
+Wda(a, FoIpar, hhat = NULL, tau = 0, par = par_Wda_none())
 }
 \arguments{
 \item{a}{age of a host cohort}

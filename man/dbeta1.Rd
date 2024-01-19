@@ -4,7 +4,7 @@
 \alias{dbeta1}
 \title{Density function for the beta distribution, an alternative parameterization}
 \usage{
-dbeta1(x, mu, pSig = par_sigma.0())
+dbeta1(x, mu, pSig = par_sigma_abc())
 }
 \arguments{
 \item{x}{a vector of quantiles}

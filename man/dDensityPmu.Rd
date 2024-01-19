@@ -4,7 +4,7 @@
 \alias{dDensityPmu}
 \title{The density function for parasite densities in a simple malaria infection}
 \usage{
-dDensityPmu(xi, mu, a = 0, pRBC = par_lRBC.0(), pSig = par_sigma.0())
+dDensityPmu(xi, mu, a = 0, pRBC = par_lRBC_static(), pSig = par_sigma_abc())
 }
 \arguments{
 \item{xi}{a vector of quantiles}

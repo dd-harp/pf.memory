@@ -32,7 +32,7 @@ salpha2mu = function(alpha, W, par){
 #' @return mean log10 parasite densities
 #' @export
 #'
-alpha2mu.0 = function(alpha, W, par){with(par,{
+alpha2mu.base = function(alpha, W, par){with(par,{
   B = tildel + (tildeb-tildel)*exp(-(Sa*(alpha-D)))
   ix = which(alpha<D)
   if(length(ix>0)) B[ix] = tildel+(tildeb-tildel)*alpha[ix]/D
@@ -41,7 +41,7 @@ alpha2mu.0 = function(alpha, W, par){with(par,{
   B
 })}
 
-#' Set up parameters for [alpha2mu.0]
+#' Set up parameters for [alpha2mu.base]
 #'
 #' @param D The age of infection (in days) when parasite densities peak
 #' @param liver The age of infection (in days) when parasites emerge from the liver
@@ -52,9 +52,9 @@ alpha2mu.0 = function(alpha, W, par){with(par,{
 #' @return a [list]
 #' @export
 #'
-par_alpha2mu.0 = function(D=20, liver=7, tildeb=10.3, tildel=2, Sa=0.0033){
+par_alpha2mu_base = function(D=20, liver=7, tildeb=10.3, tildel=2, Sa=0.0033){
   par = list()
-  class(par) <- "0"
+  class(par) <- "base"
   par$D=D
   par$liver=liver
   par$tildeb=tildeb
@@ -81,7 +81,7 @@ alpha2mu.W = function(alpha, W, par){with(par,{
   B
 })}
 
-#' Set up parameters for alpha2mu.0
+#' Set up parameters for [alpha2mu.W]
 #'
 #' @param D The age of infection (in days) when parasite densities peak
 #' @param liver The age of infection (in days) when parasites emerge from the liver

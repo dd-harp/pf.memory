@@ -106,17 +106,17 @@
         <dd>Detection of infection given parasitemia</dd>
       </dl><dl><dt>
           
-          <code><a href="Wda.0.html">Wda.0</a></code> 
-        </dt>
-        <dd>Compute immune tracking variables as a function of host age and exposure</dd>
-      </dl><dl><dt>
-          
           <code><a href="Wda.html">Wda()</a></code> 
         </dt>
         <dd>Compute immune tracking variables as a function of host age and exposure</dd>
       </dl><dl><dt>
           
           <code><a href="Wda.delta.html">Wda(<i>&lt;delta&gt;</i>)</a></code> 
+        </dt>
+        <dd>Compute immune tracking variables as a function of host age and exposure</dd>
+      </dl><dl><dt>
+          
+          <code><a href="Wda.none.html">Wda(<i>&lt;none&gt;</i>)</a></code> 
         </dt>
         <dd>Compute immune tracking variables as a function of host age and exposure</dd>
       </dl><dl><dt>
@@ -136,17 +136,17 @@
         <dd>A function that does not modify the FoI by age</dd>
       </dl><dl><dt>
           
-          <code><a href="alpha2mu.0.html">alpha2mu.0</a></code> 
-        </dt>
-        <dd>Compute expected log10 parasite densities, <code>mu</code>, as a function of the age of infection <code>alpha</code></dd>
-      </dl><dl><dt>
-          
           <code><a href="alpha2mu.html">alpha2mu()</a></code> 
         </dt>
         <dd>Compute mean, expected parasite densities <code>mu</code> as a function of the age of infection <code>alpha</code></dd>
       </dl><dl><dt>
           
           <code><a href="alpha2mu.W.html">alpha2mu(<i>&lt;W&gt;</i>)</a></code> 
+        </dt>
+        <dd>Compute expected log10 parasite densities, <code>mu</code>, as a function of the age of infection <code>alpha</code></dd>
+      </dl><dl><dt>
+          
+          <code><a href="alpha2mu.base.html">alpha2mu(<i>&lt;base&gt;</i>)</a></code> 
         </dt>
         <dd>Compute expected log10 parasite densities, <code>mu</code>, as a function of the age of infection <code>alpha</code></dd>
       </dl><dl><dt>
@@ -276,12 +276,12 @@
         <dd>Compute the derivatives for MoI and true PR</dd>
       </dl><dl><dt>
           
-          <code><a href="log10RBC.0.html">log10RBC.0</a></code> 
+          <code><a href="log10RBC.html">log10RBC()</a></code> 
         </dt>
         <dd>Compute log10 of the red blood cell population</dd>
       </dl><dl><dt>
           
-          <code><a href="log10RBC.html">log10RBC()</a></code> 
+          <code><a href="log10RBC.static.html">log10RBC(<i>&lt;static&gt;</i>)</a></code> 
         </dt>
         <dd>Compute log10 of the red blood cell population</dd>
       </dl><dl><dt>
@@ -376,24 +376,24 @@
         <dd>The density function for parasite densities as a function of the mean</dd>
       </dl><dl><dt>
           
-          <code><a href="par_Wda.0.html">par_Wda.0()</a></code> 
+          <code><a href="par_Wda_delta.html">par_Wda_delta()</a></code> 
         </dt>
-        <dd>Make a parameter set for Wda.0</dd>
+        <dd>Make a parameter set for Wda.none</dd>
       </dl><dl><dt>
           
-          <code><a href="par_Wda.delta.html">par_Wda.delta()</a></code> 
+          <code><a href="par_Wda_none.html">par_Wda_none()</a></code> 
         </dt>
-        <dd>Make a parameter set for Wda.delta</dd>
-      </dl><dl><dt>
-          
-          <code><a href="par_alpha2mu.0.html">par_alpha2mu.0()</a></code> 
-        </dt>
-        <dd>Set up parameters for alpha2mu.0</dd>
+        <dd>Make a parameter set for Wda.none</dd>
       </dl><dl><dt>
           
           <code><a href="par_alpha2mu.W.html">par_alpha2mu.W()</a></code> 
         </dt>
-        <dd>Set up parameters for alpha2mu.0</dd>
+        <dd>Set up parameters for alpha2mu.W</dd>
+      </dl><dl><dt>
+          
+          <code><a href="par_alpha2mu_base.html">par_alpha2mu_base()</a></code> 
+        </dt>
+        <dd>Set up parameters for alpha2mu.base</dd>
       </dl><dl><dt>
           
           <code><a href="par_expSeason.html">par_expSeason()</a></code> 
@@ -416,9 +416,9 @@
         <dd>Return a list that dispatches trendFoI.flat</dd>
       </dl><dl><dt>
           
-          <code><a href="par_lRBC.0.html">par_lRBC.0()</a></code> 
+          <code><a href="par_lRBC_static.html">par_lRBC_static()</a></code> 
         </dt>
-        <dd>Set up parameters for log10RBC.0</dd>
+        <dd>Set up parameters for log10RBC.static</dd>
       </dl><dl><dt>
           
           <code><a href="par_nbCounts.html">par_nbCounts()</a></code> 
@@ -431,9 +431,9 @@
         <dd>Detection of infection given parasitemia</dd>
       </dl><dl><dt>
           
-          <code><a href="par_sigma.0.html">par_sigma.0()</a></code> 
+          <code><a href="par_sigma_abc.html">par_sigma_abc()</a></code> 
         </dt>
-        <dd>Parameters to configure sigma.0</dd>
+        <dd>Parameters to configure sigma.abc</dd>
       </dl><dl><dt>
           
           <code><a href="par_sinSeason.html">par_sinSeason()</a></code> 
@@ -532,14 +532,14 @@ Title</dd>
         <dd>A generalized sinusoidal seasonal pattern</dd>
       </dl><dl><dt>
           
-          <code><a href="sigma.0.html">sigma.0</a></code> 
-        </dt>
-        <dd>A function that returns constrained values of the variance for the beta distrution as a function of the mean.</dd>
-      </dl><dl><dt>
-          
           <code><a href="sigma.html">sigma()</a></code> 
         </dt>
         <dd>A function to compute the variance of the beta distrution as a function of the mean.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="sigma.abc.html">sigma(<i>&lt;abc&gt;</i>)</a></code> 
+        </dt>
+        <dd>A function that returns constrained values of the variance for the beta distrution as a function of the mean.</dd>
       </dl><dl><dt>
           
           <code><a href="solveMMinfty.html">solveMMinfty()</a></code> 

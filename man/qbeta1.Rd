@@ -4,7 +4,7 @@
 \alias{qbeta1}
 \title{The quantile function for the beta distribution, an alternative parameterization}
 \usage{
-qbeta1(x, mu, pSig = par_sigma.0())
+qbeta1(x, mu, pSig = par_sigma_abc())
 }
 \arguments{
 \item{x}{a vector of quantiles}

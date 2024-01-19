@@ -17,10 +17,10 @@
 #'
 dDensityPaConvolve2 = function(x, a, FoIpar,
                                hhat=NULL, tau=0,  r=1/200,
-                               pMu=par_alpha2mu.0(),
-                               pRBC=par_lRBC.0(),
-                               pSig=par_sigma.0(),
-                               pWda=par_Wda.delta()){
+                               pMu=par_alpha2mu_base(),
+                               pRBC=par_lRBC_static(),
+                               pSig=par_sigma_abc(),
+                               pWda=par_Wda_none()){
   px = function(x, log10B, a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda){
     lB2 = log10(10^log10B - 10^x)
     dDensityPa(x,a,FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda)*dDensityPa(lB2,a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda)

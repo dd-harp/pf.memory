@@ -11,8 +11,8 @@
 #' @export
 #'
 dDensityPmu = function(xi, mu, a=0,
-                       pRBC=par_lRBC.0(),
-                       pSig=par_sigma.0()){
+                       pRBC=par_lRBC_static(),
+                       pSig=par_sigma_abc()){
   # xi is log10 parasite densities
   # lRBC is the upper bound
   lRBC = log10RBC(a, pRBC)
@@ -33,8 +33,8 @@ dDensityPmu = function(xi, mu, a=0,
 #' @export
 #'
 rDensityPmu = function(n, mu, a=0,
-                       pRBC=par_lRBC.0(),
-                       pSig=par_sigma.0()){
+                       pRBC=par_lRBC_static(),
+                       pSig=par_sigma_abc()){
   # lRBC is the upper bound
   # xi is log10 parasite densities
   lRBC = log10RBC(a, pRBC)
@@ -54,8 +54,8 @@ rDensityPmu = function(n, mu, a=0,
 #' @export
 #'
 pDensityPmu = function(xi, mu, a=0,
-                       pRBC=par_lRBC.0(),
-                       pSig=par_sigma.0()){
+                       pRBC=par_lRBC_static(),
+                       pSig=par_sigma_abc()){
   # lRBC is the upper bound
   # xi is log10 parasite densities
   lRBC = log10RBC(a, pRBC)
@@ -76,8 +76,8 @@ pDensityPmu = function(xi, mu, a=0,
 #' @export
 #'
 qDensityPmu = function(xi, mu, a=0,
-                       pRBC=par_lRBC.0(),
-                       pSig=par_sigma.0()){
+                       pRBC=par_lRBC_static(),
+                       pSig=par_sigma_abc()){
   # lRBC is the upper bound
   # xi is log10 parasite densities
   lRBC = log10RBC(a, pRBC)
@@ -104,9 +104,9 @@ qDensityPmu = function(xi, mu, a=0,
 #'
 dDensityPalpha = function(x, alpha,
                           W=0, a=0,
-                          pMu=par_alpha2mu.0(),
-                          pRBC=par_lRBC.0(),
-                          pSig=par_sigma.0()){
+                          pMu=par_alpha2mu_base(),
+                          pRBC=par_lRBC_static(),
+                          pSig=par_sigma_abc()){
   # lRBC is the upper bound of realistic values
   # x is log10 parasite densities
   mu = alpha2mu(alpha, W, pMu)
@@ -128,9 +128,9 @@ dDensityPalpha = function(x, alpha,
 #'
 rDensityPalpha = function(n, alpha,
                           W=0, a=0,
-                          pMu=par_alpha2mu.0(),
-                          pRBC=par_lRBC.0(),
-                          pSig=par_sigma.0()){
+                          pMu=par_alpha2mu_base(),
+                          pRBC=par_lRBC_static(),
+                          pSig=par_sigma_abc()){
   # lRBC is the upper bound of realistic values
   # x is log10 parasite densities
   mu = alpha2mu(alpha, W, pMu)
@@ -152,9 +152,9 @@ rDensityPalpha = function(n, alpha,
 #'
 pDensityPalpha = function(x, alpha,
                           W=0, a=0,
-                          pMu=par_alpha2mu.0(),
-                          pRBC=par_lRBC.0(),
-                          pSig=par_sigma.0()){
+                          pMu=par_alpha2mu_base(),
+                          pRBC=par_lRBC_static(),
+                          pSig=par_sigma_abc()){
   # lRBC is the upper bound of realistic values
   # x is log10 parasite densities
   mu = alpha2mu(alpha, W, pMu)
@@ -176,9 +176,9 @@ pDensityPalpha = function(x, alpha,
 #'
 qDensityPalpha = function(x, alpha,
                           W=0, a=0,
-                          pMu=par_alpha2mu.0(),
-                          pRBC=par_lRBC.0(),
-                          pSig=par_sigma.0()){
+                          pMu=par_alpha2mu_base(),
+                          pRBC=par_lRBC_static(),
+                          pSig=par_sigma_abc()){
   # lRBC is the upper bound of realistic values
   # x is log10 parasite densities
   mu = alpha2mu(alpha, W, pMu)
@@ -204,10 +204,10 @@ qDensityPalpha = function(x, alpha,
 dDensityPa = function(x, a, FoIpar,
                       hhat=NULL,
                       tau=0, r=1/200,
-                      pMu=par_alpha2mu.0(),
-                      pRBC=par_lRBC.0(),
-                      pSig=par_sigma.0(),
-                      pWda=par_Wda.0()){
+                      pMu=par_alpha2mu_base(),
+                      pRBC=par_lRBC_static(),
+                      pSig=par_sigma_abc(),
+                      pWda=par_Wda_none()){
   dB = function(x, a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda){
     px = function(alpha, x, W, a, m){
       mu = alpha2mu(alpha, W, pMu)

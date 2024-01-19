@@ -19,18 +19,18 @@ log10RBC = function(a,par){
 #' @return a [numeric] vector of length(a)
 #' @export
 #'
-log10RBC.0 = function(a,par){par$lRBCmax}
+log10RBC.static = function(a,par){par$lRBCmax}
 
-#' Set up parameters for [log10RBC.0]
+#' Set up parameters for [log10RBC.static]
 #'
 #' @param lRBCmax the maximum
 #'
 #' @return a [list]
 #' @export
 #'
-par_lRBC.0 = function(lRBCmax=13){
+par_lRBC_static = function(lRBCmax=13){
   par = list()
-  class(par) <- "0"
+  class(par) <- "static"
   par$lRBCmax = lRBCmax
   par
 }

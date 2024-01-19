@@ -18,10 +18,10 @@
 #'
 Bda = function(meshX, a, FoIpar,
                hhat=NULL, tau=0, r=1/200,
-               pMu=par_alpha2mu.0(),
-               pRBC=par_lRBC.0(),
-               pSig=par_sigma.0(),
-               pWda=par_Wda.delta()){
+               pMu=par_alpha2mu_base(),
+               pRBC=par_lRBC_static(),
+               pSig=par_sigma_abc(),
+               pWda=par_Wda_none()){
   PDFx = dDensityPa(meshX, a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda)
   CDFx = cumsum(PDFx)
   CDFx = CDFx/max(CDFx)
@@ -73,7 +73,7 @@ Bda = function(meshX, a, FoIpar,
 #' @return a [numeric] vector of length meshX
 #' @export
 #'
-dBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu.0(), pRBC=par_lRBC.0(), pSig=par_sigma.0(), pWda=par_Wda.delta()){
+dBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu_base(), pRBC=par_lRBC_static(), pSig=par_sigma_abc(), pWda=par_Wda_none()){
   Bda(meshX, a, FoIpar,hhat, tau, r, pMu, pRBC, pSig, pWda)$PDFm
 }
 
@@ -93,7 +93,7 @@ dBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu.0(
 #' @return a numeric vector of length meshX
 #' @export
 #'
-pBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu.0(), pRBC=par_lRBC.0(), pSig=par_sigma.0(), pWda=par_Wda.delta()){
+pBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu_base(), pRBC=par_lRBC_static(), pSig=par_sigma_abc(), pWda=par_Wda_none()){
   Bda(meshX, a, FoIpar,hhat, tau, r, pMu, pRBC, pSig, pWda)$CDFm
 }
 
@@ -116,10 +116,10 @@ pBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu.0(
 #'
 rBda = function(N, a, FoIpar,
                 hhat=NULL, r=1/200, tau=0, alphamin=7,
-                pMu=par_alpha2mu.0(),
-                pRBC=par_lRBC.0(),
-                pSig=par_sigma.0(),
-                pWda=par_Wda.delta()){
+                pMu=par_alpha2mu_base(),
+                pRBC=par_lRBC_static(),
+                pSig=par_sigma_abc(),
+                pWda=par_Wda_none()){
   moi = meanMoI(a, FoIpar, hhat, tau, r)
   W = Wda(a, FoIpar, hhat, tau, pWda)
   # MoI, excluding zeros
@@ -156,10 +156,10 @@ rBda = function(N, a, FoIpar,
 #' @export
 #'
 rRda = function(M, R, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=7,
-                pMu=par_alpha2mu.0(),
-                pRBC=par_lRBC.0(),
-                pSig=par_sigma.0(),
-                pWda=par_Wda.delta()){
+                pMu=par_alpha2mu_base(),
+                pRBC=par_lRBC_static(),
+                pSig=par_sigma_abc(),
+                pWda=par_Wda_none()){
   W = Wda(a, FoIpar, hhat, tau, pWda)
   # MoI, excluding zeros
   Ny = R*M

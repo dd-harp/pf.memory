@@ -4,7 +4,7 @@
 \alias{Wda.delta}
 \title{Compute immune tracking variables as a function of host age and exposure}
 \usage{
-\method{Wda}{delta}(a, FoIpar, hhat = NULL, tau = 0, par = par_Wda.0())
+\method{Wda}{delta}(a, FoIpar, hhat = NULL, tau = 0, par = par_Wda_delta())
 }
 \arguments{
 \item{a}{age of a host cohort}

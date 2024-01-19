@@ -2,7 +2,7 @@
 % Please edit documentation in R/alpha2mu.R
 \name{par_alpha2mu.W}
 \alias{par_alpha2mu.W}
-\title{Set up parameters for alpha2mu.0}
+\title{Set up parameters for \link{alpha2mu.W}}
 \usage{
 par_alpha2mu.W(
   D = 20,
@@ -30,5 +30,5 @@ par_alpha2mu.W(
 mean log10 parasite densities
 }
 \description{
-Set up parameters for alpha2mu.0
+Set up parameters for \link{alpha2mu.W}
 }

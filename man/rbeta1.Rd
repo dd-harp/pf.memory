@@ -5,7 +5,7 @@
 \title{The random generation function for the beta distribution, an alternative parameterization
 Title}
 \usage{
-rbeta1(n, mu, pSig = par_sigma.0())
+rbeta1(n, mu, pSig = par_sigma_abc())
 }
 \arguments{
 \item{n}{number of observations}

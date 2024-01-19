@@ -4,7 +4,7 @@
 \alias{pbeta1}
 \title{Disribution function for the beta distribution, an alternative parameterization}
 \usage{
-pbeta1(p, mu, pSig = par_sigma.0())
+pbeta1(p, mu, pSig = par_sigma_abc())
 }
 \arguments{
 \item{p}{a vector of probabilities}

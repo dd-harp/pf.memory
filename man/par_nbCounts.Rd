@@ -4,7 +4,7 @@
 \alias{par_nbCounts}
 \title{Detection of infection given parasitemia}
 \usage{
-par_nbCounts(q = 6, sz = 0.31, bvm = par_lRBC.0())
+par_nbCounts(q = 6, sz = 0.31, bvm = par_lRBC_static())
 }
 \arguments{
 \item{q}{the fraction of blood examined}

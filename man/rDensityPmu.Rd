@@ -4,7 +4,7 @@
 \alias{rDensityPmu}
 \title{Random generation of parasite densities from a simple malaria infection}
 \usage{
-rDensityPmu(n, mu, a = 0, pRBC = par_lRBC.0(), pSig = par_sigma.0())
+rDensityPmu(n, mu, a = 0, pRBC = par_lRBC_static(), pSig = par_sigma_abc())
 }
 \arguments{
 \item{n}{the number of observations}

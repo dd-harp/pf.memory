@@ -20,10 +20,10 @@
 #'
 pCountsPa = function(a, FoIpar, bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
-                     pMu=par_alpha2mu.0(),
-                     pRBC=par_lRBC.0(),
-                     pSig=par_sigma.0(),
-                     pWda=par_Wda.delta(),
+                     pMu=par_alpha2mu_base(),
+                     pRBC=par_lRBC_static(),
+                     pSig=par_sigma_abc(),
+                     pWda=par_Wda_none(),
                      Cpar = par_nbCounts()){
   if(is.null(bins)) bins=c(1:5,13)
   lRBC = log10RBC(a, pRBC)
@@ -61,10 +61,10 @@ pCountsPa = function(a, FoIpar, bins=NULL, dx=0.1,
 #'
 dCountsPa = function(a, FoIpar,  bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
-                     pMu=par_alpha2mu.0(),
-                     pRBC=par_lRBC.0(),
-                     pSig=par_sigma.0(),
-                     pWda=par_Wda.delta(),
+                     pMu=par_alpha2mu_base(),
+                     pRBC=par_lRBC_static(),
+                     pSig=par_sigma_abc(),
+                     pWda=par_Wda_none(),
                      Cpar = par_nbCounts()){
   DP = DetectPa(a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
   PC = pCountsPa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
@@ -97,10 +97,10 @@ dCountsPa = function(a, FoIpar,  bins=NULL, dx=0.1,
 #'
 pCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
-                     pMu=par_alpha2mu.0(),
-                     pRBC=par_lRBC.0(),
-                     pSig=par_sigma.0(),
-                     pWda=par_Wda.delta(),
+                     pMu=par_alpha2mu_base(),
+                     pRBC=par_lRBC_static(),
+                     pSig=par_sigma_abc(),
+                     pWda=par_Wda_none(),
                      Cpar = par_nbCounts()){
   moi = meanMoI(a, FoIpar, hhat, tau, r)
   D = DetectPa(a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
@@ -131,10 +131,10 @@ pCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
 #'
 dCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
-                     pMu=par_alpha2mu.0(),
-                     pRBC=par_lRBC.0(),
-                     pSig=par_sigma.0(),
-                     pWda=par_Wda.delta(),
+                     pMu=par_alpha2mu_base(),
+                     pRBC=par_lRBC_static(),
+                     pSig=par_sigma_abc(),
+                     pWda=par_Wda_none(),
                      Cpar = par_nbCounts()){
   moi = meanMoI(a, FoIpar, hhat, tau, r)
   D = DetectPa(a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
@@ -163,10 +163,10 @@ dCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
 #'
 meanCountsPa = function(a, FoIpar, dx=0.1,
                         hhat=NULL,tau=0, r=1/200,
-                        pMu=par_alpha2mu.0(),
-                        pRBC=par_lRBC.0(),
-                        pSig=par_sigma.0(),
-                        pWda=par_Wda.delta(),
+                        pMu=par_alpha2mu_base(),
+                        pRBC=par_lRBC_static(),
+                        pSig=par_sigma_abc(),
+                        pWda=par_Wda_none(),
                         Cpar = par_nbCounts()){
   bins = seq(0,7, by=dx)
   PC = dCountsPa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
@@ -194,10 +194,10 @@ meanCountsPa = function(a, FoIpar, dx=0.1,
 #'
 meanCountsBa = function(a, FoIpar, dx=0.1,
                         hhat=NULL,tau=0, r=1/200,
-                        pMu=par_alpha2mu.0(),
-                        pRBC=par_lRBC.0(),
-                        pSig=par_sigma.0(),
-                        pWda=par_Wda.delta(),
+                        pMu=par_alpha2mu_base(),
+                        pRBC=par_lRBC_static(),
+                        pSig=par_sigma_abc(),
+                        pWda=par_Wda_none(),
                         Cpar = par_nbCounts()){
   bins = seq(0,7, by = dx)
   PC = dCountsBa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)

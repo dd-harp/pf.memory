@@ -13,7 +13,7 @@
 #' @export
 #'
 dbeta1 = function(x, mu,
-                  pSig=par_sigma.0()){
+                  pSig=par_sigma_abc()){
 
   var = sigma(mu, pSig)
   stats::dbeta(x, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
@@ -29,7 +29,7 @@ dbeta1 = function(x, mu,
 #' @export
 #'
 pbeta1 = function(p, mu,
-                  pSig=par_sigma.0()){
+                  pSig=par_sigma_abc()){
 
   var = sigma(mu, pSig)
   stats::pbeta(p, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
@@ -45,7 +45,7 @@ pbeta1 = function(p, mu,
 #' @export
 #'
 qbeta1 = function(x, mu,
-                  pSig=par_sigma.0()){
+                  pSig=par_sigma_abc()){
 
   var = sigma(mu, pSig)
   stats::qbeta(x, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
@@ -63,7 +63,7 @@ qbeta1 = function(x, mu,
 #' @export
 #'
 rbeta1 = function(n, mu,
-                  pSig=par_sigma.0()){
+                  pSig=par_sigma_abc()){
 
   var = sigma(mu, pSig)
   stats::rbeta(n, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
@@ -90,11 +90,11 @@ sigma = function(mu, par){
 #' @return a [numeric] vector of length(mu)
 #' @export
 #'
-sigma.0 = function(mu, par){with(par,{
+sigma.abc = function(mu, par){with(par,{
   pmin(abs(cc)*mu^(1+abs(bb))*(1-mu)^(1+abs(aa)), mu*(1-mu))
 })}
 
-#' Parameters to configure [sigma.0]
+#' Parameters to configure [sigma.abc]
 #'
 #' @param aa a shape parameter
 #' @param bb a shape parameter
@@ -103,9 +103,9 @@ sigma.0 = function(mu, par){with(par,{
 #' @return a [list]
 #' @export
 #'
-par_sigma.0 = function(aa=3.11, bb=2.14, cc=1.74){
+par_sigma_abc = function(aa=3.11, bb=2.14, cc=1.74){
   par = list()
-  class(par) <- "0"
+  class(par) <- "abc"
   par$aa=aa
   par$bb=bb
   par$cc=cc

@@ -9,9 +9,9 @@ rDensityPalpha(
   alpha,
   W = 0,
   a = 0,
-  pMu = par_alpha2mu.0(),
-  pRBC = par_lRBC.0(),
-  pSig = par_sigma.0()
+  pMu = par_alpha2mu_base(),
+  pRBC = par_lRBC_static(),
+  pSig = par_sigma_abc()
 )
 }
 \arguments{

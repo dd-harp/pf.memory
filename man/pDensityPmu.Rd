@@ -4,7 +4,7 @@
 \alias{pDensityPmu}
 \title{The density function for parasite densities as a function of the mean}
 \usage{
-pDensityPmu(xi, mu, a = 0, pRBC = par_lRBC.0(), pSig = par_sigma.0())
+pDensityPmu(xi, mu, a = 0, pRBC = par_lRBC_static(), pSig = par_sigma_abc())
 }
 \arguments{
 \item{xi}{a vector of probabilities}

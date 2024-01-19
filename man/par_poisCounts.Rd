@@ -4,7 +4,7 @@
 \alias{par_poisCounts}
 \title{Detection of infection given parasitemia}
 \usage{
-par_poisCounts(q = 6, bvm = par_lRBC.0())
+par_poisCounts(q = 6, bvm = par_lRBC_static())
 }
 \arguments{
 \item{q}{the fraction of blood volume sampled}

@@ -58,7 +58,7 @@ binnedCounts = function(xi, a, bins, Cpar=par_nbCounts()){
 #' @return binary detection result
 #' @export
 #'
-par_nbCounts = function(q=6, sz=0.31, bvm = par_lRBC.0()){
+par_nbCounts = function(q=6, sz=0.31, bvm = par_lRBC_static()){
   par = list()
   class(par) <- "nb"
   par$q=q
@@ -135,7 +135,7 @@ binnedCounts.nb = function(xi, a, bins, Cpar=par_nbCounts()){
 #'
 #' @return par a [list]
 #' @export
-par_poisCounts = function(q=6, bvm = par_lRBC.0()){
+par_poisCounts = function(q=6, bvm = par_lRBC_static()){
   par = list()
   class(par) <- "pois"
   par$q=q
@@ -223,10 +223,10 @@ binnedCounts.pois = function(xi, a, bins, Cpar=par_poisCounts()){
 #' @return a [numeric] vector of length(a)
 DetectPa = function(a, FoIpar,
                     hhat=NULL,tau=0, r=1/200,
-                    pMu=par_alpha2mu.0(),
-                    pRBC=par_lRBC.0(),
-                    pSig=par_sigma.0(),
-                    pWda=par_Wda.delta(),
+                    pMu=par_alpha2mu_base(),
+                    pRBC=par_lRBC_static(),
+                    pSig=par_sigma_abc(),
+                    pWda=par_Wda_none(),
                     pC = par_nbCounts()){
   pD = function(a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, pC){
     Dx = function(x, a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, pC){
@@ -256,10 +256,10 @@ DetectPa = function(a, FoIpar,
 #' @export
 DetectPM = function(a, FoIpar,
                     hhat=NULL,tau=0, r=1/200,
-                    pMu=par_alpha2mu.0(),
-                    pRBC=par_lRBC.0(),
-                    pSig=par_sigma.0(),
-                    pWda=par_Wda.delta(),
+                    pMu=par_alpha2mu_base(),
+                    pRBC=par_lRBC_static(),
+                    pSig=par_sigma_abc(),
+                    pWda=par_Wda_none(),
                     pC = par_nbCounts()){
   moi = meanMoI(a, FoIpar, hhat, tau, r)
   D = DetectPa(a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, pC)
@@ -284,10 +284,10 @@ DetectPM = function(a, FoIpar,
 #' @export
 DetectBda = function(a, FoIpar, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
-                     pMu=par_alpha2mu.0(),
-                     pRBC=par_lRBC.0(),
-                     pSig=par_sigma.0(),
-                     pWda=par_Wda.delta(),
+                     pMu=par_alpha2mu_base(),
+                     pRBC=par_lRBC_static(),
+                     pSig=par_sigma_abc(),
+                     pWda=par_Wda_none(),
                      pC = par_nbCounts()){
 
   lRBC = log10RBC(a, pRBC)
@@ -315,10 +315,10 @@ DetectBda = function(a, FoIpar, dx=0.1,
 #' @export
 MoIPM = function(a, FoIpar,
                  hhat=NULL,tau=0, r=1/200,
-                 pMu=par_alpha2mu.0(),
-                 pRBC=par_lRBC.0(),
-                 pSig=par_sigma.0(),
-                 pWda=par_Wda.delta(),
+                 pMu=par_alpha2mu_base(),
+                 pRBC=par_lRBC_static(),
+                 pSig=par_sigma_abc(),
+                 pWda=par_Wda_none(),
                  pC = par_nbCounts()){
 
   moi = meanMoI(a, FoIpar, hhat, tau, r)
