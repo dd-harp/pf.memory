@@ -6,3 +6,4 @@
 ^docs$
 ^pkgdown$
 ^pf\.memory\.Rproj$
+^\.github$
