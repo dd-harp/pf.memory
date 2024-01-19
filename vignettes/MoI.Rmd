@@ -69,7 +69,7 @@ plot(m, ppois(N,m), type = "l", ylim = c(1-1e-07,1+1e-07))
 
 We must define a trace FoI function.
 
-```{r plot FoI, fig.height=4, fig.width=7, echo=F}
+```{r, fig.height=4, fig.width=7, echo=F}
 foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend())
 
 a2years  = 0:730
@@ -85,7 +85,7 @@ solveMMinfty(3/365, foiP3) -> out
 
 We peek at the distribution of MoI = $1, \ldots, 5$ on day 500: 
 
-```{r plot MoI, fig.height=4, fig.width=7, echo=F}
+```{r, fig.height=4, fig.width=7, echo=F}
 MoIDistPlot(out$moi, 500)
 ```
 
@@ -97,7 +97,7 @@ $$\frac{dm}{da} = h - rm$$
 
 The unction `dmda` computes the derivative, and we can solve the hybrid equation using `solve_dm` and plot the output: 
 
-```{r x, fig.height=4, fig.width=7}
+```{r, fig.height=4, fig.width=7}
 solve_dm(3/365, foiP3) -> mt 
 plot(mt$time, mt$m, type = "l", xlab = "Age (in Days)", ylab = expression(m[tau](a)))
 ```
@@ -124,7 +124,7 @@ v3 = solve_dm(5/365, foiP3, Tmax=1825)[,2]
 
 The following plots all three on the same graph using different colors with different widths, colors, and patterns: 
 
-```{r verify 2, fig.height=4, fig.width=7}
+```{r, fig.height=4, fig.width=7}
 plot(aa, v1, type = "l", col = "red", lwd=4, xlab = "Age (in Days)", ylab = expression(m[tau](a)))
 lines(aa, v2, type = "l", col = "white", lwd = 2)
 lines(aa, v3, type = "l", col = "darkblue", lwd = 1, lty =2)

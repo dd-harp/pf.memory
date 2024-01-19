@@ -48,7 +48,7 @@ foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(),
 a2years  = 0:730
 ```
 
-```{r plot FoI}
+```{r}
 plot(a2years, FoI(a2years, foiP3), type = "l", xlab = "a - age (in days)", ylab = expression(Z[tau](alpha, a)))
 ```
 
@@ -63,7 +63,7 @@ zda(60, 6*365, foiP3)
 
 
 At age 2, the density of infections of various ages for the cohort born on day $0$ reflects the history of exposure. Here, we're plotting the age of infection.  
-```{r plot zda 1}
+```{r}
 clrs12a <- turbo(12) 
 alphaM = seq(0,365*3, by =1)
 zz = zda(alphaM, 730, foiP3)
@@ -76,7 +76,7 @@ Now, we can imagine what `zda` would look like for several different host cohort
 
 There is un underlying pattern, and the curves are different because the hosts were born at different months. Here the annual FoI is 5 infections, per person, per year ($\bar h = 5/365$): 
 
-```{r plot zda}
+```{r}
 clrs12a <- turbo(12) 
 alphaM = seq(0,365*3, by =1)
 zz = zda(alphaM, 730, foiP3, tau=90)
