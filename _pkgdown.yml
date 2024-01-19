@@ -15,7 +15,7 @@ navbar:
       href: articles/MoI.html
   right:
   - icon: fa-github
-    href: https://github.com/dd-harp/exDE/
+    href: https://github.com/dd-harp/pf.memory/
 home:
   sidebar:
     structure:
