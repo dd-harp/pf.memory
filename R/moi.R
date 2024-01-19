@@ -7,13 +7,12 @@
 #' @param tau the cohort birthday
 #' @param r the clearance rate for a simple infection
 #'
-#' @return
+#' @return a [numeric] vector of length(a)
 #' @export
 #'
-#' @examples
 meanMoI = function(a, FoIpar, hhat=NULL, tau=0, r=1/200){
   moif = function(a, FoIpar, hhat, tau,r){
-    integrate(zda, 0, a, a=a, FoIpar=FoIpar,hhat=hhat,tau=tau,r=r)$value
+    stats::integrate(zda, 0, a, a=a, FoIpar=FoIpar,hhat=hhat,tau=tau,r=r)$value
   }
   if(length(a)==1){return(moif(a,FoIpar,hhat,tau,r))} else{
     (return(sapply(a,moif,FoIpar=FoIpar,hhat=hhat,tau=tau,r=r)))}
@@ -26,10 +25,9 @@ meanMoI = function(a, FoIpar, hhat=NULL, tau=0, r=1/200){
 #' @param p the parameters
 #' @param FoIpar parameters that define an FoI function
 #'
-#' @return
+#' @return the derivatives as a [list]
 #' @export
 #'
-#' @examples
 dMoIda = function(a,M,p,FoIpar){with(as.list(c(M,p)),{
   foi = FoI(a,FoIpar,tau,h)
   i = 1:N
@@ -49,17 +47,16 @@ dMoIda = function(a,M,p,FoIpar){with(as.list(c(M,p)),{
 #' @param Tmax The maximum runtime (in days)
 #' @param dt The output frequency (in days)
 #'
-#' @return
+#' @return a [list] with the orbits by name
 #' @export
 #'
-#' @examples
 solveMMinfty = function(h,FoIpar,r=1/200,tau=0,Tmax=730, dt=1){
   tms = seq(0, Tmax, by = dt)
   N = round(max(4*h/r,20))
   prms = c(h=h,r=r,N=N,tau=tau)
   inits = rep(0,N)
   inits[1]=1
-  deSolve::ode(inits, times=tms, dMoIda, prms, FoIpar=FoIpar) -> out
+  out = deSolve::ode(inits, times=tms, dMoIda, prms, FoIpar=FoIpar)
   time = out[,1]; moi = out[,-1]
   m = moi %*% c(0:(N-1))
   list(time=time, moi=moi, m=m)
@@ -72,20 +69,11 @@ solveMMinfty = function(h,FoIpar,r=1/200,tau=0,Tmax=730, dt=1){
 #' @param moi the mean moi
 #' @param t the time
 #' @param clr1 the color
-#' @param withm
-#'
-#' @return
 #' @export
-#'
-#' @examples
-MoIDistPlot = function(moi, t, clr1 = "red", withm = FALSE){
+MoIDistPlot = function(moi, t, clr1 = "red"){
   N = dim(moi)[2]-2
   mm = 1:N -1
   plot(mm, moi[t,1:N +1], type="h", xlab = "MoI", ylab = expression(M[tau](a)), main = paste ("Age = ", t, "Days"))
-  if(withm == TRUE){
-    m = out$m[t]
-    points(mm, dpois(mm, m), col = clr1)
-  }
 }
 
 #' Compute the derivatives for MoI using a hybrid model
@@ -95,10 +83,8 @@ MoIDistPlot = function(moi, t, clr1 = "red", withm = FALSE){
 #' @param p the parameters
 #' @param FoIpar parameters that define an FoI function
 #'
-#' @return
+#' @return the derivatives as a [list]
 #' @export
-#'
-#' @examples
 dmda = function(a,M,p,FoIpar){with(as.list(c(M,p)),{
   foi = FoI(a,FoIpar,tau,h)
   dm = foi - r*m
@@ -117,11 +103,10 @@ dmda = function(a,M,p,FoIpar){with(as.list(c(M,p)),{
 #' @return a [matrix] with the orbits
 #' @export
 #'
-#' @examples
 solve_dm = function(h, FoIpar, r=1/200, tau=0, Tmax=730, dt=1){
   tms = seq(0, Tmax, by = dt)
   prms = c(h=h,r=r,tau=tau)
   inits = c(m=0)
-  data.frame(lsode(inits, times=tms, dmda, prms, FoIpar=FoIpar))
+  data.frame(deSolve::ode(inits, times=tms, dmda, prms, FoIpar=FoIpar))
 }
 

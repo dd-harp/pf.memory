@@ -8,10 +8,9 @@
 #' @param tau the cohort birthday
 #' @param r the clearance rate for a simple infection
 #'
-#' @return
+#' @return a [numeric] vector of length(alpha)
 #' @export
 #'
-#' @examples
 dAoI = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   dAoIcompute = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
     zda(alpha, a, FoIpar, hhat, tau, r)/meanMoI(a, FoIpar, hhat, tau, r)
@@ -33,13 +32,12 @@ dAoI = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
 #' @param tau the cohort birthday
 #' @param r the clearance rate for a simple infection
 #'
-#' @return
+#' @return a [numeric] vector of length(alpha)
 #' @export
 #'
-#' @examples
 pAoI = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   pAoIfunction = function(alpha, a, FoIpar, hhat, tau, r){
-    integrate(dAoI,0,alpha,a=a,FoIpar=FoIpar,hhat=hhat,tau=tau,r=r)$value
+    stats::integrate(dAoI,0,alpha,a=a,FoIpar=FoIpar,hhat=hhat,tau=tau,r=r)$value
   }
   if(length(alpha)==1) {return(pAoIfunction(alpha, a, FoIpar, hhat, tau, r))} else{
     return(sapply(alpha, pAoIfunction, a=a, FoIpar=FoIpar, hhat=hhat, tau=tau, r=r))}
@@ -55,10 +53,9 @@ pAoI = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
 #' @param r the clearance rate for a simple infection
 #' @param alphamin the minimum value of the AoI to return
 #'
-#' @return
+#' @return a [numeric] vector of length(alpha)
 #' @export
 #'
-#' @examples
 rAoI = function(N, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=0){
   if(N==0) return(-1)
   alpha = alphamin:a
@@ -77,10 +74,9 @@ rAoI = function(N, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=0){
 #' @param r the clearance rate for a simple infection
 #' @param n the moment desired
 #'
-#' @return
+#' @return a [numeric] vector of length(a)
 #' @export
 #'
-#' @examples
 momentAoI = function(a, FoIpar, hhat=5/365, tau=0, r=1/200, n=1){
 
   fAda = function(a, FoIpar, hhat=5/365, tau=0, r=1/200, n=1){
@@ -88,7 +84,7 @@ momentAoI = function(a, FoIpar, hhat=5/365, tau=0, r=1/200, n=1){
       alpha^n*zda(alpha, a, FoIpar, hhat, tau, r)
     }
     m =  meanMoI(a,FoIpar,hhat,tau,r)
-    integrate(ff, 0, a,a=a,FoIpar=FoIpar,hhat=hhat,r=r,tau=tau,n=n)$value/m
+    stats::integrate(ff, 0, a,a=a,FoIpar=FoIpar,hhat=hhat,r=r,tau=tau,n=n)$value/m
   }
 
   if(length(a)==1){return(fAda(a, FoIpar, hhat, tau, r, n))} else{
@@ -103,10 +99,9 @@ momentAoI = function(a, FoIpar, hhat=5/365, tau=0, r=1/200, n=1){
 #' @param p the parameters
 #' @param FoIpar parameters that define an FoI function
 #'
-#' @return the derivatives of the MoI and the AoI
+#' @return the derivatives of the MoI and the AoI as a [list]
 #' @export
 #'
-#' @examples
 dAoIda = function(a,M,p,FoIpar){with(as.list(c(M,p)),{
   foi = FoI(a,FoIpar,tau,h)
   m0 = pmax(m,1e-6)
@@ -128,10 +123,9 @@ dAoIda = function(a,M,p,FoIpar){with(as.list(c(M,p)),{
 #' @param dt The output frequency (in days)
 #' @param N The total number of moments to compute
 #'
-#' @return a matrix describing the orbits
+#' @return a data.frame with the orbits
 #' @export
 #'
-#' @examples
 solve_dAoI = function(h, FoIpar, r=1/200, tau=0, Tmax=730, dt=1, N=3){
   stopifnot(N>2)
   tms = seq(0, Tmax, by = dt)

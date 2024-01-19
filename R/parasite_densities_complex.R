@@ -2,7 +2,7 @@
 
 #' Compute the CDF and PDF of parasite densities in a host cohort
 #'
-#' @param meshX
+#' @param meshX a mesh over parasite densities
 #' @param a host cohort age
 #' @param FoIpar parameters that define an FoI function
 #' @param hhat a local scaling parameter for the FoI
@@ -16,7 +16,6 @@
 #' @return a [numeric] vector of length meshX
 #' @export
 #'
-#' @examples
 Bda = function(meshX, a, FoIpar,
                hhat=NULL, tau=0, r=1/200,
                pMu=par_alpha2mu.0(),
@@ -37,7 +36,7 @@ Bda = function(meshX, a, FoIpar,
   cdflist$pdf = list()
   cdflist$cdf[[1]] = CDFx
   cdflist$pdf[[1]] = PDFx
-  CDFm = dpois(1, moi)*CDFx
+  CDFm = stats::dpois(1, moi)*CDFx
 
   CDFn=CDFx
   PDFn=PDFx
@@ -50,9 +49,9 @@ Bda = function(meshX, a, FoIpar,
     PDFn = PDFn/sum(PDFn)
     cdflist$cdf[[i]] = CDFn
     cdflist$pdf[[i]] = PDFn
-    CDFm = CDFm + dpois(i, moi)*CDFn
+    CDFm = CDFm + stats::dpois(i, moi)*CDFn
   }
-  cdflist$CDFm = CDFm/(1-dpois(0,moi))
+  cdflist$CDFm = CDFm/(1-stats::dpois(0,moi))
   PDFm =c(CDFm[1], diff(CDFm))
   cdflist$PDFm = PDFm/sum(PDFm)
   cdflist
@@ -60,7 +59,7 @@ Bda = function(meshX, a, FoIpar,
 
 #' The density function for parasite densities in a host cohort
 #'
-#' @param meshX
+#' @param meshX a mesh over parasite densities
 #' @param a host cohort age
 #' @param FoIpar parameters that define an FoI function
 #' @param hhat a local scaling parameter for the FoI
@@ -74,14 +73,13 @@ Bda = function(meshX, a, FoIpar,
 #' @return a [numeric] vector of length meshX
 #' @export
 #'
-#' @examples
 dBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu.0(), pRBC=par_lRBC.0(), pSig=par_sigma.0(), pWda=par_Wda.delta()){
   Bda(meshX, a, FoIpar,hhat, tau, r, pMu, pRBC, pSig, pWda)$PDFm
 }
 
 #' The distribution function for parasite densities in a host cohort
 #'
-#' @param meshX
+#' @param meshX a mesh over parasite densities
 #' @param a host cohort age
 #' @param FoIpar parameters that define an FoI function
 #' @param hhat a local scaling parameter for the FoI
@@ -95,18 +93,18 @@ dBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu.0(
 #' @return a numeric vector of length meshX
 #' @export
 #'
-#' @examples
 pBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu.0(), pRBC=par_lRBC.0(), pSig=par_sigma.0(), pWda=par_Wda.delta()){
   Bda(meshX, a, FoIpar,hhat, tau, r, pMu, pRBC, pSig, pWda)$CDFm
 }
 
 #' Random generation for parasite densities in a host cohort
 #'
-#' @param N
+#' @param N number of observations
 #' @param a host cohort age
 #' @param FoIpar parameters that define an FoI function
 #' @param hhat a local scaling parameter for the FoI
 #' @param tau the cohort birthday
+#' @param alphamin the minimum value of alpha allowed
 #' @param r the clearance rate for a simple infection
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
@@ -116,7 +114,6 @@ pBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu.0(
 #' @return a [numeric] vector of length N
 #' @export
 #'
-#' @examples
 rBda = function(N, a, FoIpar,
                 hhat=NULL, r=1/200, tau=0, alphamin=7,
                 pMu=par_alpha2mu.0(),
@@ -158,7 +155,6 @@ rBda = function(N, a, FoIpar,
 #' @return a R by M [matrix]
 #' @export
 #'
-#' @examples
 rRda = function(M, R, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=7,
                 pMu=par_alpha2mu.0(),
                 pRBC=par_lRBC.0(),

@@ -13,19 +13,18 @@
 #' @param pRBC parameters to compute [log10RBC]
 #' @param pSig parameters to dispatch [sigma]
 #' @param pWda parameters to dispatch [Wda]
-#' @param pC
+#' @param Cpar parameters that define a detection function
 #'
 #' @return a [list]
 #' @export
 #'
-#' @examples
 pCountsPa = function(a, FoIpar, bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
                      pMu=par_alpha2mu.0(),
                      pRBC=par_lRBC.0(),
                      pSig=par_sigma.0(),
                      pWda=par_Wda.delta(),
-                     pC = par_nbCounts()){
+                     Cpar = par_nbCounts()){
   if(is.null(bins)) bins=c(1:5,13)
   lRBC = log10RBC(a, pRBC)
   meshX = seq(0, lRBC, by=dx)
@@ -36,7 +35,7 @@ pCountsPa = function(a, FoIpar, bins=NULL, dx=0.1,
     pD = Detect(xi,a,Cpar)
     counts = pCounts(bins, xi, a, Cpar)
   }
-  Bx=sapply(meshX, cdfP, a=a, Cpar=pC)
+  Bx=sapply(meshX, cdfP, a=a, Cpar=Cpar)
   list(bins=bins,cdf=rowSums(Bx*Pda))
 }
 
@@ -55,21 +54,20 @@ pCountsPa = function(a, FoIpar, bins=NULL, dx=0.1,
 #' @param pRBC parameters to compute [log10RBC]
 #' @param pSig parameters to dispatch [sigma]
 #' @param pWda parameters to dispatch [Wda]
-#' @param pC
+#' @param Cpar parameters that define a detection function
 #'
 #' @return a [list]
 #' @export
 #'
-#' @examples
 dCountsPa = function(a, FoIpar,  bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
                      pMu=par_alpha2mu.0(),
                      pRBC=par_lRBC.0(),
                      pSig=par_sigma.0(),
                      pWda=par_Wda.delta(),
-                     pC = par_nbCounts()){
-  DP = DetectPa(a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, pC)
-  PC = pCountsPa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, pC)
+                     Cpar = par_nbCounts()){
+  DP = DetectPa(a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
+  PC = pCountsPa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
   list(bins=PC$bins, pdf=diff(c(DP, PC$cdf))/(1-DP), detect=DP, cdf=PC$cdf, fullpdf = c(DP,diff(c(DP, PC$cdf))))
 }
 
@@ -92,22 +90,21 @@ dCountsPa = function(a, FoIpar,  bins=NULL, dx=0.1,
 #' @param pRBC parameters to compute [log10RBC]
 #' @param pSig parameters to dispatch [sigma]
 #' @param pWda parameters to dispatch [Wda]
-#' @param pC
+#' @param Cpar parameters that define a detection function
 #'
 #' @return a [list]
 #' @export
 #'
-#' @examples
 pCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
                      pMu=par_alpha2mu.0(),
                      pRBC=par_lRBC.0(),
                      pSig=par_sigma.0(),
                      pWda=par_Wda.delta(),
-                     pC = par_nbCounts()){
+                     Cpar = par_nbCounts()){
   moi = meanMoI(a, FoIpar, hhat, tau, r)
-  D = DetectPa(a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, pC)
-  out= pCountsPa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, pC)
+  D = DetectPa(a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
+  out= pCountsPa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
   list(bins=out$bins, cdf=(1 - exp(-moi*D*out$cdf))/(1-exp(-moi*D)), DM = 1 - exp(-moi*D))
 }
 
@@ -127,22 +124,21 @@ pCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
 #' @param pRBC parameters to compute [log10RBC]
 #' @param pSig parameters to dispatch [sigma]
 #' @param pWda parameters to dispatch [Wda]
-#' @param pC
+#' @param Cpar parameters that define a detection function
 #'
 #' @return a [list]
 #' @export
 #'
-#' @examples
 dCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
                      hhat=NULL,tau=0, r=1/200,
                      pMu=par_alpha2mu.0(),
                      pRBC=par_lRBC.0(),
                      pSig=par_sigma.0(),
                      pWda=par_Wda.delta(),
-                     pC = par_nbCounts()){
+                     Cpar = par_nbCounts()){
   moi = meanMoI(a, FoIpar, hhat, tau, r)
-  D = DetectPa(a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, pC)
-  PC = pCountsBa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, pC)
+  D = DetectPa(a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
+  PC = pCountsBa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
   DP = PC$DM
   list(bins=PC$bins, pdf=diff(c(DP, PC$cdf))/(1-DP), detect=DP, cdf=PC$cdf, fullpdf = c(DP, diff(c(DP, PC$cdf))))
 }
@@ -160,21 +156,20 @@ dCountsBa = function(a, FoIpar, bins=NULL, dx=0.1,
 #' @param pRBC parameters to compute [log10RBC]
 #' @param pSig parameters to dispatch [sigma]
 #' @param pWda parameters to dispatch [Wda]
-#' @param pC
+#' @param Cpar parameters that define a detection function
 #'
 #' @return a [list]
 #' @export
 #'
-#' @examples
 meanCountsPa = function(a, FoIpar, dx=0.1,
                         hhat=NULL,tau=0, r=1/200,
                         pMu=par_alpha2mu.0(),
                         pRBC=par_lRBC.0(),
                         pSig=par_sigma.0(),
                         pWda=par_Wda.delta(),
-                        pC = par_nbCounts()){
+                        Cpar = par_nbCounts()){
   bins = seq(0,7, by=dx)
-  PC = dCountsPa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, pC)
+  PC = dCountsPa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
   sum(PC$bins*PC$pdf)
 }
 
@@ -192,20 +187,19 @@ meanCountsPa = function(a, FoIpar, dx=0.1,
 #' @param pRBC parameters to compute [log10RBC]
 #' @param pSig parameters to dispatch [sigma]
 #' @param pWda parameters to dispatch [Wda]
-#' @param pC
+#' @param Cpar parameters that define a detection function
 #'
 #' @return a [list]
 #' @export
 #'
-#' @examples
 meanCountsBa = function(a, FoIpar, dx=0.1,
                         hhat=NULL,tau=0, r=1/200,
                         pMu=par_alpha2mu.0(),
                         pRBC=par_lRBC.0(),
                         pSig=par_sigma.0(),
                         pWda=par_Wda.delta(),
-                        pC = par_nbCounts()){
+                        Cpar = par_nbCounts()){
   bins = seq(0,7, by = dx)
-  PC = dCountsBa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, pC)
+  PC = dCountsBa(a, FoIpar, bins, dx, hhat, tau, r, pMu, pRBC, pSig, pWda, Cpar)
   sum(PC$bins*PC$pdf)
 }

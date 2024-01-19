@@ -11,8 +11,6 @@
 #'
 #' @return a [numeric] vector of length(a)
 #' @export
-#'
-#' @examples
 Wda = function(a, FoIpar, hhat=NULL, tau=0, par=par_Wda.0()){
   UseMethod("Wda", par)
 }
@@ -23,8 +21,6 @@ Wda = function(a, FoIpar, hhat=NULL, tau=0, par=par_Wda.0()){
 #'
 #' @return a [numeric] vector of 0's of length(a)
 #' @export
-#'
-#' @examples
 Wda.0 = function(a, FoIpar, hhat=NULL, tau=0,  par=par_Wda.0()){
   0*a
 }
@@ -33,8 +29,6 @@ Wda.0 = function(a, FoIpar, hhat=NULL, tau=0,  par=par_Wda.0()){
 #'
 #' @return a [list]
 #' @export
-#'
-#' @examples
 par_Wda.0 = function(){
   par = list()
   class(par) <- "0"
@@ -48,8 +42,6 @@ par_Wda.0 = function(){
 #'
 #' @return a [numeric] vector of length(a)
 #' @export
-#'
-#' @examples
 Wda.delta = function(a, FoIpar, hhat=NULL, tau=0, par=par_Wda.0()){with(par,{
   Wd = function(a,FoIpar,hhat,tau,delta){
     ff = function(s,a,FoIpar,hhat,tau,delta)  FoI(a-s,FoIpar,tau,hhat)*exp(-delta*(a-s))
@@ -69,8 +61,6 @@ Wda.delta = function(a, FoIpar, hhat=NULL, tau=0, par=par_Wda.0()){with(par,{
 #'
 #' @return a [list]
 #' @export
-#'
-#' @examples
 par_Wda.delta = function(delta=0.001){
   par = list()
   class(par) <- "delta"

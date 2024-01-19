@@ -9,15 +9,14 @@
 #' @param mu the mean value for the distribution (0 <= mu <= 1)
 #' @param pSig parameters to dispatch the S3 function [sigma]
 #'
-#' @return
+#' @return a [numeric] vector of length(x)
 #' @export
 #'
-#' @examples
 dbeta1 = function(x, mu,
                   pSig=par_sigma.0()){
 
   var = sigma(mu, pSig)
-  dbeta(x, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
+  stats::dbeta(x, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
 }
 
 #' Disribution function for the beta distribution, an alternative parameterization
@@ -26,15 +25,14 @@ dbeta1 = function(x, mu,
 #' @param mu the mean value for the distribution (0 <= mu <= 1)
 #' @param pSig parameters to dispatch the S3 function [sigma]
 #'
-#' @return
+#' @return a [numeric] vector of length(p)
 #' @export
 #'
-#' @examples
 pbeta1 = function(p, mu,
                   pSig=par_sigma.0()){
 
   var = sigma(mu, pSig)
-  pbeta(p, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
+  stats::pbeta(p, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
 }
 
 #' The quantile function for the beta distribution, an alternative parameterization
@@ -43,15 +41,14 @@ pbeta1 = function(p, mu,
 #' @param mu the mean value for the distribution (0 <= mu <= 1)
 #' @param pSig parameters to dispatch the S3 function [sigma]
 #'
-#' @return
+#' @return a [numeric] vector of length(x)
 #' @export
 #'
-#' @examples
 qbeta1 = function(x, mu,
                   pSig=par_sigma.0()){
 
   var = sigma(mu, pSig)
-  qbeta(x, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
+  stats::qbeta(x, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
 }
 
 
@@ -62,15 +59,14 @@ qbeta1 = function(x, mu,
 #' @param mu the mean value for the distribution (0 <= mu <= 1)
 #' @param pSig parameters to dispatch the S3 function [sigma]
 #'
-#' @return
+#' @return a [numeric] vector of length n
 #' @export
 #'
-#' @examples
 rbeta1 = function(n, mu,
                   pSig=par_sigma.0()){
 
   var = sigma(mu, pSig)
-  rbeta(n, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
+  stats::rbeta(n, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
 }
 
 
@@ -79,10 +75,9 @@ rbeta1 = function(n, mu,
 #' @param mu the mean value for the distribution (0 <= mu <= 1)
 #' @param par parameters to dispatch and configure the instances
 #'
-#' @return
+#' @return a [numeric] vector of length(mu)
 #' @export
 #'
-#' @examples
 sigma = function(mu, par){
   UseMethod("sigma", par)
 }
@@ -92,10 +87,9 @@ sigma = function(mu, par){
 #' @param mu the mean value for the distribution (0 <= mu <= 1)
 #' @param par parameters to dispatch and configure the instances
 #'
-#' @return
+#' @return a [numeric] vector of length(mu)
 #' @export
 #'
-#' @examples
 sigma.0 = function(mu, par){with(par,{
   pmin(abs(cc)*mu^(1+abs(bb))*(1-mu)^(1+abs(aa)), mu*(1-mu))
 })}
@@ -106,10 +100,9 @@ sigma.0 = function(mu, par){with(par,{
 #' @param bb a shape parameter
 #' @param cc a shape parameter
 #'
-#' @return
+#' @return a [list]
 #' @export
 #'
-#' @examples
 par_sigma.0 = function(aa=3.11, bb=2.14, cc=1.74){
   par = list()
   class(par) <- "0"

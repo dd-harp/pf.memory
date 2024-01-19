@@ -9,10 +9,9 @@
 #' @param tau the cohort birthday
 #' @param r the clearance rate for a simple infection
 #'
-#' @return
+#' @return a [numeric] vector of length(alpha)
 #' @export
 #'
-#' @examples
 zda = function(alpha, a, FoIpar, hhat=NULL, tau=0, r=1/200){
   FoI(a-alpha, FoIpar,tau,hhat)*exp(-r*alpha)
 }

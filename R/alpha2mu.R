@@ -1,13 +1,12 @@
 #' Compute mean, expected parasite densities `mu` as a function of the age of infection `alpha`
 #'
-#' @param alpha a parasite's age of infection
+#' @param alpha the age of a parasite infection
 #' @param W the immune tracking variables
 #' @param par a [list] that defines a model
 #'
-#' @return mean log10 parasite densities
+#' @return mean log10 parasite densities, a [numeric] vector of length(alpha)
 #' @export
 #'
-#' @examples
 alpha2mu = function(alpha, W, par){
   UseMethod("alpha2mu", par)
 }
@@ -18,10 +17,9 @@ alpha2mu = function(alpha, W, par){
 #' @param W immune tracking variables
 #' @param par a [list] that defines a model
 #'
-#' @return mean log10 parasite densities
+#' @return mean log10 parasite densities, a [numeric] vector of length(alpha)
 #' @export
 #'
-#' @examples
 salpha2mu = function(alpha, W, par){
   sapply(alpha, alpha2mu, W=W, par=par)
 }
@@ -34,7 +32,6 @@ salpha2mu = function(alpha, W, par){
 #' @return mean log10 parasite densities
 #' @export
 #'
-#' @examples
 alpha2mu.0 = function(alpha, W, par){with(par,{
   B = tildel + (tildeb-tildel)*exp(-(Sa*(alpha-D)))
   ix = which(alpha<D)
@@ -44,18 +41,17 @@ alpha2mu.0 = function(alpha, W, par){with(par,{
   B
 })}
 
-#' Set up parameters for alpha2mu.0
+#' Set up parameters for [alpha2mu.0]
 #'
-#' @param D
-#' @param liver
-#' @param tildeb
-#' @param tildel
-#' @param Sa
+#' @param D The age of infection (in days) when parasite densities peak
+#' @param liver The age of infection (in days) when parasites emerge from the liver
+#' @param tildeb The maximum expected log10 parasite densities
+#' @param tildel The minimum expected log10 parasite densities
+#' @param Sa The decline in mu with respect to alpha
 #'
-#' @return mean log10 parasite densities
+#' @return a [list]
 #' @export
 #'
-#' @examples
 par_alpha2mu.0 = function(D=20, liver=7, tildeb=10.3, tildel=2, Sa=0.0033){
   par = list()
   class(par) <- "0"
@@ -76,7 +72,6 @@ par_alpha2mu.0 = function(D=20, liver=7, tildeb=10.3, tildel=2, Sa=0.0033){
 #' @return mean log10 parasite densities
 #' @export
 #'
-#' @examples
 alpha2mu.W = function(alpha, W, par){with(par,{
   B = tildel + (tildeb-tildel)*exp(-Sa*(alpha-D)-Sw*W)
   ix = which(alpha<=D)
@@ -98,7 +93,6 @@ alpha2mu.W = function(alpha, W, par){with(par,{
 #' @return mean log10 parasite densities
 #' @export
 #'
-#' @examples
 par_alpha2mu.W = function(D=20, liver=7, tildeb=10.3, tildel=2, Sa=0.0033, Sw=0.001){
   par = list()
   class(par) <- "W"

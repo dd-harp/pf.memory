@@ -1,7 +1,7 @@
 
 #' The density function for the sum of two infections
 #'
-#' @param x
+#' @param x host cohort age
 #' @param a host cohort age
 #' @param FoIpar parameters that define an FoI function
 #' @param hhat a local scaling parameter for the FoI
@@ -12,10 +12,9 @@
 #' @param pSig parameters to dispatch [sigma]
 #' @param pWda parameters to dispatch [Wda]
 #'
-#' @return
+#' @return a [numeric] value
 #' @export
 #'
-#' @examples
 dDensityPaConvolve2 = function(x, a, FoIpar,
                                hhat=NULL, tau=0,  r=1/200,
                                pMu=par_alpha2mu.0(),
@@ -24,23 +23,22 @@ dDensityPaConvolve2 = function(x, a, FoIpar,
                                pWda=par_Wda.delta()){
   px = function(x, log10B, a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda){
     lB2 = log10(10^log10B - 10^x)
-    dDensityPa(x,a,FoIpar, hhath, tau, r, pMu, pRBC, pSig, pWda)*dDensityPa(lB2,a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda)
+    dDensityPa(x,a,FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda)*dDensityPa(lB2,a, FoIpar, hhat, tau, r, pMu, pRBC, pSig, pWda)
   }
-  integrate(px, 0, x, log10B=x, a=a, FoIpar=FoIpar, hhat=hhat, tau=tau, r=r, pMu=pMu, lRBC=pRBC, pSig=pSig,pWda=pWda)$value
+  stats::integrate(px, 0, x, log10B=x, a=a, FoIpar=FoIpar, hhat=hhat, tau=tau, r=r, pMu=pMu, lRBC=pRBC, pSig=pSig,pWda=pWda)$value
 }
 
 
 
 #' The density function for the sum of two infections, method a
 #'
-#' @param meshX
+#' @param meshX a mesh of host cohort ages
 #' @param CDF1 the CDF for a complex distribution
 #' @param CDF2 the CDF for a complex distribution
 #'
 #' @return a [numeric] vector of length(meshX)
 #' @export
 #'
-#' @examples
 cdfConvolve2b = function(meshX, CDF1, CDF2){
   cX = CDF1*0
   L = length(meshX)
@@ -61,16 +59,13 @@ cdfConvolve2b = function(meshX, CDF1, CDF2){
 
 #' The density function for the sum of two infections, method b
 #'
-#' @param meshX
+#' @param meshX a mesh of host cohort ages
 #' @param CDF1 the CDF for a complex distribution
 #' @param CDF2 the CDF for a complex distribution
 #'
 #' @return a [numeric] vector of length(meshX)
-#'
-#' @return
 #' @export
 #'
-#' @examples
 cdfConvolve2a = function(meshX, CDF1, CDF2){
   cX = CDF1*0
   L = length(meshX)
@@ -94,16 +89,13 @@ cdfConvolve2a = function(meshX, CDF1, CDF2){
 
 #' The density function for the sum of two infections
 #'
-#' @param meshX
+#' @param meshX a mesh of host cohort ages
 #' @param CDF1 the CDF for a complex distribution
 #' @param CDF2 the CDF for a complex distribution
 #'
 #' @return a [numeric] vector of length(meshX)
-#'
-#' @return
 #' @export
 #'
-#' @examples
 cdfConvolve2 = function(meshX, CDF1, CDF2){
   CDFa = cdfConvolve2a(meshX, CDF1, CDF2)
   CDFb = cdfConvolve2a(meshX, CDF1, CDF2)

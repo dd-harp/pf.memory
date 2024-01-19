@@ -4,10 +4,19 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/Dynamics.html</loc>
+  </url>
+  <url>
     <loc>/articles/FoI-TraceFunctions.html</loc>
   </url>
   <url>
+    <loc>/articles/MoI.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/plotCounts.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
@@ -16,7 +25,49 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/Bda.html</loc>
+  </url>
+  <url>
+    <loc>/reference/CparountsBa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/CparountsPa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/Detect.html</loc>
+  </url>
+  <url>
+    <loc>/reference/Detect.nb.html</loc>
+  </url>
+  <url>
+    <loc>/reference/Detect.pois.html</loc>
+  </url>
+  <url>
+    <loc>/reference/DetectBda.html</loc>
+  </url>
+  <url>
+    <loc>/reference/DetectPM.html</loc>
+  </url>
+  <url>
+    <loc>/reference/DetectPa.html</loc>
+  </url>
+  <url>
     <loc>/reference/FoI.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MoIDistPlot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MoIPM.html</loc>
+  </url>
+  <url>
+    <loc>/reference/Wda.0.html</loc>
+  </url>
+  <url>
+    <loc>/reference/Wda.delta.html</loc>
+  </url>
+  <url>
+    <loc>/reference/Wda.html</loc>
   </url>
   <url>
     <loc>/reference/ageFoI.flat.html</loc>
@@ -28,7 +79,166 @@
     <loc>/reference/ageFoI.type2.html</loc>
   </url>
   <url>
+    <loc>/reference/alpha2mu.0.html</loc>
+  </url>
+  <url>
+    <loc>/reference/alpha2mu.W.html</loc>
+  </url>
+  <url>
+    <loc>/reference/alpha2mu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/binnedCounts.html</loc>
+  </url>
+  <url>
+    <loc>/reference/binnedCounts.nb.html</loc>
+  </url>
+  <url>
+    <loc>/reference/binnedCounts.pois.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cdfConvolve2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cdfConvolve2a.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cdfConvolve2b.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dAoI.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dAoIda.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dAoY.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dAoYN.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dAoYda.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dBda.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dCounts.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dCounts.nb.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dCounts.pois.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dCountsBa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dCountsPa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dDensityPa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dDensityPaConvolve2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dDensityPalpha.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dDensityPmu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dMoIda.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dbeta1.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dmda.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dpda.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/log10RBC.0.html</loc>
+  </url>
+  <url>
+    <loc>/reference/log10RBC.html</loc>
+  </url>
+  <url>
+    <loc>/reference/meanCountsBa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/meanCountsPa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/meanMoI.html</loc>
+  </url>
+  <url>
+    <loc>/reference/momentAoI.html</loc>
+  </url>
+  <url>
+    <loc>/reference/momentAoY.html</loc>
+  </url>
+  <url>
+    <loc>/reference/nzPois.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pAoI.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pAoY.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pAoYN.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pAoY_long.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pBda.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pCounts.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pCounts.nb.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pCounts.pois.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pCountsBa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pCountsPa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pDensityPa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pDensityPalpha.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pDensityPmu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/par_Wda.0.html</loc>
+  </url>
+  <url>
+    <loc>/reference/par_Wda.delta.html</loc>
+  </url>
+  <url>
+    <loc>/reference/par_alpha2mu.0.html</loc>
+  </url>
+  <url>
+    <loc>/reference/par_alpha2mu.W.html</loc>
   </url>
   <url>
     <loc>/reference/par_expSeason.html</loc>
@@ -43,10 +253,61 @@
     <loc>/reference/par_flatTrend.html</loc>
   </url>
   <url>
+    <loc>/reference/par_lRBC.0.html</loc>
+  </url>
+  <url>
+    <loc>/reference/par_nbCounts.html</loc>
+  </url>
+  <url>
+    <loc>/reference/par_poisCounts.html</loc>
+  </url>
+  <url>
+    <loc>/reference/par_sigma.0.html</loc>
+  </url>
+  <url>
     <loc>/reference/par_sinSeason.html</loc>
   </url>
   <url>
     <loc>/reference/par_type2Age.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pbeta1.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qDensityPalpha.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qDensityPmu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qbeta1.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rAoI.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rAoY.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rAoYN.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rBda.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rDensityPalpha.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rDensityPmu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rRda.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rbeta1.html</loc>
+  </url>
+  <url>
+    <loc>/reference/salpha2mu.html</loc>
   </url>
   <url>
     <loc>/reference/seasonalFoI.exp.html</loc>
@@ -61,9 +322,36 @@
     <loc>/reference/seasonalFoI.sin.html</loc>
   </url>
   <url>
+    <loc>/reference/sigma.0.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sigma.html</loc>
+  </url>
+  <url>
+    <loc>/reference/solveMMinfty.html</loc>
+  </url>
+  <url>
+    <loc>/reference/solve_dAoI.html</loc>
+  </url>
+  <url>
+    <loc>/reference/solve_dAoYda.html</loc>
+  </url>
+  <url>
+    <loc>/reference/solve_dm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/solve_dpda.html</loc>
+  </url>
+  <url>
     <loc>/reference/trendFoI.flat.html</loc>
   </url>
   <url>
     <loc>/reference/trendFoI.html</loc>
+  </url>
+  <url>
+    <loc>/reference/truePRa.html</loc>
+  </url>
+  <url>
+    <loc>/reference/zda.html</loc>
   </url>
 </urlset>

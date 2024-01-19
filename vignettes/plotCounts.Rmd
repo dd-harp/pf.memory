@@ -2,7 +2,7 @@
 title: "Plot Parasite Counts"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{FoI Trace Functions}
+  %\VignetteIndexEntry{Plot Parasite Counts}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

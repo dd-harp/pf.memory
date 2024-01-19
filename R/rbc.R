@@ -6,7 +6,6 @@
 #' @return a [numeric] vector of length(a)
 #' @export
 #'
-#' @examples
 log10RBC = function(a,par){
   UseMethod("log10RBC", par)
 }
@@ -20,7 +19,6 @@ log10RBC = function(a,par){
 #' @return a [numeric] vector of length(a)
 #' @export
 #'
-#' @examples
 log10RBC.0 = function(a,par){par$lRBCmax}
 
 #' Set up parameters for [log10RBC.0]
@@ -30,7 +28,6 @@ log10RBC.0 = function(a,par){par$lRBCmax}
 #' @return a [list]
 #' @export
 #'
-#' @examples
 par_lRBC.0 = function(lRBCmax=13){
   par = list()
   class(par) <- "0"
