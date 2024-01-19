@@ -159,10 +159,8 @@ reference:
   - cdfConvolve2
   - cdfConvolve2a
   - cdfConvolve2b
-- title: Parasite Densities & Detection
-  desc: |
-    Other
-- subtitle: Detection
+- title: Parasite Detection
+- subtitle: Parasite Positivity
   desc: |
     Observed prevalence and MoI
   contents:
@@ -172,25 +170,29 @@ reference:
   - DetectBda
   - DetectPM
   - DetectPa
+  - par_nbCounts
+  - par_poisCounts
+- subtitle: Observed MoI
+  desc: |
+    Parasite counts
+  contents:
   - MoIPM
 - subtitle: Counts
   desc: |
     Parasite counts
   contents:
-  - dCounts
-  - dCounts.nb
-  - dCounts.pois
   - pCounts
   - pCounts.nb
-  - par_nbCounts
   - pCounts.pois
-  - par_poisCounts
-  - dCountsBa
+  - dCounts
   - dCountsPa
-  - pCountsBa
   - pCountsPa
-  - meanCountsBa
   - meanCountsPa
+  - dCounts.nb
+  - dCounts.pois
+  - dCountsBa
+  - pCountsBa
+  - meanCountsBa
   - binnedCounts
   - binnedCounts.nb
   - binnedCounts.pois
