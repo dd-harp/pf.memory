@@ -14,6 +14,7 @@ suppressMessages(library(pf.memory))
 
 ```{r suppressMessages=T}
 library(viridisLite)
+library(knitr)
 library(viridis)
 ```
 

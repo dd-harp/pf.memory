@@ -14,6 +14,7 @@ suppressMessages(library(pf.memory))
 
 ```{r, suppressMessages=T}
 library(deSolve)
+library(knitr)
 library(viridisLite)
 library(viridis)
 ```
