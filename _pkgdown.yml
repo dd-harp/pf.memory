@@ -31,6 +31,169 @@ home:
         title: Changelog
         text: <a href="news/index.html">News</a>
 reference:
+- title: Infection Dynamics
+  desc: |
+    Dynamics of MoI, AoI
+- subtitle: Basic Dynamics
+  desc: |
+    Parasite Infections
+  contents:
+  - zda
+- subtitle: MoI
+  desc: |
+    Multiplicity of Infection
+  contents:
+  - meanMoI
+  - dMoIda
+  - solveMMinfty
+  - MoIDistPlot
+- subtitle: AoI
+  desc: |
+    Age of Infection
+  contents:
+  - dAoI
+  - pAoI
+  - rAoI
+  - momentAoI
+  - truePRa
+- subtitle: AoY
+  desc: |
+    Age of the Youngest Infection
+  contents:
+  - dAoY
+  - pAoY
+  - pAoY_long
+  - rAoY
+  - momentAoY
+- subtitle: AoYN
+  desc: |
+    Youngest of N-Infections
+  contents:
+  - dAoYN
+  - pAoYN
+  - rAoYN
+- title: Immune Tracking Variables
+  desc: |
+    Expected densities by AoI
+  contents:
+  - Wda
+  - Wda.none
+  - par_Wda_none
+  - Wda.delta
+  - par_Wda_delta
+- title: Hybrid Models
+  desc: |
+    Methods to set up FoI trace functions
+- subtitle: MoI
+  desc: |
+    The MoI hybrid model
+  contents:
+  - dmda
+  - solve_dm
+- subtitle: True PR
+  desc: |
+    The MoI and true PR
+  contents:
+  - dpda
+  - solve_dpda
+- subtitle: AoI
+  desc: |
+    AoI
+  contents:
+  - dAoIda
+  - solve_dAoI
+- subtitle: Approximate AoY
+  desc: |
+    AoI
+  contents:
+  - dAoYda
+  - solve_dAoYda
+- title: Parasite Densities
+  desc: |
+    Expected densities by AoI
+- subtitle: mu(alpha)
+  desc: |
+    Expected log10 parasites (mu) from the AoI (alpha)
+  contents:
+  - alpha2mu
+  - salpha2mu
+  - alpha2mu.W
+  - par_alpha2mu.W
+  - alpha2mu.base
+  - par_alpha2mu_base
+- subtitle: P(mu)
+  desc: |
+    log10 parasites distributions from mu
+  contents:
+  - dDensityPmu
+  - pDensityPmu
+  - qDensityPmu
+  - rDensityPmu
+- subtitle: P(alpha)
+  desc: |
+    log10 parasites from AoI (alpha)
+  contents:
+  - dDensityPalpha
+  - pDensityPalpha
+  - qDensityPalpha
+  - rDensityPalpha
+- subtitle: P(a)
+  desc: |
+    Parasite density distributions by host cohort age
+  contents:
+  - dDensityPa
+- subtitle: Complex Infections
+  desc: |
+    Expected densities by AoI
+  contents:
+  - Bda
+  - dBda
+  - pBda
+  - rBda
+  - rRda
+- subtitle: Convolutions
+  desc: |
+    Other
+  contents:
+  - dDensityPaConvolve2
+  - cdfConvolve2
+  - cdfConvolve2a
+  - cdfConvolve2b
+- title: Parasite Densities & Detection
+  desc: |
+    Other
+- subtitle: Detection
+  desc: |
+    Observed prevalence and MoI
+  contents:
+  - Detect
+  - Detect.nb
+  - Detect.pois
+  - DetectBda
+  - DetectPM
+  - DetectPa
+  - MoIPM
+- subtitle: Counts
+  desc: |
+    Parasite counts
+  contents:
+  - dCounts
+  - dCounts.nb
+  - dCounts.pois
+  - pCounts
+  - pCounts.nb
+  - par_nbCounts
+  - pCounts.pois
+  - par_poisCounts
+  - dCountsBa
+  - dCountsPa
+  - pCountsBa
+  - pCountsPa
+  - meanCountsBa
+  - meanCountsPa
+  - binnedCounts
+  - binnedCounts.nb
+  - binnedCounts.pois
 - title: Force of Infection
   desc: |
     Methods to set up FoI trace functions
@@ -38,114 +201,51 @@ reference:
   - FoI
 - subtitle: FoI by Age
   desc: |
-    Specialized methods to compute the FoI by Age
+    Specialized methods modify the FoI by Age
   contents:
+  - ageFoI
+  - ageFoI.flat
   - par_flatAge
-- title: Other Methods
+  - ageFoI.type2
+  - par_type2Age
+- subtitle: FoI by Season
+  desc: |
+    Specialized methods set the seasonal FoI
+  contents:
+  - seasonalFoI
+  - seasonalFoI.exp
+  - par_expSeason
+  - seasonalFoI.flat
+  - par_flatSeason
+  - seasonalFoI.sin
+  - par_sinSeason
+- subtitle: FoI Trends
+  desc: |
+    Specialized methods to set trends in the FoI
+  contents:
+  - trendFoI
+  - trendFoI.flat
+  - par_flatTrend
+- title: Utilities
   desc: |
     Other
   contents:
-  - Bda
-  - Detect
-  - Detect.nb
-  - Detect.pois
-  - DetectBda
-  - DetectPM
-  - DetectPa
-  - MoIDistPlot
-  - MoIPM
-  - Wda
-  - Wda.delta
-  - Wda.none
-  - ageFoI
-  - ageFoI.flat
-  - ageFoI.type2
-  - alpha2mu
-  - alpha2mu.W
-  - alpha2mu.base
-  - binnedCounts
-  - binnedCounts.nb
-  - binnedCounts.pois
-  - cdfConvolve2
-  - cdfConvolve2a
-  - cdfConvolve2b
-  - dAoI
-  - dAoIda
-  - dAoY
-  - dAoYN
-  - dAoYda
-  - dBda
-  - dCounts
-  - dCounts.nb
-  - dCounts.pois
-  - dCountsBa
-  - dCountsPa
-  - dDensityPa
-  - dDensityPaConvolve2
-  - dDensityPalpha
-  - dDensityPmu
-  - dMoIda
-  - dbeta1
-  - dmda
-  - dpda
+  - nzPois
+- subtitle: Red Blood Cells
+  desc: |
+    Other
+  contents:
   - log10RBC
   - log10RBC.static
-  - meanCountsBa
-  - meanCountsPa
-  - meanMoI
-  - momentAoI
-  - momentAoY
-  - nzPois
-  - pAoI
-  - pAoY
-  - pAoYN
-  - pAoY_long
-  - pBda
-  - pCounts
-  - pCounts.nb
-  - pCounts.pois
-  - pCountsBa
-  - pCountsPa
-  - pDensityPalpha
-  - pDensityPmu
-  - par_Wda_delta
-  - par_Wda_none
-  - par_alpha2mu.W
-  - par_alpha2mu_base
-  - par_expSeason
-  - par_flatSeason
-  - par_flatTrend
   - par_lRBC_static
-  - par_nbCounts
-  - par_poisCounts
-  - par_sigma_abc
-  - par_sinSeason
-  - par_type2Age
+- subtitle: beta distribution
+  desc: |
+    A modified beta distribution
+  contents:
+  - dbeta1
   - pbeta1
-  - qDensityPalpha
-  - qDensityPmu
   - qbeta1
-  - rAoI
-  - rAoY
-  - rAoYN
-  - rBda
-  - rDensityPalpha
-  - rDensityPmu
-  - rRda
   - rbeta1
-  - salpha2mu
-  - seasonalFoI
-  - seasonalFoI.exp
-  - seasonalFoI.flat
-  - seasonalFoI.sin
   - sigma
   - sigma.abc
-  - solveMMinfty
-  - solve_dAoI
-  - solve_dAoYda
-  - solve_dm
-  - solve_dpda
-  - trendFoI
-  - trendFoI.flat
-  - truePRa
-  - zda
+  - par_sigma_abc
