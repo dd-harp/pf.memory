@@ -160,9 +160,9 @@ reference:
   - cdfConvolve2a
   - cdfConvolve2b
 - title: Parasite Detection
-- subtitle: Parasite Positivity
+- subtitle: Observed prevalence
   desc: |
-    Observed prevalence and MoI
+    Parasite positivity
   contents:
   - Detect
   - Detect.nb
@@ -172,9 +172,9 @@ reference:
   - DetectPa
   - par_nbCounts
   - par_poisCounts
-- subtitle: Observed MoI
+- subtitle: Observed multiplicity of Infection
   desc: |
-    Parasite counts
+    Unique parasite types
   contents:
   - MoIPM
 - subtitle: Counts
