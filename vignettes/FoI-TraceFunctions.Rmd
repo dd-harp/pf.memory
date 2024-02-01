@@ -15,8 +15,10 @@ knitr::opts_chunk$set(
 library(pf.memory)
 ```
 
+We want to be able to simulate arbitrary patterns of exposure in cohorts as they age, with the ability to compare two cohorts of different ages in the same population. We let $h(t)$ denote the average daily FoI in a population, the hazard rate for infection. Notably, knowing the birth day for a cohort, $\tau,$ we can convert between age and time using the identity $$t = a + \tau.$$  We let $\omega(a)$ be a function that computes a *frailty* term associated with age, so we can write the FoI for any cohort as:
+$$h_\tau(a) = \omega(a) h(t-\tau).$$ 
 
-We let $h(t)$ denote the FoI. To construct $h(t)$, we let $\bar h$ be a parameter that sets the overall level of exposure. We assume exposure has a seasonal pattern, $S(t)$, and a temporal trend, $T(t)$, and $$h(t) = \bar h \cdot S(t) \cdot T(t).$$ 
+We begin by constructing functions, $h(t),$ to pressure test our models. We assume exposure has a seasonal pattern, $S(t)$, and a temporal trend, $T(t)$, and $$h(t) = \bar h \cdot S(t) \cdot T(t).$$ 
 
 Motivated by the evidence for age-dependent exposure, the rate of exposure in a cohort is assumed to change with age. We use the age-weighting function, $\omega(a)$, consistent with the available evidence from both anopheline [1-2] and aedine [3] mosquitoes. Each cohort is indexed by its birth day, $\tau$. The FoI at age $a$ for the cohort born on day $\tau$, which is at time $t=a+\tau$, is defined for $a>0$: 
 
@@ -24,9 +26,9 @@ Motivated by the evidence for age-dependent exposure, the rate of exposure in a 
 h_\tau(a) = \bar h \cdot \omega(a) \cdot S(a+\tau) \cdot T(a+\tau) 
 \end{equation}
 
-We can thus compare exposure and infection for cohorts of different ages, of the same age at different times. 
-
-To pressure test the models, we developed a class of functions to simulate exposure with respect to time or age. Supplement 1 includes a highly configurable and extensible library of FoI functions, output from this R-markdown file as `Supplement1.R` using `purl` from the R package `knitr`. 
+We can thus compare exposure and infection for cohorts of different ages, of the same age at different times. We let $H_\tau(a)$ denote the size of the cohort of age $a$ born on day $\tau$, and we note that for $h(t)$ to be the *average* FoI for the population, it must be true that 
+$$h(t) = \int_{-\infty}^t h_\tau(a) H_\tau(a) d \tau $$ 
+In most of our simulations, we compute quantities for single cohorts as they age, and we choose functions $\omega(a)$ without worrying about this constraint. When we deal with the whole human population, however, we must enforce the constraint. 
 
 The `FoI` is defined as an **S3** class function that returns the FoI at ages `a` for a cohort with birthdate `tau`, for a function defined by `par`. The optional passed parameter `hhat` overrides the value of `hbar` set in `par` when it is not `null`: 
 
@@ -39,6 +41,7 @@ The `FoI` is defined as an **S3** class function that returns the FoI at ages `a
 + $\omega(a)$ or `ageFoI` defines a change in exposure with respect to age relative to the mean population FoI
 
 ```{r FoI Trace, echo=F, purl=F}
+devtools::load_all()
 foiP1 = list(hbar = 5/365, agePar = par_flatAge(), seasonPar = par_flatSeason(), trendPar = par_flatTrend()) 
 foiP2 = list(hbar = 5/365, agePar = par_flatAge(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
 foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
