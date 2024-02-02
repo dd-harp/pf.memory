@@ -325,10 +325,10 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/seasonalFoI.sin.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/sigma.abc.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/sigma_mu.abc.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/sigma.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/sigma_mu.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/solveMMinfty.html</loc>
