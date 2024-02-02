@@ -22,8 +22,8 @@ library(pf.memory)
 ```
 
 George Maccdonald published a model of superinfection in 1950^[G Macdonald (1950). The analysis of infection rates in diseases in which superinfection occurs. Trop. Dis. Bull. 47, 907–915.].
-In presenting the model, Macdonald was faced with a problem: if super-infection was possible, then how long would it take until a person cleared a parasite completely?
-There was a problem with the mathematical formulation (Fine PEM, 1975)^[Fine PEM (1975). Superinfection - a problem in formulating a problem. Tropical Diseases Bulletin 75, 475–488]:
+In presenting the model, Macdonald was trying to solve a problem: if super-infection was possible, then how long would it take until a person would clear all of the parasites to become uninfected again? 
+Macdonald proposed a solution, but there was a problem with the mathematical formulation (An essay by Paul Fine, from 1975, is recommended reading)^[Fine PEM (1975). Superinfection - a problem in formulating a problem. Tropical Diseases Bulletin 75, 475–488]:
 the model that Macdonald described didn't match the function he used. 
 In a model formulated as part of the Garki project (Dietz K, *et al.*,  1974)^[Dietz K, Molineaux L, Thomas A (1974). A malaria model tested in the African savannah. Bull. Wld. Hlth. Org. 50, 347–357.], 
 the model allowed for *superinfection* and proposed a useful approximating model. 
@@ -74,7 +74,14 @@ $$
 
 While this is interesting, and while it solves the problem of modeling clearance under superinfection, the equation depends on $m$. Since we can compute $p(t)$ directly from $m(t)$, the equation is redundant.  
 
-In the following, we compute the prevalence of infection three ways.  
+Code exists in `pf.memory` to compute prevalence in three ways:
+
++ Using the function `truePRa`
+
++ Using the hybrid equations `solve_dpda`
+
++ From the hybrid model `solve_dm` and $p(t)= 1 - exp(-m(t))$
+
 
 ```{r, fig.height=4, fig.width=6, echo=F}
 foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
