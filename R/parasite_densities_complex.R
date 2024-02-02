@@ -10,7 +10,7 @@
 #' @param r the clearance rate for a simple infection
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #' @param pWda parameters to dispatch [Wda]
 #'
 #' @return a [numeric] vector of length meshX
@@ -67,7 +67,7 @@ Bda = function(meshX, a, FoIpar,
 #' @param r the clearance rate for a simple infection
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #' @param pWda parameters to dispatch [Wda]
 #'
 #' @return a [numeric] vector of length meshX
@@ -87,7 +87,7 @@ dBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu_ba
 #' @param r the clearance rate for a simple infection
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #' @param pWda parameters to dispatch [Wda]
 #'
 #' @return a numeric vector of length meshX
@@ -108,7 +108,7 @@ pBda = function(meshX, a, FoIpar, hhat=NULL, tau=0, r=1/200, pMu=par_alpha2mu_ba
 #' @param r the clearance rate for a simple infection
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #' @param pWda parameters to dispatch [Wda]
 #'
 #' @return a [numeric] vector of length N
@@ -149,7 +149,7 @@ rBda = function(N, a, FoIpar,
 #' @param alphamin the minimum value of alpha allowed
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #' @param pWda parameters to dispatch [Wda]
 #'
 #' @return a R by M [matrix]

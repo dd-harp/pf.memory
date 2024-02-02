@@ -5,7 +5,7 @@
 #' @param mu the expected value for log10 parasite densities
 #' @param a host cohort age
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #'
 #' @return a [numeric] vector of length(xi)
 #' @export
@@ -27,7 +27,7 @@ dDensityPmu = function(xi, mu, a=0,
 #' @param mu the expected value for log10 parasite densities
 #' @param a host cohort age
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #'
 #' @return a [numeric] vector of length(n)
 #' @export
@@ -48,7 +48,7 @@ rDensityPmu = function(n, mu, a=0,
 #' @param mu the expected value for log10 parasite densities
 #' @param a host cohort age
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #'
 #' @return a [numeric] vector of length(xi)
 #' @export
@@ -70,7 +70,7 @@ pDensityPmu = function(xi, mu, a=0,
 #' @param mu the expected value for log10 parasite densities
 #' @param a host cohort age
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #'
 #' @return a [numeric] vector of length(xi)
 #' @export
@@ -97,7 +97,7 @@ qDensityPmu = function(xi, mu, a=0,
 #' @param a host cohort age
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #'
 #' @return a [numeric] vector of length(x)
 #' @export
@@ -121,7 +121,7 @@ dDensityPalpha = function(x, alpha,
 #' @param a host cohort age
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to compute [sigma]
+#' @param pSig parameters to compute [sigma_mu]
 #'
 #' @return a [numeric] vector of length(n)
 #' @export
@@ -145,7 +145,7 @@ rDensityPalpha = function(n, alpha,
 #' @param a host cohort age
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #'
 #' @return a [numeric] vector of length(x)
 #' @export
@@ -169,7 +169,7 @@ pDensityPalpha = function(x, alpha,
 #' @param a host cohort age
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #'
 #' @return a [numeric] vector of length(x)
 #' @export
@@ -195,7 +195,7 @@ qDensityPalpha = function(x, alpha,
 #' @param r the clearance rate for a simple infection
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #' @param pWda parameters to dispatch [Wda]
 #'
 #' @return a [numeric] vector of length(x)

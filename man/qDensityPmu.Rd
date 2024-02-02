@@ -15,7 +15,7 @@ qDensityPmu(xi, mu, a = 0, pRBC = par_lRBC_static(), pSig = par_sigma_abc())
 
 \item{pRBC}{parameters to compute \link{log10RBC}}
 
-\item{pSig}{parameters to dispatch \link{sigma}}
+\item{pSig}{parameters to dispatch \link{sigma_mu}}
 }
 \value{
 a \link{numeric} vector of length(xi)

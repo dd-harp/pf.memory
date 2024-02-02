@@ -2,12 +2,12 @@
 
 #' Density function for the beta distribution, an alternative parameterization
 #' @description
-#' The beta distribution is parameterized using the mean and a function `sigma` that computes the variance
+#' The beta distribution is parameterized using the mean and a function `sigma_mu` that computes the variance
 #' as a function of the mean
 #'
 #' @param x a vector of quantiles
 #' @param mu the mean value for the distribution (0 <= mu <= 1)
-#' @param pSig parameters to dispatch the S3 function [sigma]
+#' @param pSig parameters to dispatch the S3 function [sigma_mu]
 #'
 #' @return a [numeric] vector of length(x)
 #' @export
@@ -15,7 +15,7 @@
 dbeta1 = function(x, mu,
                   pSig=par_sigma_abc()){
 
-  var = sigma(mu, pSig)
+  var = sigma_mu(mu, pSig)
   stats::dbeta(x, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
 }
 
@@ -23,7 +23,7 @@ dbeta1 = function(x, mu,
 #'
 #' @param p a vector of probabilities
 #' @param mu the mean value for the distribution (0 <= mu <= 1)
-#' @param pSig parameters to dispatch the S3 function [sigma]
+#' @param pSig parameters to dispatch the S3 function [sigma_mu]
 #'
 #' @return a [numeric] vector of length(p)
 #' @export
@@ -31,7 +31,7 @@ dbeta1 = function(x, mu,
 pbeta1 = function(p, mu,
                   pSig=par_sigma_abc()){
 
-  var = sigma(mu, pSig)
+  var = sigma_mu(mu, pSig)
   stats::pbeta(p, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
 }
 
@@ -39,7 +39,7 @@ pbeta1 = function(p, mu,
 #'
 #' @param x a vector of quantiles
 #' @param mu the mean value for the distribution (0 <= mu <= 1)
-#' @param pSig parameters to dispatch the S3 function [sigma]
+#' @param pSig parameters to dispatch the S3 function [sigma_mu]
 #'
 #' @return a [numeric] vector of length(x)
 #' @export
@@ -47,7 +47,7 @@ pbeta1 = function(p, mu,
 qbeta1 = function(x, mu,
                   pSig=par_sigma_abc()){
 
-  var = sigma(mu, pSig)
+  var = sigma_mu(mu, pSig)
   stats::qbeta(x, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
 }
 
@@ -57,7 +57,7 @@ qbeta1 = function(x, mu,
 #'
 #' @param n number of observations
 #' @param mu the mean value for the distribution (0 <= mu <= 1)
-#' @param pSig parameters to dispatch the S3 function [sigma]
+#' @param pSig parameters to dispatch the S3 function [sigma_mu]
 #'
 #' @return a [numeric] vector of length n
 #' @export
@@ -65,7 +65,7 @@ qbeta1 = function(x, mu,
 rbeta1 = function(n, mu,
                   pSig=par_sigma_abc()){
 
-  var = sigma(mu, pSig)
+  var = sigma_mu(mu, pSig)
   stats::rbeta(n, mu*(mu*(1-mu)/var-1), (1-mu)*(mu*(1-mu)/var-1))
 }
 
@@ -78,8 +78,8 @@ rbeta1 = function(n, mu,
 #' @return a [numeric] vector of length(mu)
 #' @export
 #'
-sigma = function(mu, par){
-  UseMethod("sigma", par)
+sigma_mu = function(mu, par){
+  UseMethod("sigma_mu", par)
 }
 
 #' A function that returns constrained values of the variance for the beta distrution as a function of the mean.
@@ -90,11 +90,11 @@ sigma = function(mu, par){
 #' @return a [numeric] vector of length(mu)
 #' @export
 #'
-sigma.abc = function(mu, par){with(par,{
+sigma_mu.abc = function(mu, par){with(par,{
   pmin(abs(cc)*mu^(1+abs(bb))*(1-mu)^(1+abs(aa)), mu*(1-mu))
 })}
 
-#' Parameters to configure [sigma.abc]
+#' Parameters to configure [sigma_mu.abc]
 #'
 #' @param aa a shape parameter
 #' @param bb a shape parameter

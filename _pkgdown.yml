@@ -255,6 +255,6 @@ reference:
   - pbeta1
   - qbeta1
   - rbeta1
-  - sigma
-  - sigma.abc
+  - sigma_mu
+  - sigma_mu.abc
   - par_sigma_abc

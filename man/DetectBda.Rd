@@ -35,7 +35,7 @@ DetectBda(
 
 \item{pRBC}{parameters to compute \link{log10RBC}}
 
-\item{pSig}{parameters to dispatch \link{sigma}}
+\item{pSig}{parameters to dispatch \link{sigma_mu}}
 
 \item{pWda}{parameters to dispatch \link{Wda}}
 

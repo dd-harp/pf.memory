@@ -216,7 +216,7 @@ binnedCounts.pois = function(xi, a, bins, Cpar=par_poisCounts()){
 #' @param r the clearance rate for a simple infection
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #' @param pWda parameters to dispatch [Wda]
 #' @param pC parameters that define a detection function
 #'
@@ -248,7 +248,7 @@ DetectPa = function(a, FoIpar,
 #' @param r the clearance rate for a simple infection
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #' @param pWda parameters to dispatch [Wda]
 #' @param pC parameters that define a detection function
 #'
@@ -276,7 +276,7 @@ DetectPM = function(a, FoIpar,
 #' @param r the clearance rate for a simple infection
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #' @param pWda parameters to dispatch [Wda]
 #' @param pC parameters that define a detection function
 #'
@@ -307,7 +307,7 @@ DetectBda = function(a, FoIpar, dx=0.1,
 #' @param r the clearance rate for a simple infection
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #' @param pWda parameters to dispatch [Wda]
 #' @param pC parameters that define a detection function
 #'

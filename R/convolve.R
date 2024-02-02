@@ -9,7 +9,7 @@
 #' @param r the clearance rate for a simple infection
 #' @param pMu parameters to compute [alpha2mu]
 #' @param pRBC parameters to compute [log10RBC]
-#' @param pSig parameters to dispatch [sigma]
+#' @param pSig parameters to dispatch [sigma_mu]
 #' @param pWda parameters to dispatch [Wda]
 #'
 #' @return a [numeric] value

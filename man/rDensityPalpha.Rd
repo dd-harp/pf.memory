@@ -27,7 +27,7 @@ rDensityPalpha(
 
 \item{pRBC}{parameters to compute \link{log10RBC}}
 
-\item{pSig}{parameters to compute \link{sigma}}
+\item{pSig}{parameters to compute \link{sigma_mu}}
 }
 \value{
 a \link{numeric} vector of length(n)
