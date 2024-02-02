@@ -86,19 +86,21 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/pf.memory/">pf.memory</a></span><span class="op">)</span></span></code></pre></div>
 <p>George Maccdonald published a model of superinfection in 1950<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;G Macdonald (1950). The analysis of infection rates in
 diseases in which superinfection occurs. Trop. Dis. Bull. 47, 907–915.&lt;/p&gt;"><sup>1</sup></a>. In
-presenting the model, Macdonald was faced with a problem: if
+presenting the model, Macdonald was trying to solve a problem: if
 super-infection was possible, then how long would it take until a person
-cleared a parasite completely? There was a problem with the mathematical
-formulation (Fine PEM, 1975)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Fine PEM (1975). Superinfection - a problem in
-formulating a problem. Tropical Diseases Bulletin 75, 475–488&lt;/p&gt;"><sup>2</sup></a>: the model that Macdonald described didn’t
-match the function he used. In a model formulated as part of the Garki
-project (Dietz K, <em>et al.</em>, 1974)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Dietz K, Molineaux L, Thomas A (1974). A malaria model
-tested in the African savannah. Bull. Wld. Hlth. Org. 50, 347–357.&lt;/p&gt;"><sup>3</sup></a>, the model allowed for
-<em>superinfection</em> and proposed a useful approximating model. One
-solution came from taking a hybrid modeling approach (Nåsell I, 1985)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Nåsell I (1985). Hybrid Models of Tropical Infections,
-1st edition. Springer-Verlag. &lt;a href="https://doi.org/10.1007/978-3-662-01609-1" class="external-link uri"&gt;https://doi.org/10.1007/978-3-662-01609-1&lt;/a&gt;&lt;/p&gt;'><sup>4</sup></a>, which we
-have discussed in a vignette about the <a href="MoI.html">Multiplicity
-of Infection (MoI)</a>.</p>
+would clear all of the parasites to become uninfected again? Macdonald
+proposed a solution, but there was a problem with the mathematical
+formulation (An essay by Paul Fine, from 1975, is recommended reading)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Fine PEM (1975). Superinfection - a problem in
+formulating a problem. Tropical Diseases Bulletin 75, 475–488&lt;/p&gt;"><sup>2</sup></a>: the model
+that Macdonald described didn’t match the function he used. In a model
+formulated as part of the Garki project (Dietz K, <em>et al.</em>,
+1974)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Dietz K, Molineaux L, Thomas A (1974). A malaria model
+tested in the African savannah. Bull. Wld. Hlth. Org. 50, 347–357.&lt;/p&gt;"><sup>3</sup></a>,
+the model allowed for <em>superinfection</em> and proposed a useful
+approximating model. One solution came from taking a hybrid modeling
+approach (Nåsell I, 1985)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Nåsell I (1985). Hybrid Models of Tropical Infections,
+1st edition. Springer-Verlag. &lt;a href="https://doi.org/10.1007/978-3-662-01609-1" class="external-link uri"&gt;https://doi.org/10.1007/978-3-662-01609-1&lt;/a&gt;&lt;/p&gt;'><sup>4</sup></a>, which we have discussed in a vignette
+about the <a href="MoI.html">Multiplicity of Infection (MoI)</a>.</p>
 <p>The model Macdonald described was also formulted in queuing theory,
 where the model is called <span class="math inline">\(M/M/\infty\)</span>. In this model, each new
 infection increases the MoI by one; the transition rate to a higher MoI
@@ -150,8 +152,13 @@ r \frac{m}{e^m - 1}
 \]</span></p>
 <p>While this is interesting, and while it solves the problem of
 modeling clearance under superinfection, the equation depends on <span class="math inline">\(m\)</span>. Since we can compute <span class="math inline">\(p(t)\)</span> directly from <span class="math inline">\(m(t)\)</span>, the equation is redundant.</p>
-<p>In the following, we compute the prevalence of infection three
-ways.</p>
+<p>Code exists in <code>pf.memory</code> to compute prevalence in three
+ways:</p>
+<ul>
+<li><p>Using the function <code>truePRa</code></p></li>
+<li><p>Using the hybrid equations <code>solve_dpda</code></p></li>
+<li><p>From the hybrid model <code>solve_dm</code> and <span class="math inline">\(p(t)= 1 - exp(-m(t))\)</span></p></li>
+</ul>
 <p><img src="prevalence_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 
   </main>
