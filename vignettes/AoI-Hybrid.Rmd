@@ -1,8 +1,8 @@
 ---
-title: "A Hybrid Model for the Age of Infection"
+title: "Hybrid Model for the Age of Infection"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Age of Infection}
+  %\VignetteIndexEntry{Hybrid Model for the Age of Infection}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -23,7 +23,7 @@ FoI = function(a, par, tau=0, hhat=NULL){with(par,{
 #' @return [numeric]
 #' @export
 make_FoI = function(par, maxAge = 50){
-  norm = integrate(FoI, 0, maxAge*365, tau=0, par=par)$value
+  norm = stats::integrate(FoI, 0, maxAge*365, tau=0, par=par)$value
   par$hbar = maxAge*par$hbar/norm
   ff = function(a, tau=0){
     FoI(a, par, tau)
