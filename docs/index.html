@@ -44,6 +44,7 @@
     <a class="dropdown-item" href="articles/FoI-TraceFunctions.html">Force of Infection</a>
     <a class="dropdown-item" href="articles/Dynamics.html">Dynamics</a>
     <a class="dropdown-item" href="articles/MoI.html">Multiplicity of Infection</a>
+    <a class="dropdown-item" href="articles/prevalence.html">Prevalence</a>
   </div>
 </li>
       </ul>
@@ -66,14 +67,29 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="memory--malaria-epidemiology">Memory &amp; Malaria Epidemiology<a class="anchor" aria-label="anchor" href="#memory--malaria-epidemiology"></a>
+<div class="page-header"><h1 id="pfmemory----the-age-of-infection-immunity--malaria-epidemiology">
+<code>pf.memory</code> <br><br> The Age of Infection, Immunity &amp; Malaria Epidemiology<a class="anchor" aria-label="anchor" href="#pfmemory----the-age-of-infection-immunity--malaria-epidemiology"></a>
 </h1></div>
-<p>Malaria immunity is weak and not fully protective, so a single person can be infected with malaria many times.</p>
+<p>This software is a set of computational algorithms that implements a synthetic approach to malaria epidemiology, defined narrowly to include exposure to the bites of infective mosquitoes, the dynamics of infection (including superinfection).</p>
+<p>The epidemiology of <em>Plasmodium falciparum</em> malaria presents a unique set of challenges due to the complex dynamics of infection, immunity, disease and infectiousness as well as treatment and chemo-protection, diagnostics and detection. Malaria can be measured in a dozen different ways, but it has been difficult to present a simple synthesis of malaria infection and disease in terms of the metrics that are commonly used in research and clinical surveillance. An important metric is the <em>Plasmodium falciparum</em> parasite rate, or <em>Pf</em>PR, defined as the average prevalence of malaria taken from a cross-sectional survey. Another metric, often measured as a covariate in research studies, is a parasite count, the number of parasites in a blood slide field counted by a light microscopist. In an old data set, collected during malariotherapy, parasite counts fluctuated substantially over the time course of an infection, but they were strongly statistically correlated with the <em>age of infection</em> or AoI (Henry JM, <em>et al.</em>, 2022)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Henry JM, Carter A &amp;amp; Smith DL (2022) Infection age as a predictor of epidemiological metrics for malaria. Malar J 21; 117, &lt;a href="https://doi.org/10.1186/s12936-022-04134-5" class="external-link uri"&gt;https://doi.org/10.1186/s12936-022-04134-5&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a>. In malaria, the <em>Pf</em>PR in several old studies had a characterstic shape when plotted against age. The patterns also differ by diagnostic method, by season, by sex, and by location. Parasite densities have been used as a correlate of disease.</p>
+<p>With so many interacting factors, it was a challenge to develop a model that could deal with everything. One approach to studying malaria infection has been to develop mechanistic models for the dynamics of malaria infection within a single host. The most prominent models of this type are OpenMalaria and eMod, but there have been several others. These computational models made it possible to develope comprehensive individual-based simulation models, or IBMs, of malaria for policy. While these approaches have been able to replicate the patterns, the outputs of the models are usually just as complex as the data collected in field studies. A synthesis of malaria epidemiology has proven elusive.</p>
+<p>We present the computational algorithms that support a probabilistic approach to malaria epidemiology. We start with a semi-Markovian model of malaria exposure and infection, whose states are represented by random variables that describe the multiplicity of infection (MoI) in a host and the age of infection (AoI). Assuming that parasite densities are, at least statistically, predicted by the AoI, we can compute probability distribution functions describing parasite densities, parasite counts, and detection in an individual chosen at random from the population. From this, we present a model for parasite detection and parasite counts. This same approach has been extended to predict disease, immunity, treatment with anti-malarial drugs, and a brief period of chemo-protection.</p>
+<p>The probabilistic approach is both highly realistic and descriptive, but our goal was a synthesis. This synthesis involves a few steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>We derive variables that can track the mean MoI, the mean AoI and all its moments, and the probability of detection.</p></li>
+<li><p>Hybrid models for the MoI already exist, but we show how this approach can be extended to systems of differential equations that track the mean and higher order moments of the distribution of the AoI.</p></li>
+<li><p>We a new random variable describing the age of the youngest infection (AoY). We show how the variable serves as a basis for computing parasite density distributions in complex infections.</p></li>
+<li><p>We derive a hybrid model with a variable that approximates the mean AoY.</p></li>
+<li><p>We demonstrate that a simple system of ordinary differential equations can be used to in place of the probabilistic models to compute the values of the research metrics.</p></li>
+</ol>
+<p>To put it another way, we can reduce the behavior of these highly complex probabilistic systems to a simple system of equations that has a high degree of accuracy. The computational and conceptual simplicity of hybrid models have some simplicity over compartmental models and stochastic individual-based models, and with the supporting probabilistic framework, provide a sound basis for a synthesis of observational malaria epidemiology.</p>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 </div>
 </div>
+
+
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">

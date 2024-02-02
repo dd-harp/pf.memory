@@ -13,6 +13,8 @@ navbar:
       href: articles/Dynamics.html
     - text: Multiplicity of Infection
       href: articles/MoI.html
+    - text: Prevalence
+      href: articles/prevalence.html
   right:
   - icon: fa-github
     href: https://github.com/dd-harp/pf.memory/

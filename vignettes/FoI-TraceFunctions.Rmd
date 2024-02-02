@@ -41,7 +41,6 @@ The `FoI` is defined as an **S3** class function that returns the FoI at ages `a
 + $\omega(a)$ or `ageFoI` defines a change in exposure with respect to age relative to the mean population FoI
 
 ```{r FoI Trace, echo=F, purl=F}
-devtools::load_all()
 foiP1 = list(hbar = 5/365, agePar = par_flatAge(), seasonPar = par_flatSeason(), trendPar = par_flatTrend()) 
 foiP2 = list(hbar = 5/365, agePar = par_flatAge(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
 foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 

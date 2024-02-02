@@ -9,7 +9,6 @@ vignette: >
 
 ```{r, suppressMessages=T}
 suppressMessages(library(pf.memory))
-#devtools::load_all() 
 ```
 
 ```{r, suppressMessages=T}
@@ -124,9 +123,18 @@ v3 = solve_dm(5/365, foiP3, Tmax=1825)[,2]
 
 The following plots all three on the same graph using different colors with different widths, colors, and patterns: 
 
-```{r, fig.height=4, fig.width=7}
-plot(aa, v1, type = "l", col = "red", lwd=4, xlab = "Age (in Days)", ylab = expression(m[tau](a)))
-lines(aa, v2, type = "l", col = "white", lwd = 2)
+```{r, fig.height=7, fig.width=8}
+par(mfrow = c(2,2))
+
+plot(aa, v1, type = "l", col = "red", lwd=4, xlab = "Age (in Days)", ylab = expression(m[tau](a)), main = "meanMoI")
+
+plot(aa, v2, type = "l", col = "yellow", lwd=2, xlab = "Age (in Days)", ylab = expression(m[tau](a)), main = "solveMMinfty")
+lines(aa, v2, type = "l", lwd=1, lty=2)
+
+plot(aa, v3, type = "l", col = "darkblue", lwd=1, xlab = "Age (in Days)", ylab = expression(m[tau](a)), main = "solve_dm")
+
+plot(aa, v1, type = "l", col = "red", lwd=4, xlab = "Age (in Days)", ylab = expression(m[tau](a)), main = "All Three")
+lines(aa, v2, type = "l", col = "yellow", lwd = 2)
 lines(aa, v3, type = "l", col = "darkblue", lwd = 1, lty =2)
 ```
 

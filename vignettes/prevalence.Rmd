@@ -1,0 +1,86 @@
+---
+title: "Prevalence"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Prevalence}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(pf.memory)
+```
+
+```{r}
+library(knitr)
+library(deSolve)
+library(pf.memory)
+```
+
+George Maccdonald published a model of superinfection in 1950^[G Macdonald (1950). The analysis of infection rates in diseases in which superinfection occurs. Trop. Dis. Bull. 47, 907–915.].
+In presenting the model, Macdonald was faced with a problem: if super-infection was possible, then how long would it take until a person cleared a parasite completely?
+There was a problem with the mathematical formulation (Fine PEM, 1975)^[Fine PEM (1975). Superinfection - a problem in formulating a problem. Tropical Diseases Bulletin 75, 475–488]:
+the model that Macdonald described didn't match the function he used. 
+In a model formulated as part of the Garki project (Dietz K, *et al.*,  1974)^[Dietz K, Molineaux L, Thomas A (1974). A malaria model tested in the African savannah. Bull. Wld. Hlth. Org. 50, 347–357.], 
+the model allowed for *superinfection* and proposed a useful approximating model. 
+One solution came from taking a hybrid modeling approach (Nåsell I, 1985)^[Nåsell I (1985). Hybrid Models of Tropical Infections, 1st edition. Springer-Verlag. https://doi.org/10.1007/978-3-662-01609-1], which we have discussed in a vignette about the [Multiplicity of Infection (MoI)](MoI.html). 
+
+The model Macdonald described was also formulted in queuing theory, where the model is called $M/M/\infty$. In this model, each new infection increases the MoI by one; the transition rate to a higher MoI is the force of infection (FoI), denoted $h$. Each parasite can clear at some rate, $r$. 
+
+The following diagram shows how the fraction of the population with MoI $=i$, denoted $\zeta_i$, changes over time.  
+
+***
+
+\begin{equation}
+\begin{array}{ccccccccc}
+\zeta_0 &  {h\atop \longrightarrow} \atop {\longleftarrow \atop r} & \zeta_1 
+& {h\atop \longrightarrow} \atop {\longleftarrow \atop {2r}} & \zeta_2 
+& {h \atop \longrightarrow} \atop {\longleftarrow \atop {3r}} & \zeta_3 
+& {h \atop \longrightarrow} \atop {\longleftarrow \atop {4r}}& \ldots
+\end{array}
+\end{equation}
+
+***
+
+While the infinite system of differential equations can be formulated and solved numerically, Nåsell showed that the system can be described by a simple equation. Let $m$ denote the mean MoI. 
+
+$$
+\frac{dm}{dt} = h-rm
+$$
+
+He also showed that the distribution of the MoI would converge to a Poisson distribution: 
+
+$$M(t) \sim f_M(\zeta; m) = \mbox{Pois}(m(t))$$
+
+Since $m$ is the mean of a Poisson, the prevalence of infection is the complement of the zero term:
+
+$$p(t) = 1-\mbox{Pois}(\zeta =0; m(t)) = 1 - e^{-m(t)}$$
+
+It is, nevertheless, sometimes useful to know the clearance rate, a transition from MoI = 1 to MoI=0. Clearance from the infected class can only occur if a person is infected with an MoI of one, and if that infection clears:  
+
+$$
+R(m) = r \frac{\mbox{Pr}(\zeta=1; m(t))}{\mbox{Pr}(\zeta>0; m(t))} = r \frac{m}{e^m - 1} 
+$$
+
+The change in prevalence is thus described by the equation: 
+
+$$
+\frac{dp}{dt} = h(1-p)-R(m)p 
+$$
+
+While this is interesting, and while it solves the problem of modeling clearance under superinfection, the equation depends on $m$. Since we can compute $p(t)$ directly from $m(t)$, the equation is redundant.  
+
+In the following, we compute the prevalence of infection three ways.  
+
+```{r, fig.height=4, fig.width=6, echo=F}
+foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
+tm = 0:1825
+Xt= solve_dpda(5/365, foiP3, Tmax=5*365)
+plot(tm, truePRa(tm, foiP3), type = "l", ylab = expression(p(a)), xlab = "Age (Days)", lwd=5, col = "red")
+lines(Xt$time, 1-exp(-Xt$m), col = "white", lwd=2)
+lines(Xt$time, Xt$p, col = "blue", lwd=2, lty=2)
+```
