@@ -15,6 +15,10 @@ navbar:
       href: articles/MoI.html
     - text: Prevalence
       href: articles/prevalence.html
+    - text: Age of Infection (AoI)
+      href: articles/AoI.html
+    - text: The AoI Hybrid Model
+      href: articles/AoI-Hybrid.html
   right:
   - icon: fa-github
     href: https://github.com/dd-harp/pf.memory/
