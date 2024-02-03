@@ -7,18 +7,26 @@ navbar:
     href: reference/index.html
   - text: Articles
     menu:
-    - text: Force of Infection
-      href: articles/FoI-TraceFunctions.html
+    - text: FoI
+      href: articles/FoI.html
     - text: Dynamics
       href: articles/Dynamics.html
-    - text: Multiplicity of Infection
+    - text: AoY
+      href: articles/AoY.html
+  - text: Hybrid Models
+    menu:
+    - text: MoI - Hybrid
       href: articles/MoI.html
     - text: Prevalence
       href: articles/prevalence.html
-    - text: Age of Infection (AoI)
-      href: articles/AoI.html
-    - text: The AoI Hybrid Model
+    - text: AoI - Hybrid
       href: articles/AoI-Hybrid.html
+    - text: AoY - Hybrid
+      href: articles/AoY-Hybrid.html
+  - text: Parasite
+    menu:
+    - text: Simple Infections
+      href: articles/Simple_Infections.html
   right:
   - icon: fa-github
     href: https://github.com/dd-harp/pf.memory/

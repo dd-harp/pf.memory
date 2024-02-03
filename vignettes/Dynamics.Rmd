@@ -1,5 +1,6 @@
 ---
 title: "Parasite Infection Dynamics"
+subtitle: "The Multiplicity and Age of Infection"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Parasite Infection Dynamics}
@@ -7,20 +8,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, suppressMessages=T}
-suppressMessages(library(pf.memory))
-#devtools::load_all() 
+```{r suppressMessages=T}
+library(pf.memory)
+library(viridisLite)
 ```
 
-```{r suppressMessages=T}
-library(viridisLite)
-library(knitr)
-library(viridis)
-```
+In the following, we present functions to compute the distribution of the multiplicity and age of infection.
 
 ## Introduction 
 
-Let $z_\tau(\alpha,a)$ denote the density function for infections of age $\alpha$ in a host cohort of age $a$ born on day $\tau$. The dynamics of $z(\alpha,a)$ are described by the following:
+Let $z_\tau(\alpha,a)$ denote the density function for infections of age $\alpha$ in a host cohort of age $a$ born on day $\tau$. The dynamics of $z(\alpha,a)$ in a population of humans are described by the following:
 
 $$
 \frac{\partial z}{\partial a} + \frac{\partial z}{\partial \alpha} = - r z
@@ -28,61 +25,281 @@ $$
 
 
 with the boundary condition:
+
 $$
     z_\tau(0,a) = h_\tau(a)
 $$
 
-Solutions describe the density of infections of age $\alpha$ in a cohort (born on day $\tau$) of age $a$: 
 
-$$
+We can solve the equation for any particular cohort exactly. Solutions describe the density of infections of age $\alpha$ in a cohort (born on day $\tau$) of age $a$: 
+
+\begin{equation}
 z_\tau(\alpha,a) = h_\tau(a-\alpha) e^{-r \alpha}
-$$
+\tag{1}
+\end{equation}
 
-The function `zda` uses this formula to compute the density of parasite infections in a cohort of humans as it ages. 
+All solutions to $z_\tau(\alpha, a)$ thus depend on a function that describes the history of exposure, $h_\tau(a)$, which we call the force of infection (FoI).
 
-To illustrate, we must first set up a function to describe exposure: 
+## Force of Infection (FoI)
 
-```{r}
-foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend())
+```{r, echo=F}
+foiP3 = list(hbar = 5/365, 
+             agePar = par_type2Age(), 
+             seasonPar = par_sinSeason(), 
+             trendPar = par_flatTrend())
 
-a2years  = 0:730
+foiP3t = list(hbar = 5/365, 
+             agePar = par_flatAge(), 
+             seasonPar = par_sinSeason(), 
+             trendPar = par_flatTrend())
 ```
 
-```{r}
-plot(a2years, FoI(a2years, foiP3), type = "l", xlab = "a - age (in days)", ylab = expression(Z[tau](alpha, a)))
+To compute anything, we must first set up a function to describe exposure (see the [FoI](FoI.html) vignette). We define functions that plot the FoI for a cohort as it ages (in red), but we can also compute the population average FoI (in black). Different cohorts would experience different histories of exposure. 
+
+```{r, fig.height=3.5, fig.width=6, echo=F}
+par(mar = c(5,4,1,1))
+a3years  = 0:1095
+plot(a3years, FoI(a3years, foiP3t), type = "l", 
+     xlab = "Time or Age (in days)", 
+     ylab = expression(z[tau](alpha, a)))
+lines(a3years, FoI(a3years, foiP3), col = "darkred", lwd=2)
+text(270, 0.02, "Population")
+text(100, 0.008, "Cohort", col = "darkred")
 ```
 
-Now, for this pattern of exposure, we can compute  the density of parasites of age 60 days in a host cohort of six year olds: 
+## Computing `zda` 
+
+The function `pf.memory::zda(alpha, a, FoIpar, ...)` uses the formula in Eq. 1 to compute the density of parasite infections in a cohort of humans as it ages.
+
+Using `zda,` we can compute the density of parasites in a cohort of any age without solving a full system of equations. Given a function describing the FoI in the population, $h(t)$, and the cohort birthday, $\tau.$
+
 ```{r zde eg}
 alpha = 60
 a = 6*365
 zda(60, 6*365, foiP3) 
 ```
 
-## Plotting 
+The following computes the density of infections of every age in a cohort of age 3. 
 
-
-At age 2, the density of infections of various ages for the cohort born on day $0$ reflects the history of exposure. Here, we're plotting the age of infection.  
 ```{r}
-clrs12a <- turbo(12) 
-alphaM = seq(0,365*3, by =1)
-zz = zda(alphaM, 730, foiP3)
-plot(alphaM/365, zz, type = "l", 
-     xlab = expression(alpha), ylab = expression(z[d](alpha,a)))
+zz = zda(a3years, max(a3years), foiP3)
 ```
-***
 
-Now, we can imagine what `zda` would look like for several different host cohorts at age two, but who were born at different times.  
+When we plot $z_\tau(\alpha, a)$, we note that as $\alpha$ grows larger, the parasite cohort gets older. When we plot parasite cohorts by age, time is going backwards on the x-axis. 
 
-There is un underlying pattern, and the curves are different because the hosts were born at different months. Here the annual FoI is 5 infections, per person, per year ($\bar h = 5/365$): 
+```{r, fig.height=3.5, fig.width=6, echo=F}
+par(mar = c(5,4,1,1))
+plot(a3years, zz, type = "l", 
+     xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
+     ylab = expression(z[tau](alpha,a)))
+```
 
-```{r}
+
+Now, we can imagine what `zda` would look like for several different host cohorts at age three, but who were born at different times. In effect, we are taking a snapshot of the cohorts at the same age, but at different times.
+
+The curves are different because the hosts were born at different months, and they thus experienced different levels of exposure over the first two years of life. Here the annual FoI is 5 infections, per person, per year ($\bar h = 5/365$): 
+
+```{r, fig.height=3.5, fig.width=6, echo=F}
+par(mar = c(5,4,1,1))
 clrs12a <- turbo(12) 
-alphaM = seq(0,365*3, by =1)
-zz = zda(alphaM, 730, foiP3, tau=90)
-plot(alphaM/365, zz, type = "n", 
-     xlab = expression(alpha), ylab = expression(z[d](alpha,a)))
+zz = zda(a3years, 730, foiP3, tau=90)
+plot(a3years, zz, type = "n",
+     xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
+     ylab = expression(z[tau](alpha,a)))
 for(i in 1:12){
-  lines(alphaM/365, zda(alphaM, 730, foiP3, tau=30*i), col = clrs12a[i]) 
+  birthday =  30*(i-1) +15
+  lines(a3years, zda(a3years, 730, foiP3, tau=birthday), col = clrs12a[i]) 
+  bp = (0.5 + 2.5*i/12)*365
+  points(bp, 0.015, col = clrs12a[i], pch =15)
+  text(bp, 0.015, paste(i), col = clrs12a[i], pos=1)
 }
+  text(650, 0.018, "Birth Month") 
 ```
+
+## Multiplicity of Infection (MoI) 
+
+We define a random variable $M$ describing the multiplicity of infection (MoI). The distribution of the MoI is Poisson (see the [MoI](MoI.html) vignette).
+
+$$M_\tau(a) \sim f_M(\zeta; a, \tau) = \mbox{Pois}(m_\tau(a))$$
+
+Since $z_\tau(\alpha, a)$ describes the density of _all_ infections of age $\alpha$ in a cohort of age $a$, the density of all infections must be the MoI. Since $0 \leq \alpha < a$, it must be true that:
+
+\begin{equation}
+\tag{2}
+m_\tau(a) = \int_0^a z_\tau(\alpha, a) d \alpha
+\end{equation}
+
+The function that computes $m_\tau(a)$ is called `meanMoI.` 
+
+```{r}
+mm = meanMoI(a3years, foiP3, hhat=5/365)
+```
+
+Here, we plot the average MoI in the host cohort as it ages:
+
+
+```{r, fig.height=3.5, fig.width=6, echo=F}
+par(mar = c(5,4,1,1))
+plot(a3years, mm, type = "l",
+     xlab = expression(list(a, paste("Host Age (in Days)"))), 
+     ylab = expression(m[tau](alpha,a)))
+```
+
+## Age of Infection (AoI)
+
+We define a random variable $A_\tau(a)$ that describes the age of infection (AoI), which is given by the formula 
+
+$$
+A_\tau(a) \sim f_A(\alpha; a, \tau) = \frac{z_\tau(\alpha,a)}{m_\tau(a)}
+$$
+
+### The Density Function, `dAoI` 
+
+We can compute $A_\tau(a)$ using the density function `dAoI`:
+
+```{r}
+f_A = dAoI(a3years, max(a3years), foiP3)
+```
+
+```{r, fig.height=3.5, fig.width=6, echo=F}
+par(mar = c(5,4,1,1))
+plot(a3years, f_A, type ="l", 
+     xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
+     ylab = expression(f[A](alpha)), ylim = range(f_A))
+```
+
+Now, as we plot the distribution of the AoI in cohorts at age two, born at different months (as we did above), we notice that the distributions have changed shapes:
+
+```{r, fig.height=3.5, fig.width=6, echo=F}
+par(mar = c(5,4,1,1))
+clrs12a <- turbo(12) 
+FA = dAoI(a3years, 1095, foiP3, tau=70)
+plot(a3years, FA, type = "n", ylim = range(FA)*1.15,
+     xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
+     ylab = expression(f[A](alpha, tau)))
+for(i in 1:12){
+  birthday =  30*(i-1) +15
+  lines(a3years, dAoI(a3years, 730, foiP3, tau=birthday), col = clrs12a[i]) 
+  bp = (0.5 + 2.5*i/12)*365
+  points(bp, 0.01, col = clrs12a[i], pch =15)
+  text(bp, 0.01, paste(i), col = clrs12a[i], pos=1)
+}
+  text(650, 0.0115, "Birth Month") 
+```
+
+### The Distribution Function, `pAoI` 
+
+The distribution function for $A_\tau(a)$ is:
+
+$$
+F_A(a) \sim \int_0^\alpha f_A(\alpha; a, \tau) d\alpha
+$$
+```{r}
+F_A = pAoI(a3years, max(a3years), foiP3)
+```
+
+If our functions work correctly, then we should get approximately the same answer from computing the cumulative sum of `dAoI.` 
+
+```{r}
+F_A_alt = cumsum(f_A)
+```
+
+We shouldn't expect the answers to be exactly the same, but they should be close, with the `pAoI` in black. 
+
+```{r,  fig.height=3.5, fig.width=6}
+par(mar = c(5,4,1,1))
+
+plot(a3years, F_A, type = "l", 
+     xlab = "Parasite Cohort Age", 
+     ylab = expression(1-F[X](alpha, a, tau)), lwd=3)
+
+lines(a3years, F_A_alt, col = "red", lwd=2, lty =2)
+```
+
+
+```{r, fig.height=3.5, fig.width=6, echo=F}
+par(mar = c(5,4,1,1))
+clrs12a <- turbo(12) 
+FA = pAoI(a3years, 1095, foiP3, tau=70)
+plot(a3years, FA, type = "n", ylim = range(FA)*1.15,
+     xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
+     ylab = expression(F[A](alpha)))
+for(i in 1:12){
+  birthday =  30*(i-1) +15
+  lines(a3years, pAoI(a3years, 730, foiP3, tau=birthday), col = clrs12a[i]) 
+  bp = (0.5 + 2.5*i/12)*365
+  points(bp, 0.2, col = clrs12a[i], pch =15)
+  text(bp, 0.2, paste(i), col = clrs12a[i], pos=1)
+}
+text(650, 0.3, "Birth Month") 
+```
+
+### Random Numbers, `rAoI`
+
+The function `rAoI` uses `pAoI` to generate random numbers from $F_A(\alpha)$
+
+```{r}
+rhx = rAoI(10000, 3*365, foiP3)
+```
+
+A simple visual check computes the empirical CDF for the random variates against $F_A(\alpha)$ computed using `pAoI`
+
+```{r, fig.height=3.5, fig.width=6}
+par(mar = c(5,4,1,2))
+plot(stats::ecdf(rhx), xlim = c(0,1095), cex=0.2, main = "", 
+     xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
+     ylab = expression(list(F[A](alpha), paste("ecdf"))))
+lines(a3years, F_A, col = "red", lty = 2, lwd=2)
+```
+
+We can also plot the distribution functions.
+
+```{r, fig.height=3.5, fig.width=6, echo=F}
+par(mar = c(5,4,1,2))
+hist(rhx, breaks = seq(0, 1095, by=15), 
+     right=F, probability=T, main = "", 
+     xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
+     border = grey(0.5))
+lines(a3years, f_A, col="red", lwd=2)
+```
+
+### Moments of $A_\tau(a)$
+
+Let $x$ denote the first moment of of $A_\tau(a)$: $$x_\tau(a) = \left< A_\tau(a) \right> = \int_0^\infty \alpha \frac{z_\tau(\alpha, a)} {m_\tau(a)}$$
+
+Similarly, we let $x_\tau(a)[n]$ denote the higher order moments of $A_\tau(a)$: 
+$$x_{[n]}(a, \tau) = \int_0^\infty \alpha^n \frac{z_\tau(\alpha, a)} {m_\tau(a)}$$
+
+```{r}
+a3years0 = a3years[-1]
+moment1 = momentAoI(a3years0, foiP3)
+moment2 = momentAoI(a3years0, foiP3, n=2)
+moment3 = momentAoI(a3years0, foiP3, n=3)
+```
+
+The first three moments of the AoY plotted over time. In the top plot, we've also plotted the $n^{th}$ root of the $n^{th}$ moment.
+
+```{r, fig.width=6, fig.height=8, echo=FALSE}
+par(mfrow = c(3,1), mar = c(5, 4, 0.5, 2))
+plot(a3years0, moment1, type = "l", xlab = "a - Host Age (in Days)", 
+     lwd=2, ylim = range((moment3)^(1/3)),
+     ylab = expression(list(x, sqrt(x[paste("[2]")]), sqrt(x[paste("[3]")], 3))))
+
+lines(a3years0, sqrt(moment2), col = "darkgreen")
+lines(a3years0, (moment3)^(1/3), col = "purple")
+
+plot(a3years0, moment2, type = "l", xlab = "a - Host Age (in Days)",
+     lwd=2, col = "darkgreen",
+     ylab = expression(x[paste("[2]")])) 
+mar = c(4, 4, 0.5, 2)
+plot(a3years0, moment3, type = "l", xlab = "a - Host Age (in Days)",
+     lwd=2, col = "purple", 
+     ylab = expression(x[paste("[3]")])) 
+```
+
+*** 
+
+**Next:** 
+
++ In the vignette [Multiplicity of Infection: Hybrid Models, Queuing Models, and Verification](MoI.html), we show that the mean MoI computed using the formula in Eq. 2 gives the same answer as other approaches. 
+

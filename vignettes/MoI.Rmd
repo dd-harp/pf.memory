@@ -1,5 +1,6 @@
 ---
 title: "Multiplicity of Infection"
+subtitle: "Hybrid Models, Queuing Models, and Verification"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Multiplicity of Infection}
@@ -7,11 +8,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, suppressMessages=T}
-suppressMessages(library(pf.memory))
-```
-
-```{r, suppressMessages=T}
+```{r}
+library(pf.memory)
 library(deSolve)
 library(knitr)
 library(viridisLite)
@@ -22,18 +20,8 @@ library(viridis)
 
 The random variable $M$ describes the distribution of the MoI in a population, which follows a Poisson. Here, we provide a numerical demonstration that this novel computational approach is equivalent to the queuing model $M/M/\infty$, and that it is also equivalent to hybrid models for the multiplicity of infection (Nåsell, I. 1985)^[Nåsell, I. (1985). Transmission Models for Malaria. In: Hybrid Models of Tropical Infections. Lecture Notes in Biomathematics, vol 59. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-662-01609-1_3]:
 
-In our manuscript, we define 
-
-$$M_\tau(a) \sim f_M(\zeta; a, \tau) = \mbox{Pois}(m_\tau(a))$$
-
-Since $z_\tau(\alpha, a)$ describes the density of _all_ infections of age $\alpha$ in a cohort of age $a$, the density of all infections must be the MoI. Since $0 \leq \alpha < a$, it must be true that:
-
-\begin{equation}
-m_\tau(a) = \int_0^a z_\tau(\alpha, a) d \alpha
-\end{equation}
 
 ## $M/M/\infty$
-
 
 Elsewhere, the dynamics of MoI have be described using the queuing model $M/M/\infty$. The MoI increases with the FoI, and each parasite can clear at some rate, $r$. The following is a diagram for the changes in the fraction of the population with MoI $=i$, denoted $\zeta_i$, change in a host cohort with the force of infection $h_\tau(a),$ and with clearance.
 
@@ -69,11 +57,15 @@ plot(m, ppois(N,m), type = "l", ylim = c(1-1e-07,1+1e-07))
 We must define a trace FoI function.
 
 ```{r, fig.height=4, fig.width=7, echo=F}
-foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend())
+foiP3 = list(hbar = 5/365, 
+             agePar = par_type2Age(), 
+             seasonPar = par_sinSeason(), 
+             trendPar = par_flatTrend())
 
 a2years  = 0:730
 
-plot(a2years, FoI(a2years, foiP3), type = "l", xlab = "a - age (in days)", ylab = expression(Z[tau](alpha, a)))
+plot(a2years, FoI(a2years, foiP3), type = "l", 
+     xlab = "a - age (in days)", ylab = expression(Z[tau](alpha, a)))
 ```
 
 To verify it works, we compute the MoI each day for the first three years of life. 
@@ -98,7 +90,8 @@ The unction `dmda` computes the derivative, and we can solve the hybrid equation
 
 ```{r, fig.height=4, fig.width=7}
 solve_dm(3/365, foiP3) -> mt 
-plot(mt$time, mt$m, type = "l", xlab = "Age (in Days)", ylab = expression(m[tau](a)))
+plot(mt$time, mt$m, type = "l", 
+     xlab = "Age (in Days)", ylab = expression(m[tau](a)))
 ```
 
 ## Verification
@@ -126,16 +119,28 @@ The following plots all three on the same graph using different colors with diff
 ```{r, fig.height=7, fig.width=8}
 par(mfrow = c(2,2))
 
-plot(aa, v1, type = "l", col = "red", lwd=4, xlab = "Age (in Days)", ylab = expression(m[tau](a)), main = "meanMoI")
+plot(aa, v1, type = "l", col = "red", lwd=4, 
+     xlab = "Age (in Days)", 
+     ylab = expression(m[tau](a)), 
+     main = "meanMoI")
 
-plot(aa, v2, type = "l", col = "yellow", lwd=2, xlab = "Age (in Days)", ylab = expression(m[tau](a)), main = "solveMMinfty")
-lines(aa, v2, type = "l", lwd=1, lty=2)
+plot(aa, v2, type = "l", lwd=2, 
+     xlab = "Age (in Days)", 
+     ylab = expression(m[tau](a)), 
+     main = "solveMMinfty")
+lines(aa, v2, type = "l", col = "yellow", lwd=2, lty=2)
 
-plot(aa, v3, type = "l", col = "darkblue", lwd=1, xlab = "Age (in Days)", ylab = expression(m[tau](a)), main = "solve_dm")
+plot(aa, v3, type = "l", col = "darkblue", lwd=1, 
+     xlab = "Age (in Days)", 
+     ylab = expression(m[tau](a)), 
+     main = "solve_dm")
 
-plot(aa, v1, type = "l", col = "red", lwd=4, xlab = "Age (in Days)", ylab = expression(m[tau](a)), main = "All Three")
+plot(aa, v1, type = "l", col = "red", lwd=4, 
+     xlab = "Age (in Days)", 
+     ylab = expression(m[tau](a)), 
+     main = "All Three")
 lines(aa, v2, type = "l", col = "yellow", lwd = 2)
-lines(aa, v3, type = "l", col = "darkblue", lwd = 1, lty =2)
+lines(aa, v3, type = "l", col = "darkblue", lwd = 2, lty =2)
 ```
 
 the maximum errors are on the order of $1e-07$ 

@@ -3,13 +3,15 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   AoI-Hybrid: AoI-Hybrid.html
-  AoI: AoI.html
+  AoY-Hybrid: AoY-Hybrid.html
+  AoY: AoY.html
   Dynamics: Dynamics.html
-  FoI-TraceFunctions: FoI-TraceFunctions.html
+  FoI: FoI.html
   MoI: MoI.html
+  Simple_Infections: Simple_Infections.html
   plotCounts: plotCounts.html
   prevalence: prevalence.html
-last_built: 2024-02-02T21:00Z
+last_built: 2024-02-03T01:35Z
 urls:
   reference: https://dd-harp.github.io/pf.memory/reference
   article: https://dd-harp.github.io/pf.memory/articles

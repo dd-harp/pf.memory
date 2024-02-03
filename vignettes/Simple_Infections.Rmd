@@ -1,0 +1,9 @@
+---
+title: "Parasite Densities in Simple Infections"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Parasite Densities in Simple Infections}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+

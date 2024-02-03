@@ -41,12 +41,24 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/FoI-TraceFunctions.html">Force of Infection</a>
+    <a class="dropdown-item" href="../articles/FoI.html">FoI</a>
     <a class="dropdown-item" href="../articles/Dynamics.html">Dynamics</a>
-    <a class="dropdown-item" href="../articles/MoI.html">Multiplicity of Infection</a>
+    <a class="dropdown-item" href="../articles/AoY.html">AoY</a>
+  </div>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-hybrid-models">Hybrid Models</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-hybrid-models">
+    <a class="dropdown-item" href="../articles/MoI.html">MoI - Hybrid</a>
     <a class="dropdown-item" href="../articles/prevalence.html">Prevalence</a>
-    <a class="dropdown-item" href="../articles/AoI.html">Age of Infection (AoI)</a>
-    <a class="dropdown-item" href="../articles/AoI-Hybrid.html">The AoI Hybrid Model</a>
+    <a class="dropdown-item" href="../articles/AoI-Hybrid.html">AoI - Hybrid</a>
+    <a class="dropdown-item" href="../articles/AoY-Hybrid.html">AoY - Hybrid</a>
+  </div>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-parasite">Parasite</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-parasite">
+    <a class="dropdown-item" href="../articles/Simple_Infections.html">Simple Infections</a>
   </div>
 </li>
       </ul>
@@ -74,6 +86,8 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Parasite Infection Dynamics</h1>
+            <h3 data-toc-skip class="subtitle">The Multiplicity and Age
+of Infection</h3>
             
       
       
@@ -83,79 +97,196 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/pf.memory/">pf.memory</a></span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#devtools::load_all() </span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridisLite/" class="external-link">viridisLite</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/" class="external-link">viridis</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/pf.memory/">pf.memory</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridisLite/" class="external-link">viridisLite</a></span><span class="op">)</span></span></code></pre></div>
+<p>In the following, we present functions to compute the distribution of
+the multiplicity and age of infection.</p>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>Let <span class="math inline">\(z_\tau(\alpha,a)\)</span> denote the
-density function for infections of age <span class="math inline">\(\alpha\)</span> in a host cohort of age <span class="math inline">\(a\)</span> born on day <span class="math inline">\(\tau\)</span>. The dynamics of <span class="math inline">\(z(\alpha,a)\)</span> are described by the
-following:</p>
+density function for infections of age <span class="math inline">\(\alpha\)</span> in a host cohort of age <span class="math inline">\(a\)</span> born on day <span class="math inline">\(\tau\)</span>. The dynamics of <span class="math inline">\(z(\alpha,a)\)</span> in a population of humans are
+described by the following:</p>
 <p><span class="math display">\[
 \frac{\partial z}{\partial a} + \frac{\partial z}{\partial \alpha} = - r
 z
 \]</span></p>
-<p>with the boundary condition: <span class="math display">\[
+<p>with the boundary condition:</p>
+<p><span class="math display">\[
     z_\tau(0,a) = h_\tau(a)
 \]</span></p>
-<p>Solutions describe the density of infections of age <span class="math inline">\(\alpha\)</span> in a cohort (born on day <span class="math inline">\(\tau\)</span>) of age <span class="math inline">\(a\)</span>:</p>
-<p><span class="math display">\[
+<p>We can solve the equation for any particular cohort exactly.
+Solutions describe the density of infections of age <span class="math inline">\(\alpha\)</span> in a cohort (born on day <span class="math inline">\(\tau\)</span>) of age <span class="math inline">\(a\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
 z_\tau(\alpha,a) = h_\tau(a-\alpha) e^{-r \alpha}
-\]</span></p>
-<p>The function <code>zda</code> uses this formula to compute the
-density of parasite infections in a cohort of humans as it ages.</p>
-<p>To illustrate, we must first set up a function to describe
-exposure:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">foiP3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>hbar <span class="op">=</span> <span class="fl">5</span><span class="op">/</span><span class="fl">365</span>, agePar <span class="op">=</span> <span class="fu"><a href="../reference/par_type2Age.html">par_type2Age</a></span><span class="op">(</span><span class="op">)</span>, seasonPar <span class="op">=</span> <span class="fu"><a href="../reference/par_sinSeason.html">par_sinSeason</a></span><span class="op">(</span><span class="op">)</span>, trendPar <span class="op">=</span> <span class="fu"><a href="../reference/par_flatTrend.html">par_flatTrend</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">a2years</span>  <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">730</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">a2years</span>, <span class="fu"><a href="../reference/FoI.html">FoI</a></span><span class="op">(</span><span class="va">a2years</span>, <span class="va">foiP3</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"a - age (in days)"</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">Z</span><span class="op">[</span><span class="va">tau</span><span class="op">]</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
-<p>Now, for this pattern of exposure, we can compute the density of
-parasites of age 60 days in a host cohort of six year olds:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+\tag{1}
+\end{equation}\]</span></p>
+<p>All solutions to <span class="math inline">\(z_\tau(\alpha,
+a)\)</span> thus depend on a function that describes the history of
+exposure, <span class="math inline">\(h_\tau(a)\)</span>, which we call
+the force of infection (FoI).</p>
+</div>
+<div class="section level2">
+<h2 id="force-of-infection-foi">Force of Infection (FoI)<a class="anchor" aria-label="anchor" href="#force-of-infection-foi"></a>
+</h2>
+<p>To compute anything, we must first set up a function to describe
+exposure (see the <a href="FoI.html">FoI</a> vignette). We define
+functions that plot the FoI for a cohort as it ages (in red), but we can
+also compute the population average FoI (in black). Different cohorts
+would experience different histories of exposure.</p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
+</div>
+<div class="section level2">
+<h2 id="computing-zda">Computing <code>zda</code><a class="anchor" aria-label="anchor" href="#computing-zda"></a>
+</h2>
+<p>The function <code>pf.memory::zda(alpha, a, FoIpar, ...)</code> uses
+the formula in Eq. 1 to compute the density of parasite infections in a
+cohort of humans as it ages.</p>
+<p>Using <code>zda,</code> we can compute the density of parasites in a
+cohort of any age without solving a full system of equations. Given a
+function describing the FoI in the population, <span class="math inline">\(h(t)\)</span>, and the cohort birthday, <span class="math inline">\(\tau.\)</span></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span> <span class="op">=</span> <span class="fl">60</span></span>
 <span><span class="va">a</span> <span class="op">=</span> <span class="fl">6</span><span class="op">*</span><span class="fl">365</span></span>
 <span><span class="fu"><a href="../reference/zda.html">zda</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">6</span><span class="op">*</span><span class="fl">365</span>, <span class="va">foiP3</span><span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## [1] 0.001601196</span></span></code></pre>
+<p>The following computes the density of infections of every age in a
+cohort of age 3.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">zz</span> <span class="op">=</span> <span class="fu"><a href="../reference/zda.html">zda</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
+<p>When we plot <span class="math inline">\(z_\tau(\alpha, a)\)</span>,
+we note that as <span class="math inline">\(\alpha\)</span> grows
+larger, the parasite cohort gets older. When we plot parasite cohorts by
+age, time is going backwards on the x-axis.</p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-5-1.png" width="576"></p>
+<p>Now, we can imagine what <code>zda</code> would look like for several
+different host cohorts at age three, but who were born at different
+times. In effect, we are taking a snapshot of the cohorts at the same
+age, but at different times.</p>
+<p>The curves are different because the hosts were born at different
+months, and they thus experienced different levels of exposure over the
+first two years of life. Here the annual FoI is 5 infections, per
+person, per year (<span class="math inline">\(\bar h =
+5/365\)</span>):</p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
 </div>
 <div class="section level2">
-<h2 id="plotting">Plotting<a class="anchor" aria-label="anchor" href="#plotting"></a>
+<h2 id="multiplicity-of-infection-moi">Multiplicity of Infection (MoI)<a class="anchor" aria-label="anchor" href="#multiplicity-of-infection-moi"></a>
 </h2>
-<p>At age 2, the density of infections of various ages for the cohort
-born on day <span class="math inline">\(0\)</span> reflects the history
-of exposure. Here, we’re plotting the age of infection.</p>
+<p>We define a random variable <span class="math inline">\(M\)</span>
+describing the multiplicity of infection (MoI). The distribution of the
+MoI is Poisson (see the <a href="MoI.html">MoI</a> vignette).</p>
+<p><span class="math display">\[M_\tau(a) \sim f_M(\zeta; a, \tau) =
+\mbox{Pois}(m_\tau(a))\]</span></p>
+<p>Since <span class="math inline">\(z_\tau(\alpha, a)\)</span>
+describes the density of <em>all</em> infections of age <span class="math inline">\(\alpha\)</span> in a cohort of age <span class="math inline">\(a\)</span>, the density of all infections must be
+the MoI. Since <span class="math inline">\(0 \leq \alpha &lt;
+a\)</span>, it must be true that:</p>
+<p><span class="math display">\[\begin{equation}
+\tag{2}
+m_\tau(a) = \int_0^a z_\tau(\alpha, a) d \alpha
+\end{equation}\]</span></p>
+<p>The function that computes <span class="math inline">\(m_\tau(a)\)</span> is called
+<code>meanMoI.</code></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mm</span> <span class="op">=</span> <span class="fu"><a href="../reference/meanMoI.html">meanMoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">foiP3</span>, hhat<span class="op">=</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span><span class="op">)</span></span></code></pre></div>
+<p>Here, we plot the average MoI in the host cohort as it ages:</p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
+</div>
+<div class="section level2">
+<h2 id="age-of-infection-aoi">Age of Infection (AoI)<a class="anchor" aria-label="anchor" href="#age-of-infection-aoi"></a>
+</h2>
+<p>We define a random variable <span class="math inline">\(A_\tau(a)\)</span> that describes the age of
+infection (AoI), which is given by the formula</p>
+<p><span class="math display">\[
+A_\tau(a) \sim f_A(\alpha; a, \tau) = \frac{z_\tau(\alpha,a)}{m_\tau(a)}
+\]</span></p>
+<div class="section level3">
+<h3 id="the-density-function-daoi">The Density Function, <code>dAoI</code><a class="anchor" aria-label="anchor" href="#the-density-function-daoi"></a>
+</h3>
+<p>We can compute <span class="math inline">\(A_\tau(a)\)</span> using
+the density function <code>dAoI</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">f_A</span> <span class="op">=</span> <span class="fu"><a href="../reference/dAoI.html">dAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
+<p>Now, as we plot the distribution of the AoI in cohorts at age two,
+born at different months (as we did above), we notice that the
+distributions have changed shapes:</p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-11-1.png" width="576"></p>
+</div>
+<div class="section level3">
+<h3 id="the-distribution-function-paoi">The Distribution Function, <code>pAoI</code><a class="anchor" aria-label="anchor" href="#the-distribution-function-paoi"></a>
+</h3>
+<p>The distribution function for <span class="math inline">\(A_\tau(a)\)</span> is:</p>
+<p><span class="math display">\[
+F_A(a) \sim \int_0^\alpha f_A(\alpha; a, \tau) d\alpha
+\]</span></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">clrs12a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">turbo</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span> </span>
-<span><span class="va">alphaM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">365</span><span class="op">*</span><span class="fl">3</span>, by <span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">zz</span> <span class="op">=</span> <span class="fu"><a href="../reference/zda.html">zda</a></span><span class="op">(</span><span class="va">alphaM</span>, <span class="fl">730</span>, <span class="va">foiP3</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">alphaM</span><span class="op">/</span><span class="fl">365</span>, <span class="va">zz</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">z</span><span class="op">[</span><span class="va">d</span><span class="op">]</span><span class="op">(</span><span class="va">alpha</span>,<span class="va">a</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-5-1.png" width="700">
-***</p>
-<p>Now, we can imagine what <code>zda</code> would look like for several
-different host cohorts at age two, but who were born at different
-times.</p>
-<p>There is un underlying pattern, and the curves are different because
-the hosts were born at different months. Here the annual FoI is 5
-infections, per person, per year (<span class="math inline">\(\bar h =
-5/365\)</span>):</p>
+<code class="sourceCode R"><span><span class="va">F_A</span> <span class="op">=</span> <span class="fu"><a href="../reference/pAoI.html">pAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
+<p>If our functions work correctly, then we should get approximately the
+same answer from computing the cumulative sum of <code>dAoI.</code></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">clrs12a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">turbo</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span> </span>
-<span><span class="va">alphaM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">365</span><span class="op">*</span><span class="fl">3</span>, by <span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">zz</span> <span class="op">=</span> <span class="fu"><a href="../reference/zda.html">zda</a></span><span class="op">(</span><span class="va">alphaM</span>, <span class="fl">730</span>, <span class="va">foiP3</span>, tau<span class="op">=</span><span class="fl">90</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">alphaM</span><span class="op">/</span><span class="fl">365</span>, <span class="va">zz</span>, type <span class="op">=</span> <span class="st">"n"</span>, </span>
-<span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">z</span><span class="op">[</span><span class="va">d</span><span class="op">]</span><span class="op">(</span><span class="va">alpha</span>,<span class="va">a</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">alphaM</span><span class="op">/</span><span class="fl">365</span>, <span class="fu"><a href="../reference/zda.html">zda</a></span><span class="op">(</span><span class="va">alphaM</span>, <span class="fl">730</span>, <span class="va">foiP3</span>, tau<span class="op">=</span><span class="fl">30</span><span class="op">*</span><span class="va">i</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">clrs12a</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span> </span>
-<span><span class="op">}</span></span></code></pre></div>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<code class="sourceCode R"><span><span class="va">F_A_alt</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="va">f_A</span><span class="op">)</span></span></code></pre></div>
+<p>We shouldn’t expect the answers to be exactly the same, but they
+should be close, with the <code>pAoI</code> in black.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">F_A</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"Parasite Cohort Age"</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="cn">F</span><span class="op">[</span><span class="va">X</span><span class="op">]</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">a</span>, <span class="va">tau</span><span class="op">)</span><span class="op">)</span>, lwd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">F_A_alt</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty <span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-14-1.png" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-15-1.png" width="576"></p>
+</div>
+<div class="section level3">
+<h3 id="random-numbers-raoi">Random Numbers, <code>rAoI</code><a class="anchor" aria-label="anchor" href="#random-numbers-raoi"></a>
+</h3>
+<p>The function <code>rAoI</code> uses <code>pAoI</code> to generate
+random numbers from <span class="math inline">\(F_A(\alpha)\)</span></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rhx</span> <span class="op">=</span> <span class="fu"><a href="../reference/rAoI.html">rAoI</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
+<p>A simple visual check computes the empirical CDF for the random
+variates against <span class="math inline">\(F_A(\alpha)\)</span>
+computed using <code>pAoI</code></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/ecdf.html" class="external-link">ecdf</a></span><span class="op">(</span><span class="va">rhx</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1095</span><span class="op">)</span>, cex<span class="op">=</span><span class="fl">0.2</span>, main <span class="op">=</span> <span class="st">""</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">alpha</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Parasite Age (in Days)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="cn">F</span><span class="op">[</span><span class="va">A</span><span class="op">]</span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"ecdf"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">F_A</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-17-1.png" width="576"></p>
+<p>We can also plot the distribution functions.</p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-18-1.png" width="576"></p>
+</div>
+<div class="section level3">
+<h3 id="moments-of-a_taua">Moments of <span class="math inline">\(A_\tau(a)\)</span><a class="anchor" aria-label="anchor" href="#moments-of-a_taua"></a>
+</h3>
+<p>Let <span class="math inline">\(x\)</span> denote the first moment of
+of <span class="math inline">\(A_\tau(a)\)</span>: <span class="math display">\[x_\tau(a) = \left&lt; A_\tau(a) \right&gt; =
+\int_0^\infty \alpha \frac{z_\tau(\alpha, a)} {m_\tau(a)}\]</span></p>
+<p>Similarly, we let <span class="math inline">\(x_\tau(a)[n]\)</span>
+denote the higher order moments of <span class="math inline">\(A_\tau(a)\)</span>: <span class="math display">\[x_{[n]}(a, \tau) = \int_0^\infty \alpha^n
+\frac{z_\tau(\alpha, a)} {m_\tau(a)}\]</span></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a3years0</span> <span class="op">=</span> <span class="va">a3years</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">moment1</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years0</span>, <span class="va">foiP3</span><span class="op">)</span></span>
+<span><span class="va">moment2</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years0</span>, <span class="va">foiP3</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">moment3</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years0</span>, <span class="va">foiP3</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<p>The first three moments of the AoY plotted over time. In the top
+plot, we’ve also plotted the <span class="math inline">\(n^{th}\)</span>
+root of the <span class="math inline">\(n^{th}\)</span> moment.</p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-20-1.png" width="576"></p>
+<hr>
+<p><strong>Next:</strong></p>
+<ul>
+<li>In the vignette <a href="MoI.html">Multiplicity of Infection: Hybrid
+Models, Queuing Models, and Verification</a>, we show that the mean MoI
+computed using the formula in Eq. 2 gives the same answer as other
+approaches.</li>
+</ul>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

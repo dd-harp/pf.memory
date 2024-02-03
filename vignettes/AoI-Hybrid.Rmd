@@ -7,52 +7,50 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, suppressMessages=T}
-library(deSolve)
+```{r}
 library(pf.memory)
-library(knitr)
-library(viridisLite)
-library(viridis)
+library(deSolve)
 ```
 
 ```{r, echo=F}
 a2years = c(0:730)
 foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
-clrs = turbo(12)
 ```
 
+We have developed a hybrid model that we can use to compute the mean and higher order moments for the age of infection (AoI). In a related vignette ([AoI](AoI.html)), we define the AoI as a random variable and develop functions to compute its moments. Here, we develop a notation for the moments:
 
-In [AoI](AoI.html), we discuss the direct computation of the moments of the distribution of the AoI: 
-
-+ Let $x$ denote the first moment of the AoI in a cohort at age $a$, conditioned on a hestory of exposure: $A_\tau(a; h_\tau(a))$: $$x_\tau(a; h) = \left< A_\tau(a; h) \right> = \int_0^\infty \alpha \frac{z_\tau(\alpha, a; h_\tau(a))} {m_\tau(a;h_\tau(a))}$$
-
-+ Similarly, we let $x_\tau(a)[n]$ denote the higher order moments of $A_\tau(a;)$: $$x_{n}(a, \tau; h) = \int_0^\infty \alpha^n \frac{z_\tau(\alpha, a; h_\tau(a))} {m_\tau(a;h_\tau(a))}$$
-
-Here, we derive hybrid variables describing changes in the first moments: 
+Let $x = \left< A\right>;$ x is the first moment of the AoI in a cohort at age $a$, conditioned on a history of exposure, given by a function $h$. In longer form: 
+$$x_\tau(a; h) = \left< A_\tau(a; h) \right> = \int_0^\infty \alpha \frac{z_\tau(\alpha, a; h_\tau(a))} {m_\tau(a;h_\tau(a))}$$
+Here, we show that: 
 
 $$
 \frac{\textstyle{dx}}{\textstyle{da}} = 1- 
 \frac{\textstyle{h}}{\textstyle{m}} x  
 $$
 
-All subsequent moments can be computed recursively: 
+Similarly, we let $x_{[n]} = \left< A^n \right>$ denote the higher order moments of the random variable $A$. In longer form: 
+$$x_{n}(a, \tau; h) = \int_0^\infty \alpha^n \frac{z_\tau(\alpha, a; h_\tau(a))} {m_\tau(a;h_\tau(a))}$$
+We show that higher order moments can be computed recursively:
 
 $$
-\frac{\textstyle{dx_n}}{\textstyle{da}} = nx_{n-1} -  
-  \frac{\textstyle{h}}{\textstyle{m}} x_n 
+\frac{\textstyle{dx_{[n]}}}{\textstyle{da}} = nx_{[n-1]} -  
+  \frac{\textstyle{h}}{\textstyle{m}} x_{[n]}
 $$
 
 In the following, we first demonstrate that the hybrid equations give the same answers as direct computation of the moments. 
 
-## Demo
+## Hybrid Model 
 
-```{r, purl=F, fig.height=6, fig.width=7}
+The function `solve_dAoI` computes the first three moments of the AoI by default. Here we plot the $n^{th}$ root of the first three moments. 
+
+```{r, fig.height=5, fig.width=7}
 par(mar = c(7, 4, 2, 2))
 solve_dAoI(5/365, foiP3) -> mt 
-plot(mt$time, mt$xn1, type = "l", xlab = "Age (in Days)", ylab = expression(E(A[tau](a))), ylim = range(mt$xn3^(1/3))) 
-lines(mt$time, mt$xn2^(1/2))
-lines(mt$time, mt$xn3^(1/3)) 
+plot(mt$time, mt$xn1, type = "l", xlab = "Age (in Days)", ylab = expression(list(x, sqrt(x[paste("[2]")]), sqrt(x[paste("[3]")], 3))), ylim = range(mt$xn3^(1/3))) 
+lines(mt$time, mt$xn2^(1/2), col = "purple")
+lines(mt$time, mt$xn3^(1/3), col = "darkgreen") 
 ```
+## Numerical Verification 
 
 ```{r}
 aa = seq(1, 5*365, by = 5) 
@@ -67,14 +65,25 @@ moment3 = momentAoI(aa, foiP3, n=3)
 solve_dAoI(5/365, foiP3, Tmax = 5*365, dt=5) -> mt 
 ```
 
-```{r, fig.height=10, fig.width=6}
-par(mfrow = c(3,1), mar = c(7, 4, 2, 2))
-plot(mt$time, mt$xn1, type = "l", xlab = "Age (in Days)", ylab = expression(E(A[tau](a))), lwd=2) 
-lines(aa, moment1, col = "red", lwd=2, lty=2)
-plot(mt$time, mt$xn2, type = "l", xlab = "Age (in Days)", ylab = "second moment", lwd=2) 
-lines(aa, moment2, col = "red", lwd=2, lty=2)
-plot(mt$time, mt$xn3, type = "l", xlab = "Age (in Days)", ylab = "third moment", lwd=2)
-lines(aa, moment3, col = "red", lwd=2, lty=2)
+```{r, fig.height=7, fig.width=7}
+par(mfrow = c(2,2), mar = c(7, 4, 2, 2))
+# Top Left
+plot(mt$time, mt$xn1, type = "l", xlab = "Age (in Days)", ylab = expression(x), lwd=3) 
+lines(aa, moment1, col = "yellow", lwd=2, lty=2) 
+# Top Right 
+plot(mt$time, mt$xn2, type = "l", xlab = "Age (in Days)", ylab = expression(x[paste("[2]")]), lwd=3, col = "purple") 
+lines(aa, moment2, col = "yellow", lwd=2, lty=2)
+plot(mt$time, mt$xn3, type = "l", lwd=3, col = "darkgreen",
+     xlab = "Age (in Days)", ylab = expression(x[paste("[3]")]))
+lines(aa, moment3, col = "yellow", lwd=2, lty=2)
+par(mar = c(7, 4, 2, 2))
+solve_dAoI(5/365, foiP3) -> mt 
+plot(mt$time, mt$xn1, type = "l", xlab = "Age (in Days)", ylab = expression(list(x, sqrt(x[paste("[2]")]), sqrt(x[paste("[3]")], 3))), lwd=3, ylim = range(mt$xn3^(1/3))) 
+lines(mt$time, mt$xn2^(1/2), col = "purple", lwd=3)
+lines(mt$time, mt$xn3^(1/3), col = "darkgreen", lwd=3) 
+lines(aa, moment1, col = "yellow", lwd=2, lty=2)
+lines(aa, moment2^(1/2), col = "yellow", lwd=2, lty=2)
+lines(aa, moment3^(1/3), col = "yellow", lwd=2, lty=2)
 ```
 
 ## Derivation for $dx/da$

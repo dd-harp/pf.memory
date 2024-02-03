@@ -1,8 +1,9 @@
 ---
-title: "FoI Trace Functions"
+title: "The Force of Infection (FoI)"
+subtitle: "Building Trace Functions"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{FoI Trace Functions}
+  %\VignetteIndexEntry{The Force of Infection (FoI)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
