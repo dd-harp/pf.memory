@@ -26,16 +26,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/FoI.html">FoI</a>
     <a class="dropdown-item" href="../articles/Dynamics.html">Dynamics</a>
-    <a class="dropdown-item" href="../articles/AoY.html">AoY</a>
-  </div>
-</li>
-<li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-hybrid-models">Hybrid Models</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-hybrid-models">
-    <a class="dropdown-item" href="../articles/MoI.html">MoI - Hybrid</a>
-    <a class="dropdown-item" href="../articles/prevalence.html">Prevalence</a>
-    <a class="dropdown-item" href="../articles/AoI-Hybrid.html">AoI - Hybrid</a>
-    <a class="dropdown-item" href="../articles/AoY-Hybrid.html">AoY - Hybrid</a>
+    <a class="dropdown-item" href="../articles/Hybrid.html">Hybrid Models</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -71,7 +62,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dAoYda</span><span class="op">(</span><span class="va">a</span>, <span class="va">M</span>, <span class="va">par</span>, <span class="va">FoIpar</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dAoYda</span><span class="op">(</span><span class="va">a</span>, <span class="va">vars</span>, <span class="va">pars</span>, <span class="va">FoIpar</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -80,11 +71,11 @@
 <dd><p>the host age</p></dd>
 
 
-<dt>M</dt>
+<dt>vars</dt>
 <dd><p>the state variables</p></dd>
 
 
-<dt>par</dt>
+<dt>pars</dt>
 <dd><p>the parameters</p></dd>
 
 

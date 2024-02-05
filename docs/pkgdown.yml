@@ -2,16 +2,13 @@ pandoc: 3.1.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  AoI-Hybrid: AoI-Hybrid.html
-  AoY-Hybrid: AoY-Hybrid.html
-  AoY: AoY.html
   Dynamics: Dynamics.html
   FoI: FoI.html
-  MoI: MoI.html
+  Hybrid: Hybrid.html
   Simple_Infections: Simple_Infections.html
   plotCounts: plotCounts.html
   prevalence: prevalence.html
-last_built: 2024-02-03T01:35Z
+last_built: 2024-02-05T23:34Z
 urls:
   reference: https://dd-harp.github.io/pf.memory/reference
   article: https://dd-harp.github.io/pf.memory/articles

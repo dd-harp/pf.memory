@@ -56,38 +56,4 @@ He also showed that the distribution of the MoI would converge to a Poisson dist
 
 $$M(t) \sim f_M(\zeta; m) = \mbox{Pois}(m(t))$$
 
-Since $m$ is the mean of a Poisson, the prevalence of infection is the complement of the zero term:
 
-$$p(t) = 1-\mbox{Pois}(\zeta =0; m(t)) = 1 - e^{-m(t)}$$
-
-It is, nevertheless, sometimes useful to know the clearance rate, a transition from MoI = 1 to MoI=0. Clearance from the infected class can only occur if a person is infected with an MoI of one, and if that infection clears:  
-
-$$
-R(m) = r \frac{\mbox{Pr}(\zeta=1; m(t))}{\mbox{Pr}(\zeta>0; m(t))} = r \frac{m}{e^m - 1} 
-$$
-
-The change in prevalence is thus described by the equation: 
-
-$$
-\frac{dp}{dt} = h(1-p)-R(m)p 
-$$
-
-While this is interesting, and while it solves the problem of modeling clearance under superinfection, the equation depends on $m$. Since we can compute $p(t)$ directly from $m(t)$, the equation is redundant.  
-
-Code exists in `pf.memory` to compute prevalence in three ways:
-
-+ Using the function `truePRa`
-
-+ Using the hybrid equations `solve_dpda`
-
-+ From the hybrid model `solve_dm` and $p(t)= 1 - exp(-m(t))$
-
-
-```{r, fig.height=4, fig.width=6, echo=F}
-foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
-tm = 0:1825
-Xt= solve_dpda(5/365, foiP3, Tmax=5*365)
-plot(tm, truePRa(tm, foiP3), type = "l", ylab = expression(p(a)), xlab = "Age (Days)", lwd=5, col = "red")
-lines(Xt$time, 1-exp(-Xt$m), col = "white", lwd=2)
-lines(Xt$time, Xt$p, col = "blue", lwd=2, lty=2)
-```

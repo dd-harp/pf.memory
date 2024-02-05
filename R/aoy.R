@@ -181,29 +181,29 @@ rAoYN = function(R, N, a, FoIpar, hhat=NULL, tau=0, r=1/200, alphamin=0){
 #' @description The
 #'
 #' @param a the host age
-#' @param M the state variables
-#' @param par the parameters
+#' @param vars the state variables
+#' @param pars the parameters
 #' @param FoIpar parameters that define an FoI function
 #'
 #' @return the derivatives of the MoI and the AoI as a [list]
 #' @export
 #'
-dAoYda = function(a,M,par,FoIpar){with(as.list(c(M,par)),{
+dAoYda = function(a,vars, pars,FoIpar){with(as.list(c(vars,pars)),{
+
+  m0 = function(m){pmax(m,1e-7)}
+  p = 1-exp(-m0(m))
+
   foi = FoI(a,FoIpar,tau,h)
 
-  R = function(m){ ifelse(m==0,r,r*m/(exp(m)-1))}
-  frM = function(m){
-    m^sqrt(2)/4 + m^3/3/factorial(3) + m^4/4/factorial(4) + m^5/5/factorial(5)
+  F2rm = function(m, n){
+    r*(sum(dpois(2:n, m)/c(2:n)))
   }
-  m0 = function(m){pmax(m,1e-6)}
-  p0 = function(p){pmax(p,1e-6)}
 
-  dp  = foi*(1-p) - R(m)*p
   dm  = foi - r*m
-  dy  = 1 - foi/p0(p)*y + R(m)*frM(m)*y
-  dx  = 1 - foi/m0(m)*x
+  dx  = 1 - foi*x/m0(m)
+  dy  = 1 - foi*y/p + F2rm(m, n)*x/p
 
-  list(c(dp, dm, dy,dx))
+  list(c(dm, dx, dy))
 })}
 
 #' Solve the system of differential equations to compute the approximate moments of the AoY over time.
@@ -214,14 +214,15 @@ dAoYda = function(a,M,par,FoIpar){with(as.list(c(M,par)),{
 #' @param tau the cohort birthday
 #' @param Tmax The maximum runtime (in days)
 #' @param dt The output frequency (in days)
+#' @param n The number of terms to use in F(r,m)
 #'
 #' @return a [data.frame] describing the orbits
 #' @export
 #'
-solve_dAoYda = function(h, FoIpar, r=1/200, tau=0, Tmax=730, dt=1){
-  tms = seq(0, Tmax, by = dt)
-  prms = c(h=h,r=r,FoI=FoI,tau=tau)
-  inits = c(p=0,m=0,y=0,x=0)
+solve_dAoYda = function(h, FoIpar, r=1/200, tau=0, Tmax=730, dt=1, n=8){
+  tms = seq(1, Tmax, by = dt)
+  prms = c(h=h, r=r, tau=tau, n=n)
+  inits = c(m=1e-7, x=0, y=0)
   data.frame(deSolve::ode(inits, times=tms, dAoYda, prms, FoIpar=FoIpar))
 }
 

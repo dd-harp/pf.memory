@@ -11,18 +11,8 @@ navbar:
       href: articles/FoI.html
     - text: Dynamics
       href: articles/Dynamics.html
-    - text: AoY
-      href: articles/AoY.html
-  - text: Hybrid Models
-    menu:
-    - text: MoI - Hybrid
-      href: articles/MoI.html
-    - text: Prevalence
-      href: articles/prevalence.html
-    - text: AoI - Hybrid
-      href: articles/AoI-Hybrid.html
-    - text: AoY - Hybrid
-      href: articles/AoY-Hybrid.html
+    - text: Hybrid Models
+      href: articles/Hybrid.html
   - text: Parasite
     menu:
     - text: Simple Infections
@@ -215,7 +205,6 @@ reference:
     Methods to set up FoI trace functions
   contents:
   - FoI
-  - make_FoI
 - subtitle: FoI by Age
   desc: |
     Specialized methods modify the FoI by Age

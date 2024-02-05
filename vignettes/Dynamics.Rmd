@@ -1,9 +1,9 @@
 ---
-title: "Parasite Infection Dynamics"
-subtitle: "The Multiplicity and Age of Infection"
+title: "Random Variables for Parasite Infection Dynamics"
+subtitle: "Computing the MoI, AoI, and AoY"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Parasite Infection Dynamics}
+  %\VignetteIndexEntry{Random Variables for Parasite Infection Dynamics}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -13,7 +13,15 @@ library(pf.memory)
 library(viridisLite)
 ```
 
-In the following, we present functions to compute the distribution of the multiplicity and age of infection.
+In the following, we present random variables describing: 
+
++ The multiplicity of infection (MoI)
+
++ The age of infection (AoI)
+
++ The age of the youngest infection (AoY)
+
+We introduce functions in `pf.memory` that compute the density and distribution functions, and random variables for the MoI, the AoI, and the AoY. 
 
 ## Introduction 
 
@@ -58,7 +66,7 @@ To compute anything, we must first set up a function to describe exposure (see t
 
 ```{r, fig.height=3.5, fig.width=6, echo=F}
 par(mar = c(5,4,1,1))
-a3years  = 0:1095
+a3years  = 1:1095
 plot(a3years, FoI(a3years, foiP3t), type = "l", 
      xlab = "Time or Age (in days)", 
      ylab = expression(z[tau](alpha, a)))
@@ -165,7 +173,7 @@ f_A = dAoI(a3years, max(a3years), foiP3)
 par(mar = c(5,4,1,1))
 plot(a3years, f_A, type ="l", 
      xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
-     ylab = expression(f[A](alpha)), ylim = range(f_A))
+     ylab = expression(f[A](alpha, a, tau, h)))
 ```
 
 Now, as we plot the distribution of the AoI in cohorts at age two, born at different months (as we did above), we notice that the distributions have changed shapes:
@@ -263,38 +271,112 @@ hist(rhx, breaks = seq(0, 1095, by=15),
 lines(a3years, f_A, col="red", lwd=2)
 ```
 
-### Moments of $A_\tau(a)$
+### AoI Moments 
 
 Let $x$ denote the first moment of of $A_\tau(a)$: $$x_\tau(a) = \left< A_\tau(a) \right> = \int_0^\infty \alpha \frac{z_\tau(\alpha, a)} {m_\tau(a)}$$
 
 Similarly, we let $x_\tau(a)[n]$ denote the higher order moments of $A_\tau(a)$: 
 $$x_{[n]}(a, \tau) = \int_0^\infty \alpha^n \frac{z_\tau(\alpha, a)} {m_\tau(a)}$$
 
-```{r}
-a3years0 = a3years[-1]
-moment1 = momentAoI(a3years0, foiP3)
-moment2 = momentAoI(a3years0, foiP3, n=2)
-moment3 = momentAoI(a3years0, foiP3, n=3)
+```{r, eval=T}
+moment1 = momentAoI(a3years, foiP3)
+moment2 = momentAoI(a3years, foiP3, n=2)
+moment3 = momentAoI(a3years, foiP3, n=3)
 ```
 
 The first three moments of the AoY plotted over time. In the top plot, we've also plotted the $n^{th}$ root of the $n^{th}$ moment.
 
-```{r, fig.width=6, fig.height=8, echo=FALSE}
+```{r, fig.width=6, fig.height=8, echo=FALSE, eval=T}
 par(mfrow = c(3,1), mar = c(5, 4, 0.5, 2))
-plot(a3years0, moment1, type = "l", xlab = "a - Host Age (in Days)", 
+plot(a3years, moment1, type = "l", xlab = "a - Host Age (in Days)", 
      lwd=2, ylim = range((moment3)^(1/3)),
      ylab = expression(list(x, sqrt(x[paste("[2]")]), sqrt(x[paste("[3]")], 3))))
 
-lines(a3years0, sqrt(moment2), col = "darkgreen")
-lines(a3years0, (moment3)^(1/3), col = "purple")
+lines(a3years, sqrt(moment2), col = "darkgreen")
+lines(a3years, (moment3)^(1/3), col = "purple")
 
-plot(a3years0, moment2, type = "l", xlab = "a - Host Age (in Days)",
+plot(a3years, moment2, type = "l", xlab = "a - Host Age (in Days)",
      lwd=2, col = "darkgreen",
      ylab = expression(x[paste("[2]")])) 
 mar = c(4, 4, 0.5, 2)
-plot(a3years0, moment3, type = "l", xlab = "a - Host Age (in Days)",
+plot(a3years, moment3, type = "l", xlab = "a - Host Age (in Days)",
      lwd=2, col = "purple", 
      ylab = expression(x[paste("[3]")])) 
+```
+## Age of the Youngest Infection (AoY)
+
+We have derived a random variable $Y_\tau(a)$ describing the age of the youngest infection (AoY). The density function for the AoY is: 
+
+$$Y_\tau(a) \sim f_Y(\alpha; a, \tau) = f_A(\alpha, a,\tau) e^{-m_\tau(a) F_A(\alpha, a,\tau)} \frac{m_\tau(a)}{p_\tau(a)}$$ 
+The distribution function is: 
+
+$$F_Y(a) \sim
+\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{1-e^{-m_\tau(a)}} = 
+\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{p_\tau(a)} 
+$$
+
+The derivations are found in a Suppplement to Henry JM, *et al.* (2024)^[Henry JM, Carter AR, Wu SL, Smith DL (2004), A Probabilistic Synthesis of Malaria Epidemiology:Exposure, Infection, Parasite Densities, and Detection. In preparation.]
+
+The mean AoY is: 
+
+$$
+\left< Y_\tau(a) \right> = \int_0^a \alpha \; f_Y(\alpha, a, \tau) \; d\alpha $$ 
+
+And the higher order moments for the AoY are: 
+
+$$\left< Y_\tau(a)^n \right> = \int_0^n \alpha^n \; f_y(\alpha, a, \tau) \; d\alpha $$ 
+
+### AoY Density, `dAoY`  
+
+The density function is computed with the function `dAoY.`
+
+```{r, eval=T}
+f_Y = dAoY(a3years, 3*365, foiP3)
+```
+
+We can compare $f_Y(\alpha)$ (in black) to $f_A(alpha)$ (in grey). 
+
+```{r, fig.height=3.5, fig.width=6, echo=F, eval=T}
+par(mar = c(5,4,1,1))
+plot(a3years, f_Y, type ="l", 
+     xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
+     ylab = expression(list(f[Y](alpha), f[A](alpha))), ylim = range(f_Y), lwd=2)
+lines(a3years, f_A, col = grey(0.5))
+```
+
+### Random Variables, `rAoY`  
+
+```{r, eval=T}
+raoy = rAoY(10^5, 3*365, foiP3)
+```
+
+```{r, fig.height=4, fig.width=7, eval=T} 
+hist(raoy, breaks=seq(0, 1095, by = 15), 
+     right=F, probability=T, main = "", 
+     xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
+     border = grey(0.5)) -> out
+lines(a3years, f_Y, type = "l", col = "red") 
+```
+
+### AoY Moments
+
+```{r, eval=T}
+aa = seq(5, 3*365, by = 5) 
+moment1y = momentAoY(aa, foiP3)
+moment2y = momentAoY(aa, foiP3, n=2)
+moment3y = momentAoY(aa, foiP3, n=3)
+```
+
+The first three moments of the AoY plotted over time. In the top plot, we've also plotted the $n^{th}$ root of the $n^{th}$ moment.
+
+```{r, fig.width=6, fig.height=8, echo=FALSE, eval=T}
+par(mfrow = c(4,1), mar = c(0.5, 4, 0.5, 2))
+plot(aa, moment1y, type = "l", xlab = "", ylab = expression(E(Y)), lwd=2, xaxt="n", ylim = range((moment3y)^(1/3)) ) 
+lines(aa, sqrt(moment2y), col = "darkgreen")
+lines(aa, (moment3y)^(1/3), col = "purple")
+plot(aa, moment2y, type = "l", xlab = "", ylab = expression(E(Y^2)), lwd=2, xaxt="n", col = "darkgreen") 
+plot(aa, moment3y, type = "l", xlab = "", ylab = expression(E(Y^2)), lwd=2, col = "purple") 
+mtext("Age (in Days)", 1, 3)
 ```
 
 *** 

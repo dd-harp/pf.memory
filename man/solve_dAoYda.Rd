@@ -4,7 +4,7 @@
 \alias{solve_dAoYda}
 \title{Solve the system of differential equations to compute the approximate moments of the AoY over time.}
 \usage{
-solve_dAoYda(h, FoIpar, r = 1/200, tau = 0, Tmax = 730, dt = 1)
+solve_dAoYda(h, FoIpar, r = 1/200, tau = 0, Tmax = 730, dt = 1, n = 8)
 }
 \arguments{
 \item{h}{the force of infection}
@@ -18,6 +18,8 @@ solve_dAoYda(h, FoIpar, r = 1/200, tau = 0, Tmax = 730, dt = 1)
 \item{Tmax}{The maximum runtime (in days)}
 
 \item{dt}{The output frequency (in days)}
+
+\item{n}{The number of terms to use in F(r,m)}
 }
 \value{
 a \link{data.frame} describing the orbits

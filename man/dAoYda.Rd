@@ -4,14 +4,14 @@
 \alias{dAoYda}
 \title{Compute the derivatives of the approximate moments of the AoY dynamically}
 \usage{
-dAoYda(a, M, par, FoIpar)
+dAoYda(a, vars, pars, FoIpar)
 }
 \arguments{
 \item{a}{the host age}
 
-\item{M}{the state variables}
+\item{vars}{the state variables}
 
-\item{par}{the parameters}
+\item{pars}{the parameters}
 
 \item{FoIpar}{parameters that define an FoI function}
 }
