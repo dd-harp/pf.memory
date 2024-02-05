@@ -4,22 +4,13 @@
     <loc>https://dd-harp.github.io/pf.memory/404.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/articles/AoI-Hybrid.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/articles/AoY-Hybrid.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/articles/AoY.html</loc>
-  </url>
-  <url>
     <loc>https://dd-harp.github.io/pf.memory/articles/Dynamics.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/articles/FoI.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/articles/MoI.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/articles/Hybrid.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/articles/Simple_Infections.html</loc>
@@ -179,9 +170,6 @@
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/log10RBC.static.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/make_FoI.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/meanCountsBa.html</loc>

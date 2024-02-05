@@ -43,16 +43,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/FoI.html">FoI</a>
     <a class="dropdown-item" href="../articles/Dynamics.html">Dynamics</a>
-    <a class="dropdown-item" href="../articles/AoY.html">AoY</a>
-  </div>
-</li>
-<li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-hybrid-models">Hybrid Models</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-hybrid-models">
-    <a class="dropdown-item" href="../articles/MoI.html">MoI - Hybrid</a>
-    <a class="dropdown-item" href="../articles/prevalence.html">Prevalence</a>
-    <a class="dropdown-item" href="../articles/AoI-Hybrid.html">AoI - Hybrid</a>
-    <a class="dropdown-item" href="../articles/AoY-Hybrid.html">AoY - Hybrid</a>
+    <a class="dropdown-item" href="../articles/Hybrid.html">Hybrid Models</a>
   </div>
 </li>
 <li class="active nav-item dropdown">
@@ -94,8 +85,110 @@
 
     
     
-
-  </main>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/pf.memory/">pf.memory</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridisLite/" class="external-link">viridisLite</a></span><span class="op">)</span></span></code></pre></div>
+<p>In the following, we translate information about the distribution of
+the multiplicity of infection (MoI) and the age of infection (AoI) into
+probability distributions describing parasite densities. To do so:</p>
+<ul>
+<li>
+<p>We develop a function to model mean logged parasite densities as
+a function of the AoI: <span class="math inline">\(\mu(\alpha)\)</span>:</p>
+<ul>
+<li><p>the variance of the distribution is a function of the mean, <span class="math inline">\(\sigma = F_\sigma(\mu)\)</span>;</p></li>
+<li><p>the relationship between the AoI and <span class="math inline">\(\mu\)</span> can be modified by immunity;</p></li>
+</ul>
+</li>
+<li><p>We develop a modified version of the <span class="math inline">\(beta\)</span> distribution function family to
+model the density distribution of parasites with a given mean; <span class="math inline">\(P(\mu)\)</span>;</p></li>
+<li><p>We compute the parasite density distributions for a function
+<span class="math inline">\(P(\alpha) =
+P_\mu(\alpha))\)</span>;</p></li>
+<li><p>We develop a probability distribution function family to model
+the density distribution of parasites in a human cohort of age <span class="math inline">\(a\)</span>, <span class="math inline">\(P_\tau(a):\)</span></p></li>
+</ul>
+<p><span class="math display">\[
+P_\tau(a) \sim  f_P(\xi; a, \tau) = \beta'(\xi; \mu(A_\tau(a)), \hat
+b(a))
+\]</span> The software is modular, making it possible to extend the code
+by developing other function families.</p>
+<div class="section level2">
+<h2 id="mean-logged-parasite-densities-mualpha">Mean, logged parasite densities, <span class="math inline">\(\mu(\alpha)\)</span><a class="anchor" aria-label="anchor" href="#mean-logged-parasite-densities-mualpha"></a>
+</h2>
+<p>In <code>pf.memory,</code> a <code>S3</code> function family was
+developed to model the relationship between the age of infection (AoI)
+for a parasite infection, <span class="math inline">\(\alpha\)</span>,
+and the mean, <span class="math inline">\(\mu(\alpha).\)</span> The
+function <code>alpha2mu.base</code> has the following form:</p>
+<p><span class="math display">\[\begin{equation}
+\mu(\alpha) =
+\begin{cases}
+    \text{NA} \ &amp; \mbox{if } 0 \leq \alpha &lt; 7 \\[10pt]
+%      l +  (b - l)  \frac{{\textstyle \alpha}}{{\textstyle D}}   &amp;
+\mbox{if } 7 \leq \alpha \leq D  \\[10pt]
+      l + (b - l)  \frac{{\textstyle \alpha}}{{\textstyle
+\delta}}   &amp; \mbox{if } 7 \leq \alpha \leq \delta  \\[10pt]
+     l + (b - l) e^{-s_\alpha (\alpha-\delta)}   &amp; \mbox{if } \alpha
+\geq \delta\\  
+\end{cases}
+\label{mualpha}
+\end{equation}\]</span></p>
+<p>In <code>pf.memory,</code> there are functions to set up the
+parameters for each case, with over-writable defaults:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">base_pars</span> <span class="op">=</span> <span class="fu"><a href="../reference/par_alpha2mu_base.html">par_alpha2mu_base</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">base_pars1</span> <span class="op">=</span> <span class="fu"><a href="../reference/par_alpha2mu_base.html">par_alpha2mu_base</a></span><span class="op">(</span>tildeb<span class="op">=</span><span class="fl">11</span>, Sa<span class="op">=</span><span class="fl">0.0045</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">aalpha</span> <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">366</span></span>
+<span><span class="va">mu_alpha</span> <span class="op">=</span>  <span class="fu"><a href="../reference/alpha2mu.html">alpha2mu</a></span><span class="op">(</span><span class="va">aalpha</span>, <span class="fl">0</span>, <span class="va">base_pars</span><span class="op">)</span></span>
+<span><span class="va">mu_alpha1</span> <span class="op">=</span>  <span class="fu"><a href="../reference/alpha2mu.html">alpha2mu</a></span><span class="op">(</span><span class="va">aalpha</span>, <span class="fl">0</span>, <span class="va">base_pars1</span><span class="op">)</span></span></code></pre></div>
+<p>We plot the two functions here: with the default parameters (in
+black), and the other parameters (in dark blue):</p>
+<p><img src="Simple_Infections_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
+</div>
+<div class="section level2">
+<h2 id="p_mu">
+<span class="math inline">\(P_\mu\)</span><a class="anchor" aria-label="anchor" href="#p_mu"></a>
+</h2>
+<p>We have developed a function family to compute parasite densities as
+a function of the mean of logged parasite densities, <span class="math inline">\(\mu\)</span></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">xx</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">13</span>, by<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fu"><a href="../reference/dDensityPmu.html">dDensityPmu</a></span><span class="op">(</span><span class="va">xx</span>,<span class="fl">9</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"dDensityPmu"</span>, main <span class="op">=</span> <span class="st">"dDensityPmu"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fu"><a href="../reference/dDensityPmu.html">dDensityPmu</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fl">7</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></span>
+<span><span class="va">pp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">13</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pp</span>, <span class="fu"><a href="../reference/pDensityPmu.html">pDensityPmu</a></span><span class="op">(</span><span class="va">pp</span>,<span class="fl">9</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"pDensityPmu"</span>, main <span class="op">=</span> <span class="st">"pDensityPmu"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fu"><a href="../reference/pDensityPmu.html">pDensityPmu</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fl">7</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu"><a href="../reference/rDensityPmu.html">rDensityPmu</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">9</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"rDensityPmu"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">13</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">qq</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.01</span>,<span class="fl">.99</span>, length.out<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">qq</span>, <span class="fu"><a href="../reference/qDensityPmu.html">qDensityPmu</a></span><span class="op">(</span><span class="va">qq</span>,<span class="fl">9</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"qDensityPmu"</span>, main <span class="op">=</span> <span class="st">"qDensityPmu"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Simple_Infections_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
+</div>
+<div class="section level2">
+<h2 id="pxi-alpha">
+<span class="math inline">\(P(\xi, \alpha)\)</span><a class="anchor" aria-label="anchor" href="#pxi-alpha"></a>
+</h2>
+<p>We must specify a function to model exposure:</p>
+<p><img src="Simple_Infections_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<p>At age five, the distribution of the age of infection looks like
+this:</p>
+<p><img src="Simple_Infections_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+<p>To compute parasite density distributions, we need to construct a
+mesh over <span class="math inline">\(\xi.\)</span> The function
+<code>dDensityPa</code> computes the parasite distributions as a
+function of the host age, given a function describing the history of
+exposure.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">meshX</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">13</span>, by<span class="op">=</span><span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="va">Pmu</span> <span class="op">=</span> <span class="fu"><a href="../reference/dDensityPa.html">dDensityPa</a></span><span class="op">(</span><span class="va">meshX</span>,<span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
+<p>Now, parasite densities in simple infections have the given
+distribution of mean logged parasite densities.</p>
+<p><img src="Simple_Infections_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

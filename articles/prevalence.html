@@ -43,16 +43,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/FoI.html">FoI</a>
     <a class="dropdown-item" href="../articles/Dynamics.html">Dynamics</a>
-    <a class="dropdown-item" href="../articles/AoY.html">AoY</a>
-  </div>
-</li>
-<li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-hybrid-models">Hybrid Models</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-hybrid-models">
-    <a class="dropdown-item" href="../articles/MoI.html">MoI - Hybrid</a>
-    <a class="dropdown-item" href="../articles/prevalence.html">Prevalence</a>
-    <a class="dropdown-item" href="../articles/AoI-Hybrid.html">AoI - Hybrid</a>
-    <a class="dropdown-item" href="../articles/AoY-Hybrid.html">AoY - Hybrid</a>
+    <a class="dropdown-item" href="../articles/Hybrid.html">Hybrid Models</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -147,33 +138,6 @@ the mean MoI.</p>
 Poisson distribution:</p>
 <p><span class="math display">\[M(t) \sim f_M(\zeta; m) =
 \mbox{Pois}(m(t))\]</span></p>
-<p>Since <span class="math inline">\(m\)</span> is the mean of a
-Poisson, the prevalence of infection is the complement of the zero
-term:</p>
-<p><span class="math display">\[p(t) = 1-\mbox{Pois}(\zeta =0; m(t)) = 1
-- e^{-m(t)}\]</span></p>
-<p>It is, nevertheless, sometimes useful to know the clearance rate, a
-transition from MoI = 1 to MoI=0. Clearance from the infected class can
-only occur if a person is infected with an MoI of one, and if that
-infection clears:</p>
-<p><span class="math display">\[
-R(m) = r \frac{\mbox{Pr}(\zeta=1; m(t))}{\mbox{Pr}(\zeta&gt;0; m(t))} =
-r \frac{m}{e^m - 1}
-\]</span></p>
-<p>The change in prevalence is thus described by the equation:</p>
-<p><span class="math display">\[
-\frac{dp}{dt} = h(1-p)-R(m)p
-\]</span></p>
-<p>While this is interesting, and while it solves the problem of
-modeling clearance under superinfection, the equation depends on <span class="math inline">\(m\)</span>. Since we can compute <span class="math inline">\(p(t)\)</span> directly from <span class="math inline">\(m(t)\)</span>, the equation is redundant.</p>
-<p>Code exists in <code>pf.memory</code> to compute prevalence in three
-ways:</p>
-<ul>
-<li><p>Using the function <code>truePRa</code></p></li>
-<li><p>Using the hybrid equations <code>solve_dpda</code></p></li>
-<li><p>From the hybrid model <code>solve_dm</code> and <span class="math inline">\(p(t)= 1 - exp(-m(t))\)</span></p></li>
-</ul>
-<p><img src="prevalence_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 
   </main>
 </div>
