@@ -4,6 +4,9 @@
     <loc>https://dd-harp.github.io/pf.memory/404.html</loc>
   </url>
   <url>
+    <loc>https://dd-harp.github.io/pf.memory/articles/Complex_Infections.html</loc>
+  </url>
+  <url>
     <loc>https://dd-harp.github.io/pf.memory/articles/Dynamics.html</loc>
   </url>
   <url>
@@ -13,7 +16,7 @@
     <loc>https://dd-harp.github.io/pf.memory/articles/Hybrid.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/articles/Simple_Infections.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/articles/Parasite_Densities.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/articles/index.html</loc>
@@ -31,7 +34,7 @@
     <loc>https://dd-harp.github.io/pf.memory/index.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/Bda.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/Bdensity.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/Detect.html</loc>
@@ -85,6 +88,9 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/alpha2mu.base.html</loc>
   </url>
   <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/alpha2mu.chronic.html</loc>
+  </url>
+  <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/alpha2mu.html</loc>
   </url>
   <url>
@@ -121,9 +127,6 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/dAoYda.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/dBda.html</loc>
-  </url>
-  <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/dCounts.html</loc>
   </url>
   <url>
@@ -139,19 +142,25 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/dCountsPa.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/dDensityPa.html</loc>
-  </url>
-  <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/dDensityPaConvolve2.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/dDensityPalpha.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/dDensityPmu.html</loc>
-  </url>
-  <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/dMoIda.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_Bdensity.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_Pdensity.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_alpha2density.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_mu2density.beta.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_mu2density.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/dbeta1.html</loc>
@@ -202,9 +211,6 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/pAoY_long.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/pBda.html</loc>
-  </url>
-  <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/pCounts.html</loc>
   </url>
   <url>
@@ -220,22 +226,31 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/pCountsPa.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/pDensityPalpha.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_Bdensity.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/pDensityPmu.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_alpha2density.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_mu2density.beta.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_mu2density.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/par_Fmu_W.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/par_Fmu_base.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/par_Fmu_chronic.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/par_Wda_delta.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/par_Wda_none.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/par_alpha2mu.W.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/par_alpha2mu_base.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/par_expSeason.html</loc>
@@ -251,6 +266,9 @@
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/par_lRBC_static.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/par_mu2dens_beta.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/par_nbCounts.html</loc>
@@ -271,10 +289,13 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/pbeta1.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/qDensityPalpha.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/q_alpha2density.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/qDensityPmu.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/q_mu2density.beta.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/q_mu2density.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/qbeta1.html</loc>
@@ -289,16 +310,19 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/rAoYN.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/rBda.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/rDensityPalpha.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/rDensityPmu.html</loc>
-  </url>
-  <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/rRda.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/r_Bdensity.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/r_alpha2density.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/r_mu2density.beta.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/r_mu2density.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/rbeta1.html</loc>

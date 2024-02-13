@@ -67,13 +67,13 @@
 <span>  <span class="va">R</span>,</span>
 <span>  <span class="va">a</span>,</span>
 <span>  <span class="va">FoIpar</span>,</span>
-<span>  hhat <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tau <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  hhat <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  r <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">200</span>,</span>
 <span>  alphamin <span class="op">=</span> <span class="fl">7</span>,</span>
-<span>  pMu <span class="op">=</span> <span class="fu"><a href="par_alpha2mu_base.html">par_alpha2mu_base</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  pRBC <span class="op">=</span> <span class="fu"><a href="par_lRBC_static.html">par_lRBC_static</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  pSig <span class="op">=</span> <span class="fu"><a href="par_sigma_abc.html">par_sigma_abc</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  RBC_par <span class="op">=</span> <span class="fu"><a href="par_lRBC_static.html">par_lRBC_static</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  Fmu_par <span class="op">=</span> <span class="fu"><a href="par_Fmu_base.html">par_Fmu_base</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  mu_par <span class="op">=</span> <span class="fu"><a href="par_mu2dens_beta.html">par_mu2dens_beta</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  pWda <span class="op">=</span> <span class="fu"><a href="par_Wda_none.html">par_Wda_none</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -96,12 +96,12 @@
 <dd><p>parameters that define an FoI function</p></dd>
 
 
-<dt>hhat</dt>
-<dd><p>a local scaling parameter for the FoI</p></dd>
-
-
 <dt>tau</dt>
 <dd><p>the cohort birthday</p></dd>
+
+
+<dt>hhat</dt>
+<dd><p>a local scaling parameter for the FoI</p></dd>
 
 
 <dt>r</dt>
@@ -112,16 +112,16 @@
 <dd><p>the minimum value of alpha allowed</p></dd>
 
 
-<dt>pMu</dt>
-<dd><p>parameters to compute <a href="alpha2mu.html">alpha2mu</a></p></dd>
-
-
-<dt>pRBC</dt>
+<dt>RBC_par</dt>
 <dd><p>parameters to compute <a href="log10RBC.html">log10RBC</a></p></dd>
 
 
-<dt>pSig</dt>
-<dd><p>parameters to dispatch <a href="sigma_mu.html">sigma_mu</a></p></dd>
+<dt>Fmu_par</dt>
+<dd><p>parameters to compute <a href="alpha2mu.html">alpha2mu</a></p></dd>
+
+
+<dt>mu_par</dt>
+<dd><p>parameters defining parasite densities as a function of the mu</p></dd>
 
 
 <dt>pWda</dt>

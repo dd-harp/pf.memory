@@ -197,8 +197,8 @@ mean:</p></li>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aa</span> <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">1825</span></span>
 <span><span class="va">v1</span> <span class="op">=</span> <span class="fu"><a href="../reference/meanMoI.html">meanMoI</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">foiP3</span>, hhat<span class="op">=</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span><span class="op">)</span></span>
-<span><span class="va">v2</span> <span class="op">=</span> <span class="fu"><a href="../reference/solveMMinfty.html">solveMMinfty</a></span><span class="op">(</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span>, <span class="va">foiP3</span>, Tmax<span class="op">=</span><span class="fl">1825</span><span class="op">)</span><span class="op">$</span><span class="va">m</span></span>
-<span><span class="va">v3</span> <span class="op">=</span> <span class="fu"><a href="../reference/solve_dm.html">solve_dm</a></span><span class="op">(</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span>, <span class="va">foiP3</span>, Tmax<span class="op">=</span><span class="fl">1825</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span></span></code></pre></div>
+<span><span class="va">v2</span> <span class="op">=</span> <span class="fu"><a href="../reference/solveMMinfty.html">solveMMinfty</a></span><span class="op">(</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span>, <span class="va">foiP3</span>, Amax<span class="op">=</span><span class="fl">1825</span><span class="op">)</span><span class="op">$</span><span class="va">m</span></span>
+<span><span class="va">v3</span> <span class="op">=</span> <span class="fu"><a href="../reference/solve_dm.html">solve_dm</a></span><span class="op">(</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span>, <span class="va">foiP3</span>, Amax<span class="op">=</span><span class="fl">1825</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span></span></code></pre></div>
 <p>The following plots all three on the same graph using different
 colors with different widths, colors, and patterns:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -230,7 +230,7 @@ colors with different widths, colors, and patterns:</p>
 <p>the maximum errors are on the order of <span class="math inline">\(1e-07\)</span></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">v1</span><span class="op">-</span><span class="va">v2</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">v2</span><span class="op">-</span><span class="va">v3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">v1</span><span class="op">-</span><span class="va">v3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 1.833689e-07 9.797274e-08 1.833689e-07</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 2.511903e-09 1.790373e-13 2.511903e-09</span></span></code></pre>
 <p>We have developed a hybrid model that we can use to compute the mean
 and higher order moments for the age of infection (AoI). In a related
 vignette (<a href="AoI.html">AoI</a>), we define the AoI as a random
@@ -331,7 +331,7 @@ moments.</p>
 <h3 id="numerical-verification-1">Numerical Verification<a class="anchor" aria-label="anchor" href="#numerical-verification-1"></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">aa</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="va">aa</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> </span>
 <span><span class="va">moment1</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">foiP3</span><span class="op">)</span></span>
 <span><span class="va">moment2</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">foiP3</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">moment3</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">foiP3</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
@@ -340,7 +340,7 @@ moments.</p>
 using the equations that we derived above:</li>
 </ol>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/solve_dAoI.html">solve_dAoI</a></span><span class="op">(</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span>, <span class="va">foiP3</span>, Tmax <span class="op">=</span> <span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, dt<span class="op">=</span><span class="fl">5</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">mt</span> </span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/solve_dAoI.html">solve_dAoI</a></span><span class="op">(</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span>, <span class="va">foiP3</span>, Amax <span class="op">=</span> <span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, dt<span class="op">=</span><span class="fl">5</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">mt</span> </span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># Top Left</span></span>
@@ -369,8 +369,8 @@ using the equations that we derived above:</li>
 <p>Let <span class="math inline">\(y\)</span> denote the first moment of
 the AoY.</p>
 <p><span class="math display">\[
-y_\tau(a) = \int_0^a \alpha \; f_Y(\alpha, a, \tau) \; d\alpha \]</span>
-$$</p>
+y_\tau(a) = \int_0^a \alpha \; f_Y(\alpha, a, \tau) \; d\alpha
+\]</span></p>
 <p>A differential equation for <span class="math inline">\(y_\tau(a)\)</span> is:</p>
 <p><span class="math display">\[
 \frac{dy}{da} = 1 - \frac{h}{p} y + F(r,m) \frac{x}{p}
@@ -378,15 +378,15 @@ $$</p>
 <p>To verify, we can compute the moment directly. The function
 <code>solve_dAoYda</code> gives solutions:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/solve_dAoYda.html">solve_dAoYda</a></span><span class="op">(</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span>, <span class="va">foiP3</span>, Tmax<span class="op">=</span><span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, dt<span class="op">=</span><span class="fl">5</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">mt</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/solve_dAoYda.html">solve_dAoYda</a></span><span class="op">(</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span>, <span class="va">foiP3</span>, Amax<span class="op">=</span><span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, dt<span class="op">=</span><span class="fl">5</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">mt</span></span></code></pre></div>
 <p>The moments can be computed directly using <code>momentAoY</code></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">moment1y</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoY.html">momentAoY</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
-<p>The following shows</p>
-<p><img src="Hybrid_files/figure-html/unnamed-chunk-15-1.png" width="576"></p>
-<p>The errors are minor – the difference between the two methods is at
-most a few days.</p>
+<code class="sourceCode R"><span><span class="va">moment1y</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoY.html">momentAoY</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">foiP3</span>, hhat<span class="op">=</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span><span class="op">)</span></span></code></pre></div>
+<p>The following plots the first moment computed both ways:</p>
 <p><img src="Hybrid_files/figure-html/unnamed-chunk-16-1.png" width="576"></p>
+<p>The errors are minor. After 5 years, the difference between the two
+methods is less than two days.</p>
+<p><img src="Hybrid_files/figure-html/unnamed-chunk-17-1.png" width="576"></p>
 </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

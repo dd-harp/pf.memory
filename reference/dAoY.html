@@ -62,33 +62,33 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dAoY</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">a</span>, <span class="va">FoIpar</span>, hhat <span class="op">=</span> <span class="cn">NULL</span>, tau <span class="op">=</span> <span class="fl">0</span>, r <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">200</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dAoY</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">a</span>, <span class="va">FoIpar</span>, tau <span class="op">=</span> <span class="fl">0</span>, hhat <span class="op">=</span> <span class="fl">1</span>, r <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">200</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>alpha</dt>
-<dd><p>the age of infection</p></dd>
+<dd><p>the age of an infection, \(\alpha\)</p></dd>
 
 
 <dt>a</dt>
-<dd><p>the age of a cohort</p></dd>
+<dd><p>host age</p></dd>
 
 
 <dt>FoIpar</dt>
-<dd><p>parameters that define an FoI function</p></dd>
-
-
-<dt>hhat</dt>
-<dd><p>a local scaling parameter for the FoI</p></dd>
+<dd><p>a compound <a href="https://rdrr.io/r/base/list.html" class="external-link">list</a> to compute \(h_\tau(a)\)</p></dd>
 
 
 <dt>tau</dt>
-<dd><p>the cohort birthday</p></dd>
+<dd><p>the host cohort's birthday</p></dd>
+
+
+<dt>hhat</dt>
+<dd><p>scaling parameter for <a href="FoI.html">FoI</a></p></dd>
 
 
 <dt>r</dt>
-<dd><p>the clearance rate of a simple infection</p></dd>
+<dd><p>the clearance rate for a simple infection</p></dd>
 
 </dl></div>
     <div class="section level2">
