@@ -162,7 +162,7 @@ dAoYda = function(a, vars, pars, FoIpar){with(as.list(c(vars,pars)),{
 solve_dAoYda = function(h, FoIpar, r=1/200, tau=0, Amax=730, dt=1, n=8){
   tms = seq(0, Amax, by = dt)
   prms = c(h=h, r=r, tau=tau, n=n)
-  inits = c(m=0, x=0, y=0)
+  inits = c(m=1e-8, x=0, y=0)
   data.frame(deSolve::ode(inits, times=tms, dAoYda, prms, FoIpar=FoIpar))
 }
 

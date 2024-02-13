@@ -194,12 +194,12 @@ Code exists in `pf.memory` to compute prevalence in three ways:
 
 + From the hybrid model `solve_dm` and $p(t)= 1 - exp(-m(t))$
 
-
 ```{r, fig.height=4, fig.width=6, echo=F}
-foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
+foiP3 = list(hbar=1, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
 tm = 0:1825
 Xt= solve_dpda(5/365, foiP3, Amax=5*365)
-plot(tm, truePRa(tm, foiP3), type = "l", ylab = expression(p(a)), xlab = "Age (Days)", lwd=5, col = "red")
+tPR = truePRa(tm, foiP3, hhat=5/365)
+plot(tm, tPR, type = "l", ylab = expression(p(a)), xlab = "Age (Days)", lwd=5, col = "red")
 lines(Xt$time, 1-exp(-Xt$m), col = "white", lwd=2)
 lines(Xt$time, Xt$p, col = "blue", lwd=2, lty=2)
 ```
@@ -291,7 +291,7 @@ $$
 To verify, we can compute the moment directly. The function `solve_dAoYda` gives solutions: 
 
 ```{r}
-solve_dAoYda(5/365, foiP3, Amax=5*365, dt=5, n=5) -> mt
+solve_dAoYda(5/365, foiP3, Amax=5*365, dt=5, n=9) -> mt
 ```
 
 The moments can be computed directly using `momentAoY`
@@ -301,9 +301,6 @@ moment1y = momentAoY(aa, foiP3, hhat=5/365)
 ```
 
 
-```{r, echo=F, eval=F}
-devtools::load_all()
-```
 
 The following plots the first moment computed both ways:
 
@@ -312,9 +309,9 @@ plot(aa, moment1y, type = "l", lwd=2, xlab = "Age (in Days)")
 with(mt, lines(time, y, col = "darkred", lwd=2))
 ```
 
-The errors are minor. After 5 years,  the difference between the two methods is less than two days. 
+<!-- The errors are minor. After 5 years,  the difference between the two methods is less than two days.  -->
 
-```{r, fig.height=4, fig.width=6, echo=F}
+```{r, fig.height=4, fig.width=6, echo=F, eval=F}
 plot(moment1y-mt$y[-1], type = "l", xlab = "Age (in Days)", ylab = "Errors")
 ```
 

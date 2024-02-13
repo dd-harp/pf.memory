@@ -46,7 +46,7 @@ dAoY = function(alpha, a, FoIpar, tau=0, hhat=1, r=1/200){
   # The function call
   dAoYcompute = function(alpha, a, FoIpar, tau, hhat, r){
     moi = meanMoI(a,FoIpar,tau,hhat,r)
-    moi*dAoI(alpha,a,FoIpar,tau,hhat,r)*exp(-moi*pAoI(alpha,a,FoIpar,tau,hhat,r))/truePRa(a,FoIpar,hhat,tau,r)
+    moi*dAoI(alpha,a,FoIpar,tau,hhat,r)*exp(-moi*pAoI(alpha,a,FoIpar,tau,hhat,r))/truePRa(a,FoIpar,tau,hhat,r)
   }
   # Use sapply to call dAoYcompute multiple times
   if(length(alpha)==1) return(dAoYcompute(alpha, a,FoIpar,tau,hhat,r))
@@ -86,7 +86,7 @@ momentAoY = function(a, FoIpar, tau=0, hhat=1, r=1/200, n=1){
     ff = function(alpha, a, FoIpar, tau, hhat, r, n){
       alpha^n*dAoY(alpha, a, FoIpar, tau, hhat, r)
     }
-    stats::integrate(ff, 0, a,a=a,FoIpar=FoIpar, tau=tau, hhat=hhat,r=r,n=n)$value
+    stats::integrate(ff, 0, a,a=a, FoIpar=FoIpar, tau=tau, hhat=hhat,r=r,n=n)$value
   }
   if(length(a)==1){return(ffAoYda(a, FoIpar, tau, hhat, r, n))} else{
     sapply(a, ffAoYda, FoIpar=FoIpar, tau=tau, hhat=hhat, r=r, n=n)}
