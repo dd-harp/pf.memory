@@ -4,16 +4,16 @@
 \alias{momentAoI}
 \title{Compute the moments for the AoI density function for a cohort of age a}
 \usage{
-momentAoI(a, FoIpar, hhat = 5/365, tau = 0, r = 1/200, n = 1)
+momentAoI(a, FoIpar, tau = 0, hhat = 1, r = 1/200, n = 1)
 }
 \arguments{
-\item{a}{the host cohort age}
+\item{a}{host age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
+
+\item{tau}{the host cohort's birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
-
-\item{tau}{the cohort birthday}
 
 \item{r}{the clearance rate for a simple infection}
 

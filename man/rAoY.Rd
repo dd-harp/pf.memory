@@ -4,18 +4,18 @@
 \alias{rAoY}
 \title{The random generation function for the age of the youngest infection (AoY)}
 \usage{
-rAoY(N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200, alphamin = 0)
+rAoY(N, a, FoIpar, tau = 0, hhat = 1, r = 1/200, alphamin = 0)
 }
 \arguments{
 \item{N}{the number of observations}
 
-\item{a}{the host cohort age}
+\item{a}{host age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
+
+\item{tau}{the host cohort's birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
-
-\item{tau}{the cohort birthday}
 
 \item{r}{the clearance rate for a simple infection}
 

@@ -13,42 +13,113 @@ library(pf.memory)
 library(viridisLite)
 ```
 
-In the following, we present random variables describing: 
+We have derived mathematical formulas that describe the dynamics of malaria infections as random variables in cohorts of humans as they age (Henry JM, *et al.*, 2024)^[Henry JM, Carter AR, Wu SL, Smith DL (in preparation). A Probabilistic Synthesis of Malaria Epidemiology: Exposure, Infection, Parasite Densities, and Detection.] This R package is the computational companion. 
 
-+ The multiplicity of infection (MoI)
+In the following, we review the mathematical formulas and the functions in `pf.memory` that compute the multiplicity of infection (MoI), the age of infection (AoI), and the age of the youngest infection (AoY). 
 
-+ The age of infection (AoI)
+## Formulas and Computation
 
-+ The age of the youngest infection (AoY)
+1. Let $z_\tau(\alpha,a)$ denote the density for infections of age $\alpha$ in a host cohort of age $a$ born on day $\tau$. 
 
-We introduce functions in `pf.memory` that compute the density and distribution functions, and random variables for the MoI, the AoI, and the AoY. 
-
-## Introduction 
-
-Let $z_\tau(\alpha,a)$ denote the density function for infections of age $\alpha$ in a host cohort of age $a$ born on day $\tau$. The dynamics of $z(\alpha,a)$ in a population of humans are described by the following:
-
+    + The dynamics of $z(\alpha,a)$ are described by the following:
 $$
 \frac{\partial z}{\partial a} + \frac{\partial z}{\partial \alpha} = - r z
+\label{dzda}
 $$
-
-
 with the boundary condition:
-
 $$
-    z_\tau(0,a) = h_\tau(a)
-$$
-
-
-We can solve the equation for any particular cohort exactly. Solutions describe the density of infections of age $\alpha$ in a cohort (born on day $\tau$) of age $a$: 
-
 \begin{equation}
-z_\tau(\alpha,a) = h_\tau(a-\alpha) e^{-r \alpha}
-\tag{1}
+    z_\tau(0,a) = h_\tau(a).
 \end{equation}
+$$
+Its solutions are given by: 
+$$
+z_\tau(\alpha,a) = h_\tau(a-\alpha) e^{-r \alpha}
+$$
 
-All solutions to $z_\tau(\alpha, a)$ thus depend on a function that describes the history of exposure, $h_\tau(a)$, which we call the force of infection (FoI).
+    + The function `zda` computes $z_\tau(\alpha, a).$ 
 
-## Force of Infection (FoI)
+2. The mean MoI is given by the formula: 
+$$
+m_\tau(a) = \int_0^a z_\tau(\alpha, a) d \alpha
+$$
+    + The distribution of the MoI is Poisson (Nåsell I, 1985)^[Nåsell I (1985). Hybrid Models of Tropical Infections, 1st edition. Springer-Verlag. https://doi.org/10.1007/978-3-662-01609-1] with mean $m_\tau(a).$ 
+    
+    +  The function `meanMoI` computes $m_\tau(a)$ using `zda`
+
+3. The true prevalence is the 
+$$
+p_\tau(a) = 1 - e^{-m_\tau(a)} 
+$$
+The function `truePRa` computes the true prevalence using `meanMoI` 
+
+4. The density function for the age of infection (AoI) is
+$$
+A_\tau(a) \sim f_A(\alpha, a, \tau) = \frac{z_\tau(\alpha,a)}{m_\tau(a)}
+$$
+and its moments are
+$$
+x_n(a, \tau | h) = \int_0^a  \alpha^n f_A(\alpha, a, \tau) d \alpha
+$$
+
+5. The age of the youngest infection (AoY) is defined as: 
+$$
+Y_\tau(a) \sim f_Y(\alpha, a, \tau) = \min_{\zeta \sim M_\tau(a)} \left\{ \alpha_i \right\}_{i=1}^\zeta,  \alpha_i \sim A_\tau(a) 
+$$
+
+    + The density function can be expressed in terms of the density and distribution functions of the AoI and MoI. 
+$$
+f_Y(\alpha; a, \tau) = 
+f_A(\alpha, a,\tau) e^{-m_\tau(a) F_A(\alpha, a,\tau)} \frac{m_\tau(a)}{p_\tau(a)}.
+$$ 
+    + The distribution function for the AoY is:
+$$
+F_Y(a) \sim
+\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{1-e^{-m_\tau(a)}} = 
+\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{p_\tau(a)} 
+\label{FY}
+$$
+
+    + Its moments are:
+$$
+y_n(a, \tau | h) = \int_0^a  \alpha^n f_Y(\alpha | a, \tau, h) d \alpha 
+$$
+5. We also developed functions to compute the age of the youngest of $N$ infections, called AoYN 
+$$
+N_\tau(a) \sim
+\min_{N} \left\{ \alpha_i \right\}_{i=1}^N \mbox { where }  \alpha_i \sim A_\tau(a) 
+$$
+    + The distribution function for AoYN, $N_\tau(a)$, is 
+$$F_N(\alpha, a, t) \sim 1- (1-F_A(\alpha, a, \tau))^N$$
+The following is a summary table of functions to compute the MoI, AoI, AoY, and all their moments.
+    
+    + The density function for AoYN is found by differentiating:
+    
+$$f_N(\alpha, a, t) \sim N (1-F_A(\alpha, a, \tau))^{N-1}\frac{f_A(\alpha, a, \tau)}{m_\tau(a)}$$
+
+## Quick Reference 
+
+The following is a summary table of functions to compute the MoI, AoI, AoY, AoYN, and all their moments.
+
+<center>
+| | MoI | AoI | AoY | AoYN |
+| ------ | :---: | :---: | :---: | :---: |
+` `  | $\zeta$ |  $\alpha$ | $\alpha$ | $\alpha$ | 
+` ` | $\zeta \geq 0$ |  $0 \leq \alpha \leq a$ | $0 \leq \alpha \leq a$ | $0 \leq \alpha \leq a$ | 
+Random Variable | $M_\tau(\zeta, a, h)$ |  $A_\tau(\alpha, a, h)$ | $Y_\tau(\alpha, a , h)$ | $N_\tau(\alpha, a, h)$| 
+Density Function | $f_M(\zeta, a, h)$ | $f_A(\zeta, a, h)$  | $f_Y(\zeta, a, h)$ |  $f_N(\zeta, a, h)$ | 
+` ` | dpois | dAoI | dAoY | dAoYN |  
+Distribution Function | $F_M(\zeta, a, h)$ | $F_A(\zeta, a, h)$  | $F_Y(\zeta, a, h)$ | $F_N(\zeta, a, h)$ | 
+` ` | ppois | pAoI | pAoY | pAoYN | 
+Random Numbers  | $\hat M_\tau(\zeta, a, h)$| $\hat A_\tau(\alpha, a, h)$ | $\hat Y_\tau(\alpha, a , h)$ | $\hat N_\tau(\alpha, a , h)$ | 
+` ` | rpois | rAoI | rAoY | rAoYN | 
+Moments | $m_\tau(a, h)$ |  $x_n(a, \tau, h)$ | $y_n(a, \tau, h)$ |
+` ` | meanMoI | momentAoI | momentAoY | 
+</center>
+
+## Demonstration
+
+### Force of Infection (FoI)
 
 ```{r, echo=F}
 foiP3 = list(hbar = 5/365, 
@@ -75,7 +146,7 @@ text(270, 0.02, "Population")
 text(100, 0.008, "Cohort", col = "darkred")
 ```
 
-## Computing `zda` 
+### Computing `zda` 
 
 The function `pf.memory::zda(alpha, a, FoIpar, ...)` uses the formula in Eq. 1 to compute the density of parasite infections in a cohort of humans as it ages.
 

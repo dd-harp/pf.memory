@@ -2,22 +2,22 @@
 % Please edit documentation in R/foi.R
 \name{FoI}
 \alias{FoI}
-\title{Trace Function - Force of Infection}
+\title{Force of Infection, \eqn{h_\tau(a)}}
 \usage{
-FoI(a, par, tau = 0, hhat = NULL)
+FoI(a, FoIpar, tau = 0)
 }
 \arguments{
 \item{a}{host age}
 
-\item{par}{a formatted list}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
 
-\item{tau}{cohort birthday}
-
-\item{hhat}{overrides the value of hbar in par}
+\item{tau}{the host cohort's birthday}
 }
 \value{
 \link{numeric}
 }
 \description{
-Trace Function - Force of Infection
+Given a birth day, \eqn{\tau,} age is related
+to time by the formula \eqn{t = a+\tau}.
+The FoI is computed as \deqn{\bar h \; \omega(a) S(a+\tau) T(a+\tau)}
 }

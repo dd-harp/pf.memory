@@ -2,7 +2,7 @@
 % Please edit documentation in R/moi.R
 \name{MoIDistPlot}
 \alias{MoIDistPlot}
-\title{Plot the distribution of the MoI at time t}
+\title{Plot the output of \link{solveMMinfty}}
 \usage{
 MoIDistPlot(moi, t, clr1 = "red")
 }
@@ -14,5 +14,5 @@ MoIDistPlot(moi, t, clr1 = "red")
 \item{clr1}{the color}
 }
 \description{
-Plot the distribution of the MoI at time t
+Plot the output of \link{solveMMinfty}
 }

@@ -4,16 +4,16 @@
 \alias{Wda.delta}
 \title{Compute immune tracking variables as a function of host age and exposure}
 \usage{
-\method{Wda}{delta}(a, FoIpar, hhat = NULL, tau = 0, par = par_Wda_delta())
+\method{Wda}{delta}(a, FoIpar, tau = 0, hhat = 1, par = par_Wda_delta())
 }
 \arguments{
 \item{a}{age of a host cohort}
 
 \item{FoIpar}{parameters that define an FoI function}
 
-\item{hhat}{overrides the value of hbar in par}
-
 \item{tau}{cohort birthday}
+
+\item{hhat}{overrides the value of hbar in par}
 
 \item{par}{parameters in a \link{list}}
 }

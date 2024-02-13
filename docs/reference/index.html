@@ -57,13 +57,7 @@
     <div class="section level2">
       <h2 id="infection-dynamics">Infection Dynamics<a class="anchor" aria-label="anchor" href="#infection-dynamics"></a></h2>
       
-      <p class="section-desc"></p><p>Dynamics of MoI, AoI</p>
-
-      
-    </div><div class="section level2">
-      
-      <h3 id="basic-dynamics">Basic Dynamics<a class="anchor" aria-label="anchor" href="#basic-dynamics"></a></h3>
-      <p class="section-desc"></p><p>Parasite Infections</p>
+      <p class="section-desc"></p><p>Dynamics of MoI, AoI, and the AoY</p>
 
       
     </div><div id="" class="section level2">
@@ -75,11 +69,16 @@
           
           <code><a href="zda.html">zda()</a></code> 
         </dt>
-        <dd>Compute the density of parasite infections in a host cohort</dd>
+        <dd>Compute infection density in a cohort of humans, \(z_\tau(\alpha, a)\)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="truePRa.html">truePRa()</a></code> 
+        </dt>
+        <dd>Compute the true PR in a cohort as a function of age and exposure</dd>
       </dl></div><div class="section level2">
       
-      <h3 id="moi">MoI<a class="anchor" aria-label="anchor" href="#moi"></a></h3>
-      <p class="section-desc"></p><p>Multiplicity of Infection</p>
+      <h3 id="multiplicity-of-infection-moi-">Multiplicity of Infection (MoI)<a class="anchor" aria-label="anchor" href="#multiplicity-of-infection-moi-"></a></h3>
+      <p class="section-desc"></p><p>Methods to compute the MoI</p>
 
       
     </div><div id="" class="section level2">
@@ -91,26 +90,26 @@
           
           <code><a href="meanMoI.html">meanMoI()</a></code> 
         </dt>
-        <dd>Compute the mean MoI directly</dd>
+        <dd>The mean MoI in a host cohort of age \(a\)</dd>
       </dl><dl><dt>
           
           <code><a href="dMoIda.html">dMoIda()</a></code> 
         </dt>
-        <dd>Compute the first derivatives for the queuing model M/M/infinity</dd>
+        <dd>Derivatives for the queuing model \(M/M/\infty\)</dd>
       </dl><dl><dt>
           
           <code><a href="solveMMinfty.html">solveMMinfty()</a></code> 
         </dt>
-        <dd>Solve the queuing model M/M/infinity</dd>
+        <dd>Solve the queuing model \(M/M/\infty\)</dd>
       </dl><dl><dt>
           
           <code><a href="MoIDistPlot.html">MoIDistPlot()</a></code> 
         </dt>
-        <dd>Plot the distribution of the MoI at time t</dd>
+        <dd>Plot the output of solveMMinfty</dd>
       </dl></div><div class="section level2">
       
-      <h3 id="aoi">AoI<a class="anchor" aria-label="anchor" href="#aoi"></a></h3>
-      <p class="section-desc"></p><p>Age of Infection</p>
+      <h3 id="age-of-infection-aoi-">Age of Infection (AoI)<a class="anchor" aria-label="anchor" href="#age-of-infection-aoi-"></a></h3>
+      <p class="section-desc"></p><p>Methods to compute the AoI density and distribution functions, random numbers, and moments</p>
 
       
     </div><div id="" class="section level2">
@@ -122,31 +121,26 @@
           
           <code><a href="dAoI.html">dAoI()</a></code> 
         </dt>
-        <dd>The density function for the age of infection (AoI)</dd>
+        <dd>Compute the density function for AoI</dd>
       </dl><dl><dt>
           
           <code><a href="pAoI.html">pAoI()</a></code> 
         </dt>
-        <dd>The distribution function for the age of infection (AoI)</dd>
+        <dd>Compute the distribution function for AoI</dd>
       </dl><dl><dt>
           
           <code><a href="rAoI.html">rAoI()</a></code> 
         </dt>
-        <dd>The random generation function for the age of infection (AoI)</dd>
+        <dd>Random numbers for the AoI</dd>
       </dl><dl><dt>
           
           <code><a href="momentAoI.html">momentAoI()</a></code> 
         </dt>
         <dd>Compute the moments for the AoI density function for a cohort of age a</dd>
-      </dl><dl><dt>
-          
-          <code><a href="truePRa.html">truePRa()</a></code> 
-        </dt>
-        <dd>Compute the true PR in a cohort as a function of age and exposure</dd>
       </dl></div><div class="section level2">
       
-      <h3 id="aoy">AoY<a class="anchor" aria-label="anchor" href="#aoy"></a></h3>
-      <p class="section-desc"></p><p>Age of the Youngest Infection</p>
+      <h3 id="age-of-the-youngest-infection-aoy-">Age of the Youngest Infection (AoY)<a class="anchor" aria-label="anchor" href="#age-of-the-youngest-infection-aoy-"></a></h3>
+      <p class="section-desc"></p><p>Methods to compute the AoY density and distribution functions, random numbers, and moments</p>
 
       
     </div><div id="" class="section level2">
@@ -178,11 +172,11 @@
           
           <code><a href="momentAoY.html">momentAoY()</a></code> 
         </dt>
-        <dd>Compute the moments for the AoI density function for a cohort of age a</dd>
+        <dd>Compute the moments for the AoY density function for a cohort of age a</dd>
       </dl></div><div class="section level2">
       
-      <h3 id="aoyn">AoYN<a class="anchor" aria-label="anchor" href="#aoyn"></a></h3>
-      <p class="section-desc"></p><p>Youngest of N-Infections</p>
+      <h3 id="age-of-the-youngest-of-n-infections-aoyn-">Age of the Youngest of N Infections (AoYN)<a class="anchor" aria-label="anchor" href="#age-of-the-youngest-of-n-infections-aoyn-"></a></h3>
+      <p class="section-desc"></p><p>Methods to compute the AoYN density and distribution functions &amp; random numbers</p>
 
       
     </div><div id="" class="section level2">
@@ -194,63 +188,21 @@
           
           <code><a href="dAoYN.html">dAoYN()</a></code> 
         </dt>
-        <dd>The density function for the youngest age of N infections</dd>
+        <dd>The youngest of N infections, density function</dd>
       </dl><dl><dt>
           
           <code><a href="pAoYN.html">pAoYN()</a></code> 
         </dt>
-        <dd>The distribution function for the youngest age of N infections</dd>
+        <dd>The youngest of N infections, distribution function</dd>
       </dl><dl><dt>
           
           <code><a href="rAoYN.html">rAoYN()</a></code> 
         </dt>
-        <dd>The random generation function for the age of the youngest of N infections</dd>
+        <dd>The youngest of N infections, random numbers</dd>
       </dl></div><div class="section level2">
-      <h2 id="immune-tracking-variables">Immune Tracking Variables<a class="anchor" aria-label="anchor" href="#immune-tracking-variables"></a></h2>
       
-      <p class="section-desc"></p><p>Expected densities by AoI</p>
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="Wda.html">Wda()</a></code> 
-        </dt>
-        <dd>Compute immune tracking variables as a function of host age and exposure</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Wda.none.html">Wda(<i>&lt;none&gt;</i>)</a></code> 
-        </dt>
-        <dd>Compute immune tracking variables as a function of host age and exposure</dd>
-      </dl><dl><dt>
-          
-          <code><a href="par_Wda_none.html">par_Wda_none()</a></code> 
-        </dt>
-        <dd>Make a parameter set for Wda.none</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Wda.delta.html">Wda(<i>&lt;delta&gt;</i>)</a></code> 
-        </dt>
-        <dd>Compute immune tracking variables as a function of host age and exposure</dd>
-      </dl><dl><dt>
-          
-          <code><a href="par_Wda_delta.html">par_Wda_delta()</a></code> 
-        </dt>
-        <dd>Make a parameter set for Wda.none</dd>
-      </dl></div><div class="section level2">
-      <h2 id="hybrid-models">Hybrid Models<a class="anchor" aria-label="anchor" href="#hybrid-models"></a></h2>
-      
-      <p class="section-desc"></p><p>Methods to set up FoI trace functions</p>
-
-      
-    </div><div class="section level2">
-      
-      <h3 id="moi-1">MoI<a class="anchor" aria-label="anchor" href="#moi-1"></a></h3>
-      <p class="section-desc"></p><p>The MoI hybrid model</p>
+      <h3 id="hybrid-models">Hybrid Models<a class="anchor" aria-label="anchor" href="#hybrid-models"></a></h3>
+      <p class="section-desc"></p><p>Methods to solve hybrid models</p>
 
       
     </div><div id="" class="section level2">
@@ -268,18 +220,7 @@
           <code><a href="solve_dm.html">solve_dm()</a></code> 
         </dt>
         <dd>Solve the hybrid model for the MoI</dd>
-      </dl></div><div class="section level2">
-      
-      <h3 id="true-pr">True PR<a class="anchor" aria-label="anchor" href="#true-pr"></a></h3>
-      <p class="section-desc"></p><p>The MoI and true PR</p>
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
+      </dl><dl><dt>
           
           <code><a href="dpda.html">dpda()</a></code> 
         </dt>
@@ -289,18 +230,7 @@
           <code><a href="solve_dpda.html">solve_dpda()</a></code> 
         </dt>
         <dd>Solve a system of differential equations to compute the true PR and the MoI</dd>
-      </dl></div><div class="section level2">
-      
-      <h3 id="aoi-1">AoI<a class="anchor" aria-label="anchor" href="#aoi-1"></a></h3>
-      <p class="section-desc"></p><p>AoI</p>
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
+      </dl><dl><dt>
           
           <code><a href="dAoIda.html">dAoIda()</a></code> 
         </dt>
@@ -310,18 +240,7 @@
           <code><a href="solve_dAoI.html">solve_dAoI()</a></code> 
         </dt>
         <dd>Solve the system of differential equations to compute the moments of the AoI over time.</dd>
-      </dl></div><div class="section level2">
-      
-      <h3 id="approximate-aoy">Approximate AoY<a class="anchor" aria-label="anchor" href="#approximate-aoy"></a></h3>
-      <p class="section-desc"></p><p>AoI</p>
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
+      </dl><dl><dt>
           
           <code><a href="dAoYda.html">dAoYda()</a></code> 
         </dt>
@@ -365,7 +284,7 @@
         <dd>Compute expected log10 parasite densities, <code>mu</code>, as a function of the age of infection <code>alpha</code></dd>
       </dl><dl><dt>
           
-          <code><a href="par_alpha2mu.W.html">par_alpha2mu.W()</a></code> 
+          <code><a href="par_Fmu_W.html">par_Fmu_W()</a></code> 
         </dt>
         <dd>Set up parameters for alpha2mu.W</dd>
       </dl><dl><dt>
@@ -375,9 +294,19 @@
         <dd>Compute expected log10 parasite densities, <code>mu</code>, as a function of the age of infection <code>alpha</code></dd>
       </dl><dl><dt>
           
-          <code><a href="par_alpha2mu_base.html">par_alpha2mu_base()</a></code> 
+          <code><a href="par_Fmu_base.html">par_Fmu_base()</a></code> 
         </dt>
         <dd>Set up parameters for alpha2mu.base</dd>
+      </dl><dl><dt>
+          
+          <code><a href="alpha2mu.chronic.html">alpha2mu(<i>&lt;chronic&gt;</i>)</a></code> 
+        </dt>
+        <dd>Compute expected log10 parasite densities, <code>mu</code>, as a function of the age of infection <code>alpha</code></dd>
+      </dl><dl><dt>
+          
+          <code><a href="par_Fmu_chronic.html">par_Fmu_chronic()</a></code> 
+        </dt>
+        <dd>Set up parameters for alpha2mu.chronic</dd>
       </dl></div><div class="section level2">
       
       <h3 id="p-mu-">P(mu)<a class="anchor" aria-label="anchor" href="#p-mu-"></a></h3>
@@ -391,24 +320,60 @@
 
       <dl><dt>
           
-          <code><a href="dDensityPmu.html">dDensityPmu()</a></code> 
+          <code><a href="d_mu2density.html">d_mu2density()</a></code> 
         </dt>
         <dd>The density function for parasite densities in a simple malaria infection</dd>
       </dl><dl><dt>
           
-          <code><a href="pDensityPmu.html">pDensityPmu()</a></code> 
+          <code><a href="p_mu2density.html">p_mu2density()</a></code> 
         </dt>
         <dd>The density function for parasite densities as a function of the mean</dd>
       </dl><dl><dt>
           
-          <code><a href="qDensityPmu.html">qDensityPmu()</a></code> 
+          <code><a href="q_mu2density.html">q_mu2density()</a></code> 
         </dt>
         <dd>The quantile function for parasite densities in a simple malaria infection</dd>
       </dl><dl><dt>
           
-          <code><a href="rDensityPmu.html">rDensityPmu()</a></code> 
+          <code><a href="r_mu2density.html">r_mu2density()</a></code> 
         </dt>
         <dd>Random generation of parasite densities from a simple malaria infection</dd>
+      </dl><dl><dt>
+          
+          <code><a href="par_mu2dens_beta.html">par_mu2dens_beta()</a></code> 
+        </dt>
+        <dd>The quantile function for parasite densities in a simple malaria infection</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="p-mu--1">P(mu)<a class="anchor" aria-label="anchor" href="#p-mu--1"></a></h3>
+      <p class="section-desc"></p><p>log10 parasites distributions from mu</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="d_mu2density.beta.html">d_mu2density(<i>&lt;beta&gt;</i>)</a></code> 
+        </dt>
+        <dd>Modified beta distribution, density function</dd>
+      </dl><dl><dt>
+          
+          <code><a href="p_mu2density.beta.html">p_mu2density(<i>&lt;beta&gt;</i>)</a></code> 
+        </dt>
+        <dd>Modified beta distribution, distribution function</dd>
+      </dl><dl><dt>
+          
+          <code><a href="q_mu2density.beta.html">q_mu2density(<i>&lt;beta&gt;</i>)</a></code> 
+        </dt>
+        <dd>Modified beta distribution, distribution function</dd>
+      </dl><dl><dt>
+          
+          <code><a href="r_mu2density.beta.html">r_mu2density(<i>&lt;beta&gt;</i>)</a></code> 
+        </dt>
+        <dd>Modified beta distribution, random numbers</dd>
       </dl></div><div class="section level2">
       
       <h3 id="p-alpha-">P(alpha)<a class="anchor" aria-label="anchor" href="#p-alpha-"></a></h3>
@@ -422,22 +387,22 @@
 
       <dl><dt>
           
-          <code><a href="dDensityPalpha.html">dDensityPalpha()</a></code> 
+          <code><a href="d_alpha2density.html">d_alpha2density()</a></code> 
         </dt>
         <dd>The density function for parasite densities in a simple malaria infection of age alpha</dd>
       </dl><dl><dt>
           
-          <code><a href="pDensityPalpha.html">pDensityPalpha()</a></code> 
+          <code><a href="p_alpha2density.html">p_alpha2density()</a></code> 
         </dt>
         <dd>The distribution function for parasite densities in a simple malaria infection of age alpha</dd>
       </dl><dl><dt>
           
-          <code><a href="qDensityPalpha.html">qDensityPalpha()</a></code> 
+          <code><a href="q_alpha2density.html">q_alpha2density()</a></code> 
         </dt>
         <dd>The quantile function for parasite densities in a simple malaria infection of age alpha</dd>
       </dl><dl><dt>
           
-          <code><a href="rDensityPalpha.html">rDensityPalpha()</a></code> 
+          <code><a href="r_alpha2density.html">r_alpha2density()</a></code> 
         </dt>
         <dd>The distribution function for parasite densities in a simple malaria infection of age alpha</dd>
       </dl></div><div class="section level2">
@@ -453,9 +418,9 @@
 
       <dl><dt>
           
-          <code><a href="dDensityPa.html">dDensityPa()</a></code> 
+          <code><a href="d_Pdensity.html">d_Pdensity()</a></code> <code><a href="d_Pdensity.html">d_Pdensity()</a></code> 
         </dt>
-        <dd>The density function for parasite densities from a host cohort population of age a</dd>
+        <dd>Compute \(P_\tau(a |h)\)</dd>
       </dl></div><div class="section level2">
       
       <h3 id="complex-infections">Complex Infections<a class="anchor" aria-label="anchor" href="#complex-infections"></a></h3>
@@ -469,22 +434,22 @@
 
       <dl><dt>
           
-          <code><a href="Bda.html">Bda()</a></code> 
+          <code><a href="Bdensity.html">Bdensity()</a></code> 
         </dt>
-        <dd>Compute the CDF and PDF of parasite densities in a host cohort</dd>
+        <dd>Compute \(B_\tau(a | h)\)</dd>
       </dl><dl><dt>
           
-          <code><a href="dBda.html">dBda()</a></code> 
+          <code><a href="d_Bdensity.html">d_Bdensity()</a></code> 
         </dt>
-        <dd>The density function for parasite densities in a host cohort</dd>
+        <dd>Compute the distribution function for \(B_\tau(a)\)</dd>
       </dl><dl><dt>
           
-          <code><a href="pBda.html">pBda()</a></code> 
+          <code><a href="p_Bdensity.html">p_Bdensity()</a></code> 
         </dt>
-        <dd>The distribution function for parasite densities in a host cohort</dd>
+        <dd>Call Bdensity and return the density vector</dd>
       </dl><dl><dt>
           
-          <code><a href="rBda.html">rBda()</a></code> 
+          <code><a href="r_Bdensity.html">r_Bdensity()</a></code> 
         </dt>
         <dd>Random generation for parasite densities in a host cohort</dd>
       </dl><dl><dt>
@@ -697,7 +662,7 @@
           
           <code><a href="FoI.html">FoI()</a></code> 
         </dt>
-        <dd>Trace Function - Force of Infection</dd>
+        <dd>Force of Infection, \(h_\tau(a)\)</dd>
       </dl></div><div class="section level2">
       
       <h3 id="foi-by-age">FoI by Age<a class="anchor" aria-label="anchor" href="#foi-by-age"></a></h3>
@@ -822,6 +787,42 @@
           <code><a href="nzPois.html">nzPois()</a></code> 
         </dt>
         <dd>Compute N non-zero values from a Poisson distribution with a given MoI</dd>
+      </dl></div><div class="section level2">
+      <h2 id="immune-tracking-variables">Immune Tracking Variables<a class="anchor" aria-label="anchor" href="#immune-tracking-variables"></a></h2>
+      
+      <p class="section-desc"></p><p>Expected densities by AoI</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="Wda.html">Wda()</a></code> 
+        </dt>
+        <dd>Compute immune tracking variables as a function of host age and exposure</dd>
+      </dl><dl><dt>
+          
+          <code><a href="Wda.none.html">Wda(<i>&lt;none&gt;</i>)</a></code> 
+        </dt>
+        <dd>Compute immune tracking variables as a function of host age and exposure</dd>
+      </dl><dl><dt>
+          
+          <code><a href="par_Wda_none.html">par_Wda_none()</a></code> 
+        </dt>
+        <dd>Make a parameter set for Wda.none</dd>
+      </dl><dl><dt>
+          
+          <code><a href="Wda.delta.html">Wda(<i>&lt;delta&gt;</i>)</a></code> 
+        </dt>
+        <dd>Compute immune tracking variables as a function of host age and exposure</dd>
+      </dl><dl><dt>
+          
+          <code><a href="par_Wda_delta.html">par_Wda_delta()</a></code> 
+        </dt>
+        <dd>Make a parameter set for Wda.none</dd>
       </dl></div><div class="section level2">
       
       <h3 id="red-blood-cells">Red Blood Cells<a class="anchor" aria-label="anchor" href="#red-blood-cells"></a></h3>

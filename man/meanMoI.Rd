@@ -2,18 +2,18 @@
 % Please edit documentation in R/moi.R
 \name{meanMoI}
 \alias{meanMoI}
-\title{Compute the mean MoI directly}
+\title{The mean MoI in a host cohort of age \eqn{a}}
 \usage{
-meanMoI(a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
+meanMoI(a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 }
 \arguments{
-\item{a}{the host cohort age}
+\item{a}{host age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
+
+\item{tau}{the host cohort's birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
-
-\item{tau}{the cohort birthday}
 
 \item{r}{the clearance rate for a simple infection}
 }
@@ -21,5 +21,5 @@ meanMoI(a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
 a \link{numeric} vector of length(a)
 }
 \description{
-Compute the mean MoI directly
+The mean multiplicity of infection (MoI) is \deqn{m_\tau(a) = \int_0^a z_\tau(\alpha, a) d \alpha}
 }

@@ -16,7 +16,7 @@ seasonalFoI = function(t, par){
 #'
 #' @return [numeric]
 #' @export
-seasonalFoI.flat= function(t, par){1}
+seasonalFoI.flat= function(t, par){0*t + 1}
 
 #' Return a list that dispatches seasonalFoI.flat
 #'

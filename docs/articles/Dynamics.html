@@ -90,43 +90,233 @@ and AoY</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/pf.memory/">pf.memory</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridisLite/" class="external-link">viridisLite</a></span><span class="op">)</span></span></code></pre></div>
-<p>In the following, we present random variables describing:</p>
-<ul>
-<li><p>The multiplicity of infection (MoI)</p></li>
-<li><p>The age of infection (AoI)</p></li>
-<li><p>The age of the youngest infection (AoY)</p></li>
-</ul>
-<p>We introduce functions in <code>pf.memory</code> that compute the
-density and distribution functions, and random variables for the MoI,
-the AoI, and the AoY.</p>
+<p>We have derived mathematical formulas that describe the dynamics of
+malaria infections as random variables in cohorts of humans as they age
+(Henry JM, <em>et al.</em>, 2024)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Henry JM, Carter AR, Wu SL, Smith DL (in preparation). A
+Probabilistic Synthesis of Malaria Epidemiology: Exposure, Infection,
+Parasite Densities, and Detection.&lt;/p&gt;"><sup>1</sup></a> This R package is the computational
+companion.</p>
+<p>In the following, we review the mathematical formulas and the
+functions in <code>pf.memory</code> that compute the multiplicity of
+infection (MoI), the age of infection (AoI), and the age of the youngest
+infection (AoY).</p>
 <div class="section level2">
-<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<h2 id="formulas-and-computation">Formulas and Computation<a class="anchor" aria-label="anchor" href="#formulas-and-computation"></a>
 </h2>
-<p>Let <span class="math inline">\(z_\tau(\alpha,a)\)</span> denote the
-density function for infections of age <span class="math inline">\(\alpha\)</span> in a host cohort of age <span class="math inline">\(a\)</span> born on day <span class="math inline">\(\tau\)</span>. The dynamics of <span class="math inline">\(z(\alpha,a)\)</span> in a population of humans are
-described by the following:</p>
-<p><span class="math display">\[
+<ol style="list-style-type: decimal">
+<li>
+<p>Let <span class="math inline">\(z_\tau(\alpha,a)\)</span> denote
+the density for infections of age <span class="math inline">\(\alpha\)</span> in a host cohort of age <span class="math inline">\(a\)</span> born on day <span class="math inline">\(\tau\)</span>.</p>
+<ul>
+<li><p>The dynamics of <span class="math inline">\(z(\alpha,a)\)</span>
+are described by the following: <span class="math display">\[
 \frac{\partial z}{\partial a} + \frac{\partial z}{\partial \alpha} = - r
 z
-\]</span></p>
-<p>with the boundary condition:</p>
-<p><span class="math display">\[
-    z_\tau(0,a) = h_\tau(a)
-\]</span></p>
-<p>We can solve the equation for any particular cohort exactly.
-Solutions describe the density of infections of age <span class="math inline">\(\alpha\)</span> in a cohort (born on day <span class="math inline">\(\tau\)</span>) of age <span class="math inline">\(a\)</span>:</p>
-<p><span class="math display">\[\begin{equation}
+\label{dzda}
+\]</span> with the boundary condition: <span class="math display">\[
+\begin{equation}
+z_\tau(0,a) = h_\tau(a).
+\end{equation}
+\]</span> Its solutions are given by: <span class="math display">\[
 z_\tau(\alpha,a) = h_\tau(a-\alpha) e^{-r \alpha}
-\tag{1}
-\end{equation}\]</span></p>
-<p>All solutions to <span class="math inline">\(z_\tau(\alpha,
-a)\)</span> thus depend on a function that describes the history of
-exposure, <span class="math inline">\(h_\tau(a)\)</span>, which we call
-the force of infection (FoI).</p>
+\]</span></p></li>
+<li><p>The function <code>zda</code> computes <span class="math inline">\(z_\tau(\alpha, a).\)</span></p></li>
+</ul>
+</li>
+<li>
+<p>The mean MoI is given by the formula: <span class="math display">\[
+m_\tau(a) = \int_0^a z_\tau(\alpha, a) d \alpha
+\]</span></p>
+<ul>
+<li><p>The distribution of the MoI is Poisson (Nåsell I, 1985)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Nåsell I (1985). Hybrid Models of Tropical Infections,
+1st edition. Springer-Verlag. &lt;a href="https://doi.org/10.1007/978-3-662-01609-1" class="external-link uri"&gt;https://doi.org/10.1007/978-3-662-01609-1&lt;/a&gt;&lt;/p&gt;'><sup>2</sup></a> with mean
+<span class="math inline">\(m_\tau(a).\)</span></p></li>
+<li><p>The function <code>meanMoI</code> computes <span class="math inline">\(m_\tau(a)\)</span> using <code>zda</code></p></li>
+</ul>
+</li>
+<li><p>The true prevalence is the <span class="math display">\[
+p_\tau(a) = 1 - e^{-m_\tau(a)}
+\]</span> The function <code>truePRa</code> computes the true prevalence
+using <code>meanMoI</code></p></li>
+<li><p>The density function for the age of infection (AoI) is <span class="math display">\[
+A_\tau(a) \sim f_A(\alpha, a, \tau) = \frac{z_\tau(\alpha,a)}{m_\tau(a)}
+\]</span> and its moments are <span class="math display">\[
+x_n(a, \tau | h) = \int_0^a  \alpha^n f_A(\alpha, a, \tau) d \alpha
+\]</span></p></li>
+<li>
+<p>The age of the youngest infection (AoY) is defined as: <span class="math display">\[
+Y_\tau(a) \sim f_Y(\alpha, a, \tau) = \min_{\zeta \sim M_\tau(a)}
+\left\{ \alpha_i \right\}_{i=1}^\zeta,  \alpha_i \sim A_\tau(a)
+\]</span></p>
+<ul>
+<li><p>The density function can be expressed in terms of the density and
+distribution functions of the AoI and MoI. <span class="math display">\[
+f_Y(\alpha; a, \tau) =
+f_A(\alpha, a,\tau) e^{-m_\tau(a) F_A(\alpha, a,\tau)}
+\frac{m_\tau(a)}{p_\tau(a)}.
+\]</span></p></li>
+<li><p>The distribution function for the AoY is: <span class="math display">\[
+F_Y(a) \sim
+\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{1-e^{-m_\tau(a)}} =
+\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{p_\tau(a)}
+\label{FY}
+\]</span></p></li>
+<li><p>Its moments are: <span class="math display">\[
+y_n(a, \tau | h) = \int_0^a  \alpha^n f_Y(\alpha | a, \tau, h) d \alpha
+\]</span></p></li>
+</ul>
+</li>
+<li>
+<p>We also developed functions to compute the age of the youngest of
+<span class="math inline">\(N\)</span> infections, called AoYN <span class="math display">\[
+N_\tau(a) \sim
+\min_{N} \left\{ \alpha_i \right\}_{i=1}^N \mbox { where }  \alpha_i
+\sim A_\tau(a)
+\]</span></p>
+<ul>
+<li><p>The distribution function for AoYN, <span class="math inline">\(N_\tau(a)\)</span>, is <span class="math display">\[F_N(\alpha, a, t) \sim 1- (1-F_A(\alpha, a,
+\tau))^N\]</span> The following is a summary table of functions to
+compute the MoI, AoI, AoY, and all their moments.</p></li>
+<li><p>The density function for AoYN is found by
+differentiating:</p></li>
+</ul>
+</li>
+</ol>
+<p><span class="math display">\[f_N(\alpha, a, t) \sim N (1-F_A(\alpha,
+a, \tau))^{N-1}\frac{f_A(\alpha, a, \tau)}{m_\tau(a)}\]</span></p>
 </div>
 <div class="section level2">
-<h2 id="force-of-infection-foi">Force of Infection (FoI)<a class="anchor" aria-label="anchor" href="#force-of-infection-foi"></a>
+<h2 id="quick-reference">Quick Reference<a class="anchor" aria-label="anchor" href="#quick-reference"></a>
 </h2>
+<p>The following is a summary table of functions to compute the MoI,
+AoI, AoY, AoYN, and all their moments.</p>
+<center>
+<table class="table">
+<colgroup>
+<col width="23%">
+<col width="19%">
+<col width="19%">
+<col width="19%">
+<col width="19%">
+</colgroup>
+<thead><tr class="header">
+<th></th>
+<th align="center">MoI</th>
+<th align="center">AoI</th>
+<th align="center">AoY</th>
+<th align="center">AoYN</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code></code></td>
+<td align="center"><span class="math inline">\(\zeta\)</span></td>
+<td align="center"><span class="math inline">\(\alpha\)</span></td>
+<td align="center"><span class="math inline">\(\alpha\)</span></td>
+<td align="center"><span class="math inline">\(\alpha\)</span></td>
+</tr>
+<tr class="even">
+<td><code></code></td>
+<td align="center"><span class="math inline">\(\zeta \geq
+0\)</span></td>
+<td align="center"><span class="math inline">\(0 \leq \alpha \leq
+a\)</span></td>
+<td align="center"><span class="math inline">\(0 \leq \alpha \leq
+a\)</span></td>
+<td align="center"><span class="math inline">\(0 \leq \alpha \leq
+a\)</span></td>
+</tr>
+<tr class="odd">
+<td>Random Variable</td>
+<td align="center"><span class="math inline">\(M_\tau(\zeta, a,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(A_\tau(\alpha, a,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(Y_\tau(\alpha, a ,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(N_\tau(\alpha, a,
+h)\)</span></td>
+</tr>
+<tr class="even">
+<td>Density Function</td>
+<td align="center"><span class="math inline">\(f_M(\zeta, a,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(f_A(\zeta, a,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(f_Y(\zeta, a,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(f_N(\zeta, a,
+h)\)</span></td>
+</tr>
+<tr class="odd">
+<td><code></code></td>
+<td align="center">dpois</td>
+<td align="center">dAoI</td>
+<td align="center">dAoY</td>
+<td align="center">dAoYN</td>
+</tr>
+<tr class="even">
+<td>Distribution Function</td>
+<td align="center"><span class="math inline">\(F_M(\zeta, a,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(F_A(\zeta, a,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(F_Y(\zeta, a,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(F_N(\zeta, a,
+h)\)</span></td>
+</tr>
+<tr class="odd">
+<td><code></code></td>
+<td align="center">ppois</td>
+<td align="center">pAoI</td>
+<td align="center">pAoY</td>
+<td align="center">pAoYN</td>
+</tr>
+<tr class="even">
+<td>Random Numbers</td>
+<td align="center"><span class="math inline">\(\hat M_\tau(\zeta, a,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(\hat A_\tau(\alpha, a,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(\hat Y_\tau(\alpha, a ,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(\hat N_\tau(\alpha, a ,
+h)\)</span></td>
+</tr>
+<tr class="odd">
+<td><code></code></td>
+<td align="center">rpois</td>
+<td align="center">rAoI</td>
+<td align="center">rAoY</td>
+<td align="center">rAoYN</td>
+</tr>
+<tr class="even">
+<td>Moments</td>
+<td align="center"><span class="math inline">\(m_\tau(a,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(x_n(a, \tau,
+h)\)</span></td>
+<td align="center"><span class="math inline">\(y_n(a, \tau,
+h)\)</span></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td><code></code></td>
+<td align="center">meanMoI</td>
+<td align="center">momentAoI</td>
+<td align="center">momentAoY</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+</center>
+</div>
+<div class="section level2">
+<h2 id="demonstration">Demonstration<a class="anchor" aria-label="anchor" href="#demonstration"></a>
+</h2>
+<div class="section level3">
+<h3 id="force-of-infection-foi">Force of Infection (FoI)<a class="anchor" aria-label="anchor" href="#force-of-infection-foi"></a>
+</h3>
 <p>To compute anything, we must first set up a function to describe
 exposure (see the <a href="FoI.html">FoI</a> vignette). We define
 functions that plot the FoI for a cohort as it ages (in red), but we can
@@ -134,9 +324,9 @@ also compute the population average FoI (in black). Different cohorts
 would experience different histories of exposure.</p>
 <p><img src="Dynamics_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 </div>
-<div class="section level2">
-<h2 id="computing-zda">Computing <code>zda</code><a class="anchor" aria-label="anchor" href="#computing-zda"></a>
-</h2>
+<div class="section level3">
+<h3 id="computing-zda">Computing <code>zda</code><a class="anchor" aria-label="anchor" href="#computing-zda"></a>
+</h3>
 <p>The function <code>pf.memory::zda(alpha, a, FoIpar, ...)</code> uses
 the formula in Eq. 1 to compute the density of parasite infections in a
 cohort of humans as it ages.</p>
@@ -167,6 +357,7 @@ first two years of life. Here the annual FoI is 5 infections, per
 person, per year (<span class="math inline">\(\bar h =
 5/365\)</span>):</p>
 <p><img src="Dynamics_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="multiplicity-of-infection-moi">Multiplicity of Infection (MoI)<a class="anchor" aria-label="anchor" href="#multiplicity-of-infection-moi"></a>
@@ -288,7 +479,7 @@ f_A(\alpha, a,\tau) e^{-m_\tau(a) F_A(\alpha, a,\tau)}
 <p>The derivations are found in a Suppplement to Henry JM, <em>et
 al.</em> (2024)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Henry JM, Carter AR, Wu SL, Smith DL (2004), A
 Probabilistic Synthesis of Malaria Epidemiology:Exposure, Infection,
-Parasite Densities, and Detection. In preparation.&lt;/p&gt;"><sup>1</sup></a></p>
+Parasite Densities, and Detection. In preparation.&lt;/p&gt;"><sup>3</sup></a></p>
 <p>The mean AoY is:</p>
 <p><span class="math display">\[
 \left&lt; Y_\tau(a) \right&gt; = \int_0^a \alpha \; f_Y(\alpha, a, \tau)

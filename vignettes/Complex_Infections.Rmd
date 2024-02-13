@@ -1,0 +1,13 @@
+---
+title: "Complex Infections"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Complex Infections}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r suppressMessages=T}
+library(pf.memory)
+library(viridisLite)
+```

@@ -4,20 +4,20 @@
 \alias{pAoY_long}
 \title{Alternative method for computing the distribution function for the age of the youngest infection (AoY)}
 \usage{
-pAoY_long(alpha, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
+pAoY_long(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 }
 \arguments{
-\item{alpha}{the age of infection}
+\item{alpha}{the age of an infection, \eqn{\alpha}}
 
-\item{a}{the age of a cohort}
+\item{a}{host age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
 
-\item{hhat}{a local scaling parameter for the FoI}
+\item{tau}{the host cohort's birthday}
 
-\item{tau}{the cohort birthday}
+\item{hhat}{scaling parameter for \link{FoI}}
 
-\item{r}{the clearance rate of a simple infection}
+\item{r}{the clearance rate for a simple infection}
 }
 \value{
 a \link{numeric} vector of length(alpha)

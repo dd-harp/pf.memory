@@ -2,20 +2,20 @@
 % Please edit documentation in R/dynamics.R
 \name{zda}
 \alias{zda}
-\title{Compute the density of parasite infections in a host cohort}
+\title{Compute infection density in a cohort of humans, \eqn{z_\tau(\alpha, a)}}
 \usage{
-zda(alpha, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
+zda(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 }
 \arguments{
-\item{alpha}{a parasites age of infection}
+\item{alpha}{the age of an infection, \eqn{\alpha}}
 
-\item{a}{the host cohort age}
+\item{a}{host age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
 
-\item{hhat}{a local scaling parameter for the FoI}
+\item{tau}{the host cohort's birthday}
 
-\item{tau}{the cohort birthday}
+\item{hhat}{scaling parameter for \link{FoI}}
 
 \item{r}{the clearance rate for a simple infection}
 }
@@ -23,5 +23,11 @@ zda(alpha, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
 a \link{numeric} vector of length(alpha)
 }
 \description{
-Solutions to the time and age version of the Ross-Macdonald model.
+Given a function describing the FoI (\eqn{h_\tau(a)}), and a parameter
+describing the clearance rate of infections (\eqn{r}),
+the density of parasites of age \eqn{\alpha} in a cohort of humans of
+age \eqn{a} is \deqn{z_\tau(\alpha, a) = e^{-r \alpha} h_\tau(a-\alpha)}
+}
+\seealso{
+\code{\link[=FoI]{FoI()}}
 }

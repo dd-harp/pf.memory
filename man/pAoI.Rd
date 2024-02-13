@@ -2,20 +2,20 @@
 % Please edit documentation in R/aoi.R
 \name{pAoI}
 \alias{pAoI}
-\title{The distribution function for the age of infection (AoI)}
+\title{Compute the distribution function for AoI}
 \usage{
-pAoI(alpha, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
+pAoI(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 }
 \arguments{
-\item{alpha}{the parasite age of infection}
+\item{alpha}{the age of an infection, \eqn{\alpha}}
 
-\item{a}{the host cohort age}
+\item{a}{host age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
 
-\item{hhat}{a local scaling parameter for the FoI}
+\item{tau}{the host cohort's birthday}
 
-\item{tau}{the cohort birthday}
+\item{hhat}{scaling parameter for \link{FoI}}
 
 \item{r}{the clearance rate for a simple infection}
 }
@@ -23,5 +23,5 @@ pAoI(alpha, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
 a \link{numeric} vector of length(alpha)
 }
 \description{
-The distribution function for the age of infection (AoI)
+Compute the distribution function for AoI
 }

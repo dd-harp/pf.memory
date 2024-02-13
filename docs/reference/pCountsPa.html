@@ -65,14 +65,14 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pCountsPa</span><span class="op">(</span></span>
 <span>  <span class="va">a</span>,</span>
 <span>  <span class="va">FoIpar</span>,</span>
-<span>  bins <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  bins <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">13</span><span class="op">)</span>,</span>
 <span>  dx <span class="op">=</span> <span class="fl">0.1</span>,</span>
-<span>  hhat <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hhat <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  tau <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  r <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">200</span>,</span>
-<span>  pMu <span class="op">=</span> <span class="fu"><a href="par_alpha2mu_base.html">par_alpha2mu_base</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  pRBC <span class="op">=</span> <span class="fu"><a href="par_lRBC_static.html">par_lRBC_static</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  pSig <span class="op">=</span> <span class="fu"><a href="par_sigma_abc.html">par_sigma_abc</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  RBC_par <span class="op">=</span> <span class="fu"><a href="par_lRBC_static.html">par_lRBC_static</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  Fmu_par <span class="op">=</span> <span class="fu"><a href="par_Fmu_base.html">par_Fmu_base</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  mu_par <span class="op">=</span> <span class="fu"><a href="par_mu2dens_beta.html">par_mu2dens_beta</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  pWda <span class="op">=</span> <span class="fu"><a href="par_Wda_none.html">par_Wda_none</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  Cpar <span class="op">=</span> <span class="fu"><a href="par_nbCounts.html">par_nbCounts</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -108,16 +108,16 @@
 <dd><p>the clearance rate for a simple infection</p></dd>
 
 
-<dt>pMu</dt>
-<dd><p>parameters to compute <a href="alpha2mu.html">alpha2mu</a></p></dd>
-
-
-<dt>pRBC</dt>
+<dt>RBC_par</dt>
 <dd><p>parameters to compute <a href="log10RBC.html">log10RBC</a></p></dd>
 
 
-<dt>pSig</dt>
-<dd><p>parameters to dispatch <a href="https://rdrr.io/r/stats/sigma.html" class="external-link">sigma</a></p></dd>
+<dt>Fmu_par</dt>
+<dd><p>parameters to compute <a href="alpha2mu.html">alpha2mu</a></p></dd>
+
+
+<dt>mu_par</dt>
+<dd><p>parameters defining parasite densities as a function of the mu</p></dd>
 
 
 <dt>pWda</dt>

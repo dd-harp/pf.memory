@@ -37,79 +37,52 @@ home:
 reference:
 - title: Infection Dynamics
   desc: |
-    Dynamics of MoI, AoI
-- subtitle: Basic Dynamics
-  desc: |
-    Parasite Infections
+    Dynamics of MoI, AoI, and the AoY
   contents:
   - zda
-- subtitle: MoI
+  - truePRa
+- subtitle: Multiplicity of Infection (MoI)
   desc: |
-    Multiplicity of Infection
+    Methods to compute the MoI
   contents:
   - meanMoI
   - dMoIda
   - solveMMinfty
   - MoIDistPlot
-- subtitle: AoI
+- subtitle: Age of Infection (AoI)
   desc: |
-    Age of Infection
+    Methods to compute the AoI density and distribution functions, random numbers, and moments
   contents:
   - dAoI
   - pAoI
   - rAoI
   - momentAoI
-  - truePRa
-- subtitle: AoY
+- subtitle: Age of the Youngest Infection (AoY)
   desc: |
-    Age of the Youngest Infection
+    Methods to compute the AoY density and distribution functions, random numbers, and moments
   contents:
   - dAoY
   - pAoY
   - pAoY_long
   - rAoY
   - momentAoY
-- subtitle: AoYN
+- subtitle: Age of the Youngest of N Infections (AoYN)
   desc: |
-    Youngest of N-Infections
+    Methods to compute the AoYN density and distribution functions & random numbers
   contents:
   - dAoYN
   - pAoYN
   - rAoYN
-- title: Immune Tracking Variables
+- subtitle: Hybrid Models
   desc: |
-    Expected densities by AoI
-  contents:
-  - Wda
-  - Wda.none
-  - par_Wda_none
-  - Wda.delta
-  - par_Wda_delta
-- title: Hybrid Models
-  desc: |
-    Methods to set up FoI trace functions
-- subtitle: MoI
-  desc: |
-    The MoI hybrid model
+    Methods to solve hybrid models
   contents:
   - dmda
   - solve_dm
-- subtitle: True PR
-  desc: |
-    The MoI and true PR
-  contents:
   - dpda
   - solve_dpda
-- subtitle: AoI
-  desc: |
-    AoI
-  contents:
   - dAoIda
   - solve_dAoI
-- subtitle: Approximate AoY
-  desc: |
-    AoI
-  contents:
   - dAoYda
   - solve_dAoYda
 - title: Parasite Densities
@@ -122,38 +95,49 @@ reference:
   - alpha2mu
   - salpha2mu
   - alpha2mu.W
-  - par_alpha2mu.W
+  - par_Fmu_W
   - alpha2mu.base
-  - par_alpha2mu_base
+  - par_Fmu_base
+  - alpha2mu.chronic
+  - par_Fmu_chronic
 - subtitle: P(mu)
   desc: |
     log10 parasites distributions from mu
   contents:
-  - dDensityPmu
-  - pDensityPmu
-  - qDensityPmu
-  - rDensityPmu
+  - d_mu2density
+  - p_mu2density
+  - q_mu2density
+  - r_mu2density
+  - par_mu2dens_beta
+- subtitle: P(mu)
+  desc: |
+    log10 parasites distributions from mu
+  contents:
+  - d_mu2density.beta
+  - p_mu2density.beta
+  - q_mu2density.beta
+  - r_mu2density.beta
 - subtitle: P(alpha)
   desc: |
     log10 parasites from AoI (alpha)
   contents:
-  - dDensityPalpha
-  - pDensityPalpha
-  - qDensityPalpha
-  - rDensityPalpha
+  - d_alpha2density
+  - p_alpha2density
+  - q_alpha2density
+  - r_alpha2density
 - subtitle: P(a)
   desc: |
     Parasite density distributions by host cohort age
   contents:
-  - dDensityPa
+  - d_Pdensity
 - subtitle: Complex Infections
   desc: |
     Expected densities by AoI
   contents:
-  - Bda
-  - dBda
-  - pBda
-  - rBda
+  - Bdensity
+  - d_Bdensity
+  - p_Bdensity
+  - r_Bdensity
   - rRda
 - subtitle: Convolutions
   desc: |
@@ -237,6 +221,15 @@ reference:
     Other
   contents:
   - nzPois
+- title: Immune Tracking Variables
+  desc: |
+    Expected densities by AoI
+  contents:
+  - Wda
+  - Wda.none
+  - par_Wda_none
+  - Wda.delta
+  - par_Wda_delta
 - subtitle: Red Blood Cells
   desc: |
     Other

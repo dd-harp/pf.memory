@@ -2,20 +2,20 @@
 % Please edit documentation in R/moi.R
 \name{solveMMinfty}
 \alias{solveMMinfty}
-\title{Solve the queuing model M/M/infinity}
+\title{Solve the queuing model \eqn{M/M/\infty}}
 \usage{
-solveMMinfty(h, FoIpar, r = 1/200, tau = 0, Tmax = 730, dt = 1)
+solveMMinfty(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1)
 }
 \arguments{
 \item{h}{the force of infection}
 
-\item{FoIpar}{a FoI trace function}
+\item{FoIpar}{\eqn{h_\tau(a)}, a \link{list} formatted to compute \link{FoI}}
 
 \item{r}{the clearance rate for a simple infection}
 
 \item{tau}{the cohort birthday}
 
-\item{Tmax}{The maximum runtime (in days)}
+\item{Amax}{The maximum runtime (in days)}
 
 \item{dt}{The output frequency (in days)}
 }
@@ -23,5 +23,12 @@ solveMMinfty(h, FoIpar, r = 1/200, tau = 0, Tmax = 730, dt = 1)
 a \link{list} with the orbits by name
 }
 \description{
-Solve the queuing model M/M/infinity
+A wrapper to solve the queuing model \eqn{M/M/\infty} (see \link{dMoIda}).
+
+The function automatically sets the maximum MoI to be computed, and it
+sets initial conditions. The equations are solved using \link[deSolve:ode]{deSolve::ode} and returned at
+regular intervals dt from age 0 up to Amax (in days).
+}
+\seealso{
+\link{dMoIda}
 }

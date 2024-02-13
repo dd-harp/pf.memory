@@ -24,6 +24,9 @@ The probabilistic approach is both highly realistic and descriptive, but our goa
 To put it another way, we can reduce the behavior of these highly complex probabilistic systems to a simple system of equations that has a high degree of accuracy. The computational and conceptual simplicity of hybrid models have some simplicity over compartmental models and stochastic individual-based models, and with the supporting probabilistic framework, provide a sound basis for a synthesis of observational malaria epidemiology. 
 
 
+| A | B  |
+| --- | --- |
+| a  | b  |
 
 
 ## References

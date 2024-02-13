@@ -2,20 +2,20 @@
 % Please edit documentation in R/aoi.R
 \name{dAoI}
 \alias{dAoI}
-\title{The density function for the age of infection (AoI)}
+\title{Compute the density function for AoI}
 \usage{
-dAoI(alpha, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
+dAoI(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 }
 \arguments{
-\item{alpha}{the parasite age of infection}
+\item{alpha}{the age of an infection, \eqn{\alpha}}
 
-\item{a}{the host cohort age}
+\item{a}{host age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
 
-\item{hhat}{a local scaling parameter for the FoI}
+\item{tau}{the host cohort's birthday}
 
-\item{tau}{the cohort birthday}
+\item{hhat}{scaling parameter for \link{FoI}}
 
 \item{r}{the clearance rate for a simple infection}
 }
@@ -23,5 +23,6 @@ dAoI(alpha, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
 a \link{numeric} vector of length(alpha)
 }
 \description{
-The density function for the age of infection (AoI)
+The density of the AoI is given by
+\deqn{f_A(\alpha | a, \tau, h) = \frac{\int_0^a z(\alpha, a)}{m_\tau(a)}}
 }

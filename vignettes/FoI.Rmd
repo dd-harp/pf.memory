@@ -51,9 +51,9 @@ plotFoI= function(h, FoIpar, tau=0, Tmax=5*365, clrs=NULL){
   if(is.null(clrs)) clrs = rep("black", L)
   tms = 1:Tmax
   tm = tms/365 
-  plot(tm, 365*FoI(tms, FoIpar, tau, hhat=h), type = "n", 
+  plot(tm, 365*h[1]*FoI(tms, FoIpar, tau), type = "n", 
        xlab = "Host Age (Years)", ylab = "aFoI") 
-  for(i in 1:L) lines(tm, 365*FoI(tms,FoIpar, tau, hhat=h[i]), col = clrs[i])
+  for(i in 1:L) lines(tm, 365*h[i]*FoI(tms,FoIpar, tau), col = clrs[i])
 }
 ```
 

@@ -2,20 +2,20 @@
 % Please edit documentation in R/aoi.R
 \name{rAoI}
 \alias{rAoI}
-\title{The random generation function for the age of infection (AoI)}
+\title{Random numbers for the AoI}
 \usage{
-rAoI(N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200, alphamin = 0)
+rAoI(N, a, FoIpar, tau = 0, hhat = 1, r = 1/200, alphamin = 0)
 }
 \arguments{
 \item{N}{the number of observations}
 
-\item{a}{the host cohort age}
+\item{a}{host age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
+
+\item{tau}{the host cohort's birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
-
-\item{tau}{the cohort birthday}
 
 \item{r}{the clearance rate for a simple infection}
 
@@ -25,5 +25,5 @@ rAoI(N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200, alphamin = 0)
 a \link{numeric} vector of length(alpha)
 }
 \description{
-The random generation function for the age of infection (AoI)
+Random numbers for the AoI
 }
