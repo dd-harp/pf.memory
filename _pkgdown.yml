@@ -15,8 +15,8 @@ navbar:
       href: articles/Hybrid.html
   - text: Parasite
     menu:
-    - text: Simple Infections
-      href: articles/Simple_Infections.html
+    - text: Parasite Densities
+      href: articles/Parasite_Densities.html
   right:
   - icon: fa-github
     href: https://github.com/dd-harp/pf.memory/
