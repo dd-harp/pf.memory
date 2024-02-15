@@ -11,7 +11,7 @@ We present the computational algorithms that support a probabilistic approach to
 
 The probabilistic approach is both highly realistic and descriptive, but our goal was a synthesis. This synthesis involves a few steps:
 
-1. We derive variables that can track the mean MoI, the mean AoI and all its moments, and the probability of detection. 
+1. We define mean MoI, the mean AoI and all its moments, and the probability of detection. 
 
 2. Hybrid models for the MoI already exist, but we show how this approach can be extended to systems of differential equations that track the mean and higher order moments of the distribution of the AoI. 
 
@@ -24,9 +24,6 @@ The probabilistic approach is both highly realistic and descriptive, but our goa
 To put it another way, we can reduce the behavior of these highly complex probabilistic systems to a simple system of equations that has a high degree of accuracy. The computational and conceptual simplicity of hybrid models have some simplicity over compartmental models and stochastic individual-based models, and with the supporting probabilistic framework, provide a sound basis for a synthesis of observational malaria epidemiology. 
 
 
-| A | B  |
-| --- | --- |
-| a  | b  |
 
 
 ## References

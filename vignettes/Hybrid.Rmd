@@ -285,8 +285,10 @@ y_\tau(a) = \int_0^a \alpha \; f_Y(\alpha, a, \tau) \; d\alpha $$
 A differential equation for $y_\tau(a)$ is:
 
 $$
-\frac{dy}{da} = 1 - \frac{h}{p} y + F(r,m) \frac{x}{p}
+\frac{dy}{da} = 1 - \frac{h}{p} y + \phi(r,m) \frac{x}{p}
 $$
+
+Where $\phi$ computes the probability that an infection with MoI$\geq 2$ *increases* with a loss. 
 
 To verify, we can compute the moment directly. The function `solve_dAoYda` gives solutions: 
 
