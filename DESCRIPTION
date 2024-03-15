@@ -1,4 +1,4 @@
-Package: pf.memory
+Package: ramp.pf.infection 
 Title: Probabilistic Approaches to Malaria Parasite Infections
 Version: 0.1.0
 Authors@R: c(
@@ -9,7 +9,7 @@ Description: .
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 LazyData: true
 Imports: 
   stats,
@@ -20,4 +20,4 @@ Suggests:
   viridis,
   viridisLite
 VignetteBuilder: knitr
-URL: https://dd-harp.github.io/pf.memory/
+URL: https://dd-harp.github.io/ramp.pf.infection/

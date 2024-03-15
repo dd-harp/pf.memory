@@ -29,5 +29,5 @@ the density of parasite clones of age \eqn{\alpha} distributed among a cohort of
 age \eqn{a} is \deqn{z_\tau(\alpha, a) = e^{-r \alpha} h_\tau(a-\alpha)}
 }
 \seealso{
-\code{\link[=FoI]{FoI()}}
+\code{\link[pf.memory:FoI]{pf.memory::FoI()}}
 }
