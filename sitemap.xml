@@ -16,6 +16,9 @@
     <loc>https://dd-harp.github.io/pf.memory/articles/Hybrid.html</loc>
   </url>
   <url>
+    <loc>https://dd-harp.github.io/pf.memory/articles/MoI.html</loc>
+  </url>
+  <url>
     <loc>https://dd-harp.github.io/pf.memory/articles/Parasite_Densities.html</loc>
   </url>
   <url>
@@ -34,34 +37,25 @@
     <loc>https://dd-harp.github.io/pf.memory/index.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/Bdensity.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/FQ.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/Detect.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/Fmu.W.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/Detect.nb.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/Fmu.base.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/Detect.pois.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/Fmu.chronic.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/DetectBda.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/DetectPM.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/DetectPa.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/Fmu.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/FoI.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/MoIDistPlot.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/MoIPM.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/Wda.delta.html</loc>
@@ -80,27 +74,6 @@
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/ageFoI.type2.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/alpha2mu.W.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/alpha2mu.base.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/alpha2mu.chronic.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/alpha2mu.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/binnedCounts.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/binnedCounts.nb.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/binnedCounts.pois.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/cdfConvolve2.html</loc>
@@ -127,40 +100,70 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/dAoYda.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/dCounts.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/dCounts.nb.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/dCounts.pois.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/dCountsBa.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/dCountsPa.html</loc>
-  </url>
-  <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/dDensityPaConvolve2.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/dMoIda.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/d_Bdensity.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_Omega.beta.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/d_Pdensity.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_Omega.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/d_alpha2density.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/d_mu2density.beta.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_clone_counts.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/d_mu2density.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_clone_density.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_clone_detect.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_counts.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_counts.nb.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_counts.pois.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_detect.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_detect.nb.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_detect.pois.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_detect_mesh.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_moi_count.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_nz_counts_log.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_nz_counts_log_binned.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_parasite_counts.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_parasite_density.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_parasite_detect.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/d_parasite_detect_moi.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/dbeta1.html</loc>
@@ -181,19 +184,25 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/log10RBC.static.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/meanCountsBa.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/meanCountsPa.html</loc>
-  </url>
-  <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/meanMoI.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/mean_clone_counts.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/mean_parasite_counts.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/momentAoI.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/momentAoY.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/moments_clone_density.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/moments_parasite_density.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/nzPois.html</loc>
@@ -211,31 +220,37 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/pAoY_long.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/pCounts.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_Omega.beta.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/pCounts.nb.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/pCounts.pois.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/pCountsBa.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/pCountsPa.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/p_Bdensity.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_Omega.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/p_alpha2density.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/p_mu2density.beta.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_clone_counts.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/p_mu2density.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_counts.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_counts.nb.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_counts.pois.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_nz_counts_log.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_nz_counts_log_binned.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_parasite_counts.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/p_parasite_density.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/par_Fmu_W.html</loc>
@@ -245,6 +260,9 @@
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/par_Fmu_chronic.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/par_Omega_beta.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/par_Wda_delta.html</loc>
@@ -268,13 +286,10 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/par_lRBC_static.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/par_mu2dens_beta.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/par_nb.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/par_nbCounts.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/par_poisCounts.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/par_pois.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/par_sigma_abc.html</loc>
@@ -286,16 +301,19 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/par_type2Age.html</loc>
   </url>
   <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/parasite_density.html</loc>
+  </url>
+  <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/pbeta1.html</loc>
   </url>
   <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/q_Omega.beta.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/q_Omega.html</loc>
+  </url>
+  <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/q_alpha2density.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/q_mu2density.beta.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/q_mu2density.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/qbeta1.html</loc>
@@ -313,22 +331,22 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/rRda.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/r_Bdensity.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/r_Omega.beta.html</loc>
+  </url>
+  <url>
+    <loc>https://dd-harp.github.io/pf.memory/reference/r_Omega.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/r_alpha2density.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/r_mu2density.beta.html</loc>
-  </url>
-  <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/r_mu2density.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/r_parasite_density.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/rbeta1.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/salpha2mu.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/sFmu.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/seasonalFoI.exp.html</loc>
@@ -370,7 +388,7 @@
     <loc>https://dd-harp.github.io/pf.memory/reference/trendFoI.html</loc>
   </url>
   <url>
-    <loc>https://dd-harp.github.io/pf.memory/reference/truePRa.html</loc>
+    <loc>https://dd-harp.github.io/pf.memory/reference/truePR.html</loc>
   </url>
   <url>
     <loc>https://dd-harp.github.io/pf.memory/reference/zda.html</loc>

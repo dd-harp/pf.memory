@@ -44,6 +44,7 @@
     <a class="dropdown-item" href="../articles/FoI.html">FoI</a>
     <a class="dropdown-item" href="../articles/Dynamics.html">Dynamics</a>
     <a class="dropdown-item" href="../articles/Hybrid.html">Hybrid Models</a>
+    <a class="dropdown-item" href="../articles/MoI.html">MoI</a>
   </div>
 </li>
 <li class="active nav-item dropdown">
@@ -92,7 +93,7 @@
 distributions using information about the MoI and the aoI. To do so:</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(F_\mu\)</span> – We developed the
-<code>S3</code> function <code>alpha2mu</code> to build models of the
+<code>S3</code> function <code>Fmu</code> to build models of the
 relationship between mean <span class="math inline">\(\log_{10}\)</span>
 parasite densities (<span class="math inline">\(\mu\)</span>) and the
 AoI (<span class="math inline">\(\alpha\)</span>); <span class="math display">\[\mu = F_\mu(\alpha)\]</span></p></li>
@@ -101,8 +102,9 @@ AoI (<span class="math inline">\(\alpha\)</span>); <span class="math display">\[
 quantile functions and random numbers for parasite density
 distributions, given mean <span class="math inline">\(\log_{10}\)</span>
 densities, <span class="math inline">\(\mu\)</span>:
-<code>d_mu2density</code>, <code>p_mu2density</code>,
-<code>q_mu2density</code> and <code>r_mu2density</code> <span class="math display">\[\Omega(\xi; \mu)\]</span></p></li>
+<code>d_Omega</code>, <code>p_Omega</code>, <code>q_Omega</code> and
+<code>r_Omega</code> <span class="math display">\[\Omega(\xi;
+\mu)\]</span></p></li>
 <li><p><span class="math inline">\(P\)</span> - We develop functions to
 compute the density distribution of parasites in simple infections in a
 human cohort of age <span class="math inline">\(a\)</span>: <span class="math display">\[
@@ -126,10 +128,10 @@ developed to model the relationship between the age of infection (AoI)
 for a parasite infection, <span class="math inline">\(\alpha\)</span>,
 and the mean, <span class="math inline">\(\mu(\alpha).\)</span></p>
 <div class="section level3">
-<h3 id="alpha2mu-base">
-<code>alpha2mu.base</code><a class="anchor" aria-label="anchor" href="#alpha2mu-base"></a>
+<h3 id="fmu-base">
+<code>Fmu.base</code><a class="anchor" aria-label="anchor" href="#fmu-base"></a>
 </h3>
-<p>The function <code>alpha2mu.base</code> has the following form:</p>
+<p>The function <code>Fmu.base</code> has the following form:</p>
 <p><span class="math display">\[\begin{equation}
 F_\mu(\alpha) =
 \begin{cases}
@@ -143,8 +145,7 @@ F_\mu(\alpha) =
 \end{equation}\]</span></p>
 </div>
 <div class="section level3">
-<h3 id="the-function-alpha2mu-chronic-has-the-following-form">The function <code>alpha2mu.chronic</code> has the following
-form:<a class="anchor" aria-label="anchor" href="#the-function-alpha2mu-chronic-has-the-following-form"></a>
+<h3 id="the-function-fmu-chronic-has-the-following-form">The function <code>Fmu.chronic</code> has the following form:<a class="anchor" aria-label="anchor" href="#the-function-fmu-chronic-has-the-following-form"></a>
 </h3>
 <p><span class="math display">\[\begin{equation}
 F_\mu(\alpha) =
@@ -158,9 +159,9 @@ parameters for each case, with over-writable defaults:</p>
 <span><span class="va">chronic_pars</span> <span class="op">=</span> <span class="fu"><a href="../reference/par_Fmu_chronic.html">par_Fmu_chronic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aalpha</span> <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">366</span></span>
-<span><span class="va">mu_alpha</span> <span class="op">=</span>  <span class="fu"><a href="../reference/alpha2mu.html">alpha2mu</a></span><span class="op">(</span><span class="va">aalpha</span>, <span class="fl">0</span>, <span class="va">base_pars</span><span class="op">)</span></span>
-<span><span class="va">mu_alpha1</span> <span class="op">=</span>  <span class="fu"><a href="../reference/alpha2mu.html">alpha2mu</a></span><span class="op">(</span><span class="va">aalpha</span>, <span class="fl">0</span>, <span class="va">base_pars1</span><span class="op">)</span></span>
-<span><span class="va">mu_alpha2</span> <span class="op">=</span>  <span class="fu"><a href="../reference/alpha2mu.html">alpha2mu</a></span><span class="op">(</span><span class="va">aalpha</span>, <span class="fl">0</span>, <span class="va">chronic_pars</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">mu_alpha</span> <span class="op">=</span>  <span class="fu"><a href="../reference/Fmu.html">Fmu</a></span><span class="op">(</span><span class="va">aalpha</span>, <span class="fl">0</span>, <span class="va">base_pars</span><span class="op">)</span></span>
+<span><span class="va">mu_alpha1</span> <span class="op">=</span>  <span class="fu"><a href="../reference/Fmu.html">Fmu</a></span><span class="op">(</span><span class="va">aalpha</span>, <span class="fl">0</span>, <span class="va">base_pars1</span><span class="op">)</span></span>
+<span><span class="va">mu_alpha2</span> <span class="op">=</span>  <span class="fu"><a href="../reference/Fmu.html">Fmu</a></span><span class="op">(</span><span class="va">aalpha</span>, <span class="fl">0</span>, <span class="va">chronic_pars</span><span class="op">)</span></span></code></pre></div>
 <p>We plot the two functions here: with the default parameters (in
 black), and the other parameters (in dark blue):</p>
 <p><img src="Parasite_Densities_files/figure-html/unnamed-chunk-4-1.png" width="576">
@@ -168,24 +169,24 @@ black), and the other parameters (in dark blue):</p>
 <p>We have developed a function family to compute parasite densities as
 a function of the mean of logged parasite densities, <span class="math inline">\(\mu\)</span></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">parD</span> <span class="op">=</span> <span class="fu"><a href="../reference/par_mu2dens_beta.html">par_mu2dens_beta</a></span><span class="op">(</span><span class="op">)</span> </span>
-<span><span class="fu"><a href="../reference/d_mu2density.html">d_mu2density</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">9</span>, <span class="va">parD</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">parD</span> <span class="op">=</span> <span class="fu"><a href="../reference/par_Omega_beta.html">par_Omega_beta</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="../reference/d_Omega.html">d_Omega</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="va">parD</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 0.4593359</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">xx</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">13</span>, by<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fu"><a href="../reference/d_mu2density.html">d_mu2density</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fl">9</span>, <span class="va">parD</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">xi</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"d_mu2density"</span>, main <span class="op">=</span> <span class="st">"d_mu2density"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fu"><a href="../reference/d_mu2density.html">d_mu2density</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fl">7</span>,  <span class="va">parD</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fu"><a href="../reference/d_Omega.html">d_Omega</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="va">parD</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">xi</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"d_Omega"</span>, main <span class="op">=</span> <span class="st">"d_Omega"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fu"><a href="../reference/d_Omega.html">d_Omega</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fl">7</span>,  <span class="fl">13</span>, <span class="va">parD</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></span>
 <span><span class="va">pp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">13</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pp</span>, <span class="fu"><a href="../reference/p_mu2density.html">p_mu2density</a></span><span class="op">(</span><span class="va">pp</span>, <span class="fl">9</span>,  <span class="va">parD</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">xi</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"p_mu2density"</span>, main <span class="op">=</span> <span class="st">"p_mu2density"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fu"><a href="../reference/p_mu2density.html">p_mu2density</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fl">7</span>, <span class="va">parD</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu"><a href="../reference/r_mu2density.html">r_mu2density</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">9</span>, <span class="va">parD</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">xi</span><span class="op">)</span>, </span>
-<span>     main <span class="op">=</span> <span class="st">"r_mu2density"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">13</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pp</span>, <span class="fu"><a href="../reference/p_Omega.html">p_Omega</a></span><span class="op">(</span><span class="va">pp</span>, <span class="fl">9</span>,  <span class="fl">13</span>, <span class="va">parD</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">xi</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"p_Omega"</span>, main <span class="op">=</span> <span class="st">"p_Omega"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fu"><a href="../reference/p_Omega.html">p_Omega</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fl">7</span>, <span class="fl">13</span>, <span class="va">parD</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu"><a href="../reference/r_Omega.html">r_Omega</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="va">parD</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">xi</span><span class="op">)</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"r_Omega"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">13</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">qq</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.01</span>,<span class="fl">.99</span>, length.out<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">qq</span>, <span class="fu"><a href="../reference/q_mu2density.html">q_mu2density</a></span><span class="op">(</span><span class="va">qq</span>, <span class="fl">9</span>,  <span class="va">parD</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">xi</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"q_mu2density"</span>, main <span class="op">=</span> <span class="st">"q_mu2density"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">qq</span>, <span class="fu"><a href="../reference/q_Omega.html">q_Omega</a></span><span class="op">(</span><span class="va">qq</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="va">parD</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">xi</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"q_Omega"</span>, main <span class="op">=</span> <span class="st">"q_Omega"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Parasite_Densities_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
 </div>
 </div>
@@ -204,7 +205,7 @@ function of age for two cohorts born six months apart.</p>
 density parasite cohorts. Notably, the age of the cohorts are
 representing infections that occurred <span class="math inline">\(\alpha\)</span> days ago, so the <span class="math inline">\(x-\)</span>axis is looking into the past:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mu_alpha</span> <span class="op">=</span>  <span class="fu"><a href="../reference/alpha2mu.html">alpha2mu</a></span><span class="op">(</span><span class="va">a5years</span>, <span class="fl">0</span>, <span class="va">base_pars</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mu_alpha</span> <span class="op">=</span>  <span class="fu"><a href="../reference/Fmu.html">Fmu</a></span><span class="op">(</span><span class="va">a5years</span>, <span class="fl">0</span>, <span class="va">base_pars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/dAoI.html">dAoI</a></span><span class="op">(</span><span class="va">a5years</span>, <span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, <span class="va">foiP3</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">dalpha</span></span></code></pre></div>
 <p><img src="Parasite_Densities_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 <p>Now we want to understand parasite densities in the cohort of humans.
@@ -240,12 +241,12 @@ appropriate bin, defined by the mesh over <span class="math inline">\(\xi\)</spa
 distributions as a function of the host age, given a function describing
 the history of exposure.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Pa</span> <span class="op">=</span> <span class="fu"><a href="../reference/d_Pdensity.html">d_Pdensity</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">Pa</span> <span class="op">=</span> <span class="fu"><a href="../reference/d_clone_density.html">d_clone_density</a></span><span class="op">(</span><span class="va">xx</span>, <span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Parasite_Densities_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 <p>We can check to ensure that our distribution function integrates to
 1:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/integrate.html" class="external-link">integrate</a></span><span class="op">(</span><span class="va">d_Pdensity</span>, <span class="fl">0</span>, <span class="fl">13</span>, a<span class="op">=</span><span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, FoIpar<span class="op">=</span><span class="va">foiP3</span><span class="op">)</span><span class="op">$</span><span class="va">value</span> </span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/integrate.html" class="external-link">integrate</a></span><span class="op">(</span><span class="va">d_clone_density</span>, <span class="fl">0</span>, <span class="fl">13</span>, a<span class="op">=</span><span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, FoIpar<span class="op">=</span><span class="va">foiP3</span><span class="op">)</span><span class="op">$</span><span class="va">value</span> </span></code></pre></div>
 <pre><code><span><span class="co">## [1] 1.000014</span></span></code></pre>
 </div>
 <div class="section level2">
