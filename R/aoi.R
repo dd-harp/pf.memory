@@ -24,6 +24,9 @@ dAoI = function(alpha, a, FoIpar, tau=0, hhat=1, r=1/200){
 
 #' Compute the distribution function for AoI
 #'
+#' The distribution function for the AoI is given by
+#' \deqn{F_A(\alpha | a, \tau, h) = \int_0^\alpha f_A(\alpha, a, \tau | h) d \alpha}
+#'
 #' @inheritParams zda
 #'
 #' @return a [numeric] vector of length(alpha)
@@ -38,6 +41,9 @@ pAoI = function(alpha, a, FoIpar, tau=0, hhat=1, r=1/200){
 }
 
 #' Random numbers for the AoI
+#'
+#' @description
+#' Draw random numbers for the AoI from a cohort, \eqn{\hat A_\tau(a)}
 #'
 #' @param N the number of observations
 #' @inheritParams FoI

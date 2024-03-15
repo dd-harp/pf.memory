@@ -30,7 +30,7 @@ pAoY_long= function(alpha, a, FoIpar, tau=0, hhat=1, r=1/200){
   for(m in 1:ix){
     aoy = aoy+stats::dpois(m,moi)*(1-(1-py)^m)
   }
-  aoy = aoy/truePRa(a,FoIpar,tau,hhat,r)
+  aoy = aoy/truePR(a,FoIpar,tau,hhat,r)
   return(aoy)
 }
 
@@ -46,7 +46,7 @@ dAoY = function(alpha, a, FoIpar, tau=0, hhat=1, r=1/200){
   # The function call
   dAoYcompute = function(alpha, a, FoIpar, tau, hhat, r){
     moi = meanMoI(a,FoIpar,tau,hhat,r)
-    moi*dAoI(alpha,a,FoIpar,tau,hhat,r)*exp(-moi*pAoI(alpha,a,FoIpar,tau,hhat,r))/truePRa(a,FoIpar,tau,hhat,r)
+    moi*dAoI(alpha,a,FoIpar,tau,hhat,r)*exp(-moi*pAoI(alpha,a,FoIpar,tau,hhat,r))/truePR(a,FoIpar,tau,hhat,r)
   }
   # Use sapply to call dAoYcompute multiple times
   if(length(alpha)==1) return(dAoYcompute(alpha, a,FoIpar,tau,hhat,r))

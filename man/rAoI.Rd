@@ -25,5 +25,5 @@ rAoI(N, a, FoIpar, tau = 0, hhat = 1, r = 1/200, alphamin = 0)
 a \link{numeric} vector of length(alpha)
 }
 \description{
-Random numbers for the AoI
+Draw random numbers for the AoI from a cohort, \eqn{\hat A_\tau(a)}
 }

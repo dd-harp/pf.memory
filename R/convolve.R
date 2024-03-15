@@ -8,8 +8,8 @@
 #' @param tau the cohort birthday
 #' @param r the clearance rate for a simple infection
 #' @param par_RBC parameters to compute [log10RBC]
-#' @param par_Fmu parameters to compute [alpha2mu]
-#' @param par_mu2dens parameters to compute [d_mu2density]
+#' @param par_Fmu parameters to compute [Fmu]
+#' @param par_Omega parameters to compute [d_Omega]
 #' @param pWda parameters to dispatch [Wda]
 #'
 #' @return a [numeric] value
@@ -19,14 +19,14 @@ dDensityPaConvolve2 = function(x, a, FoIpar,
                                hhat=NULL, tau=0,  r=1/200,
                                par_RBC = par_lRBC_static(),
                                par_Fmu=par_Fmu_base(),
-                               par_mu2dens = par_mu2dens_beta(),
+                               par_Omega = par_Omega_beta(),
                                pWda=par_Wda_none()){
   px = function(x, log10B, a, FoIpar, hhat, tau, r,
-                par_RBC, par_Fmu, par_mu2dens, pWda){
+                par_RBC, par_Fmu, par_Omega, pWda){
     lB2 = log10(10^log10B - 10^x)
-    d_Pdensity(x,a,FoIpar, hhat, tau, r, par_RBC, par_Fmu, par_mu2dens, pWda)*d_Pdensity(lB2,a, FoIpar, hhat, tau, r, par_RBC, par_Fmu, par_mu2dens, pWda)
+    d_clone_density(x,a,FoIpar, hhat, tau, r, par_RBC, par_Fmu, par_Omega, pWda)*d_clone_density(lB2,a, FoIpar, hhat, tau, r, par_RBC, par_Fmu, par_Omega, pWda)
   }
-  stats::integrate(px, 0, x, log10B=x, a=a, FoIpar=FoIpar, hhat=hhat, tau=tau, r=r, par_RBC=par_RBC, par_Fmu=par_Fmu, par_mu2dens=par_mu2dens, pWda=pWda)$value
+  stats::integrate(px, 0, x, log10B=x, a=a, FoIpar=FoIpar, hhat=hhat, tau=tau, r=r, par_RBC=par_RBC, par_Fmu=par_Fmu, par_Omega=par_Omega, pWda=pWda)$value
 }
 
 

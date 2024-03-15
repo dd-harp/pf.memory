@@ -11,7 +11,7 @@ d_alpha2density(
   a = 0,
   par_RBC = par_lRBC_static(),
   par_Fmu = par_Fmu_base(),
-  par_mu2dens = par_mu2dens_beta()
+  par_Omega = par_Omega_beta()
 )
 }
 \arguments{
@@ -25,9 +25,9 @@ d_alpha2density(
 
 \item{par_RBC}{parameters to compute \link{log10RBC}}
 
-\item{par_Fmu}{parameters to compute \link{alpha2mu}}
+\item{par_Fmu}{parameters to compute \link{Fmu}}
 
-\item{par_mu2dens}{parameters to compute \link{d_mu2density}}
+\item{par_Omega}{parameters to compute \link{d_Omega}}
 }
 \value{
 a \link{numeric} vector of length(x)

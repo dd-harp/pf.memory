@@ -6,10 +6,11 @@ articles:
   Dynamics: Dynamics.html
   FoI: FoI.html
   Hybrid: Hybrid.html
+  MoI: MoI.html
   Parasite_Densities: Parasite_Densities.html
   plotCounts: plotCounts.html
   prevalence: prevalence.html
-last_built: 2024-02-13T23:57Z
+last_built: 2024-03-15T00:40Z
 urls:
   reference: https://dd-harp.github.io/pf.memory/reference
   article: https://dd-harp.github.io/pf.memory/articles

@@ -13,7 +13,7 @@ dDensityPaConvolve2(
   r = 1/200,
   par_RBC = par_lRBC_static(),
   par_Fmu = par_Fmu_base(),
-  par_mu2dens = par_mu2dens_beta(),
+  par_Omega = par_Omega_beta(),
   pWda = par_Wda_none()
 )
 }
@@ -32,9 +32,9 @@ dDensityPaConvolve2(
 
 \item{par_RBC}{parameters to compute \link{log10RBC}}
 
-\item{par_Fmu}{parameters to compute \link{alpha2mu}}
+\item{par_Fmu}{parameters to compute \link{Fmu}}
 
-\item{par_mu2dens}{parameters to compute \link{d_mu2density}}
+\item{par_Omega}{parameters to compute \link{d_Omega}}
 
 \item{pWda}{parameters to dispatch \link{Wda}}
 }

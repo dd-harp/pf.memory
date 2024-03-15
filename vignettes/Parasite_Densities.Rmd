@@ -14,9 +14,9 @@ library(viridisLite)
 
 In the following, we build the functions to compute parasite density distributions using information about the MoI and the aoI. To do so:
 
-1. $F_\mu$ -- We developed the `S3` function `alpha2mu` to build models of the relationship between mean $\log_{10}$ parasite densities ($\mu$) and the AoI ($\alpha$); $$\mu = F_\mu(\alpha)$$ 
+1. $F_\mu$ -- We developed the `S3` function `Fmu` to build models of the relationship between mean $\log_{10}$ parasite densities ($\mu$) and the AoI ($\alpha$); $$\mu = F_\mu(\alpha)$$ 
 
-2. $\Omega$ -- We develop four `S3` functions to compute the density, distribution, and quantile functions and random numbers for parasite density distributions, given mean $\log_{10}$ densities, $\mu$: `d_mu2density`, `p_mu2density`, `q_mu2density` and `r_mu2density` $$\Omega(\xi; \mu)$$ 
+2. $\Omega$ -- We develop four `S3` functions to compute the density, distribution, and quantile functions and random numbers for parasite density distributions, given mean $\log_{10}$ densities, $\mu$: `d_Omega`, `p_Omega`, `q_Omega` and `r_Omega` $$\Omega(\xi; \mu)$$ 
 
 3. $P$ - We develop functions to compute the density distribution of parasites in simple infections in a human cohort of age $a$: 
 $$
@@ -32,9 +32,9 @@ The software is modular, in the sense that $F_\mu$ and $\Omega$ can use any suit
 
 In `pf.memory,` a `S3` function family was developed to model the relationship between the age of infection (AoI) for a parasite infection, $\alpha$, and the mean, $\mu(\alpha).$ 
 
-### `alpha2mu.base` 
+### `Fmu.base` 
 
-The function `alpha2mu.base` has the following form:  
+The function `Fmu.base` has the following form:  
 
 \begin{equation}
 F_\mu(\alpha) = 
@@ -46,7 +46,7 @@ F_\mu(\alpha) =
 \label{mualpha}
 \end{equation}
 
-### The function `alpha2mu.chronic` has the following form:  
+### The function `Fmu.chronic` has the following form:  
 
 \begin{equation}
 F_\mu(\alpha) = 
@@ -65,9 +65,9 @@ chronic_pars = par_Fmu_chronic()
 
 ```{r}
 aalpha = 7:366
-mu_alpha =  alpha2mu(aalpha, 0, base_pars)
-mu_alpha1 =  alpha2mu(aalpha, 0, base_pars1)
-mu_alpha2 =  alpha2mu(aalpha, 0, chronic_pars)
+mu_alpha =  Fmu(aalpha, 0, base_pars)
+mu_alpha1 =  Fmu(aalpha, 0, base_pars1)
+mu_alpha2 =  Fmu(aalpha, 0, chronic_pars)
 ```
 
 We plot the two functions here: with the default parameters (in black), and the other parameters (in dark blue):
@@ -84,25 +84,25 @@ We have developed a function family to compute parasite densities as a function 
 
 
 ```{r}
-parD = par_mu2dens_beta() 
-d_mu2density(9, 9, parD)
+parD = par_Omega_beta() 
+d_Omega(9, 9, 13, parD)
 ```
 
 ```{r, fig.height=8, fig.width=8}
 par(mfrow = c(2,2))
 xx = seq(0, 13, by=0.1)
-plot(xx, d_mu2density(xx, 9, parD), type = "l", 
-     xlab = expression(xi), ylab = "d_mu2density", main = "d_mu2density")
-lines(xx, d_mu2density(xx, 7,  parD), col = "darkred")
+plot(xx, d_Omega(xx, 9, 13, parD), type = "l", 
+     xlab = expression(xi), ylab = "d_Omega", main = "d_Omega")
+lines(xx, d_Omega(xx, 7,  13, parD), col = "darkred")
 pp = seq(0,13, by = 0.01)
-plot(pp, p_mu2density(pp, 9,  parD), type = "l", 
-     xlab = expression(xi), ylab = "p_mu2density", main = "p_mu2density")
-lines(xx, p_mu2density(xx, 7, parD), col = "darkred")
-hist(r_mu2density(1000, 9, parD), xlab = expression(xi), 
-     main = "r_mu2density", xlim = c(0,13))
+plot(pp, p_Omega(pp, 9,  13, parD), type = "l", 
+     xlab = expression(xi), ylab = "p_Omega", main = "p_Omega")
+lines(xx, p_Omega(xx, 7, 13, parD), col = "darkred")
+hist(r_Omega(1000, 9, 13, parD), xlab = expression(xi), 
+     main = "r_Omega", xlim = c(0,13))
 qq = seq(0.01,.99, length.out=100)
-plot(qq, q_mu2density(qq, 9,  parD), type = "l", 
-     xlab = expression(xi), ylab = "q_mu2density", main = "q_mu2density")
+plot(qq, q_Omega(qq, 9, 13, parD), type = "l", 
+     xlab = expression(xi), ylab = "q_Omega", main = "q_Omega")
 ```
 
 ## Simple Infections 
@@ -129,7 +129,7 @@ lines(a5years, FoI(a5years, foiP3, tau=180), col = clrs[2])
 For one of these cohorts (the black line), we have plotted the density parasite cohorts. Notably, the age of the cohorts are representing infections that occurred $\alpha$ days ago, so the $x-$axis is looking into the past:  
 
 ```{r}
-mu_alpha =  alpha2mu(a5years, 0, base_pars)
+mu_alpha =  Fmu(a5years, 0, base_pars)
 dAoI(a5years, 5*365, foiP3) -> dalpha
 ```
 
@@ -191,16 +191,16 @@ The function `dPdensity` computes the parasite distributions as a function of th
 
 
 ```{r}
-Pa = d_Pdensity(xx, 5*365, foiP3)
+Pa = d_clone_density(xx, 5*365, foiP3)
 ```
 
 ```{r, echo=F, fig.height=4.5, fig.width=7}
 
-parD = par_mu2dens_beta()
+parD = par_Omega_beta()
 alpha = 20
-mu = alpha2mu(alpha, 0, base_pars)
+mu = Fmu(alpha, 0, base_pars)
 fA = dAoI(alpha, 5*365, foiP3)
-Pmu = fA*d_mu2density(xx, mu, parD)
+Pmu = fA*d_Omega(xx, mu, 13, parD)
 
 par(mar = c(5,5,3,4))
 plot(xx, Pa, type = "l",
@@ -210,9 +210,9 @@ plot(xx, Pa, type = "l",
 segments(6,0, 6, 0.004, col = grey(0.5), lty=2)
 for(i in (1:50)){
   alpha = 1020-20*i
-  mu = alpha2mu(alpha, 0, base_pars)
+  mu = Fmu(alpha, 0, base_pars)
   fA = dAoI(alpha, 5*365, foiP3)
-  lines(xx, fA*d_mu2density(xx, mu, parD)*max(Pa)/max(Pmu), col = clrs[51-i])
+  lines(xx, fA*d_Omega(xx, mu, 13, parD)*max(Pa)/max(Pmu), col = clrs[51-i])
 }
 tks = pretty(Pa/40, 6)
 axis(4, tks*40, tks)
@@ -222,7 +222,7 @@ mtext(expression(P[mu](alpha)), 4, 3)
 We can check to ensure that our distribution function integrates to 1: 
 
 ```{r}
-integrate(d_Pdensity, 0, 13, a=5*365, FoIpar=foiP3)$value 
+integrate(d_clone_density, 0, 13, a=5*365, FoIpar=foiP3)$value 
 ```
 
 ## Complex Infections

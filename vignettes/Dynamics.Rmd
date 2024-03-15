@@ -51,7 +51,7 @@ $$
 $$
 p_\tau(a) = 1 - e^{-m_\tau(a)} 
 $$
-The function `truePRa` computes the true prevalence using `meanMoI` 
+The function `truePR` computes the true prevalence using `meanMoI` 
 
 4. The density function for the age of infection (AoI) is
 $$

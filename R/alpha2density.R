@@ -6,8 +6,8 @@
 #' @param W the immune tracking variables
 #' @param a host cohort age
 #' @param par_RBC parameters to compute [log10RBC]
-#' @param par_Fmu parameters to compute [alpha2mu]
-#' @param par_mu2dens parameters to compute [d_mu2density]
+#' @param par_Fmu parameters to compute [Fmu]
+#' @param par_Omega parameters to compute [d_Omega]
 #'
 #' @return a [numeric] vector of length(x)
 #' @export
@@ -15,10 +15,10 @@
 d_alpha2density = function(xi, alpha, W=0, a=0,
                            par_RBC = par_lRBC_static(),
                            par_Fmu = par_Fmu_base(),
-                           par_mu2dens = par_mu2dens_beta()){
+                           par_Omega = par_Omega_beta()){
   bvm = log10RBC(a, par_RBC)
-  mu = alpha2mu(alpha, W, par_Fmu)
-  d_mu2density(xi, mu, par_mu2dens, bvm)
+  mu = Fmu(alpha, W, par_Fmu)
+  d_Omega(xi, mu, bvm, par_Omega)
 }
 
 #' The distribution function for parasite densities in a simple malaria infection of age alpha
@@ -28,8 +28,8 @@ d_alpha2density = function(xi, alpha, W=0, a=0,
 #' @param W the immune tracking variables
 #' @param a host cohort age
 #' @param par_RBC parameters to compute [log10RBC]
-#' @param par_Fmu parameters to compute [alpha2mu]
-#' @param par_mu2dens parameters to compute [r_mu2density]
+#' @param par_Fmu parameters to compute [Fmu]
+#' @param par_Omega parameters to compute [r_Omega]
 #'
 #' @return a [numeric] vector of length(n)
 #' @export
@@ -37,10 +37,10 @@ d_alpha2density = function(xi, alpha, W=0, a=0,
 r_alpha2density = function(n, alpha, W=0, a=0,
                            par_RBC = par_lRBC_static(),
                            par_Fmu=par_Fmu_base(),
-                           par_mu2dens = par_mu2dens_beta()){
+                           par_Omega = par_Omega_beta()){
   bvm = log10RBC(a, par_RBC)
-  mu = alpha2mu(alpha, W, par_Fmu)
-  r_mu2density(n, mu, par_mu2dens, bvm)
+  mu = Fmu(alpha, W, par_Fmu)
+  r_Omega(n, mu, bvm, par_Omega)
 }
 
 #' The distribution function for parasite densities in a simple malaria infection of age alpha
@@ -50,8 +50,8 @@ r_alpha2density = function(n, alpha, W=0, a=0,
 #' @param W the immune tracking variables
 #' @param a host cohort age
 #' @param par_RBC parameters to compute [log10RBC]
-#' @param par_Fmu parameters to compute [alpha2mu]
-#' @param par_mu2dens parameters to compute [p_mu2density]
+#' @param par_Fmu parameters to compute [Fmu]
+#' @param par_Omega parameters to compute [p_Omega]
 #'
 #' @return a [numeric] vector of length(x)
 #' @export
@@ -59,10 +59,10 @@ r_alpha2density = function(n, alpha, W=0, a=0,
 p_alpha2density = function(x, alpha, W=0, a=0,
                            par_RBC = par_lRBC_static(),
                            par_Fmu = par_Fmu_base(),
-                           par_mu2dens = par_mu2dens_beta()){
+                           par_Omega = par_Omega_beta()){
   bvm = log10RBC(a, par_RBC)
-  mu = alpha2mu(alpha, W, par_Fmu)
-  p_mu2density(x, mu, par_mu2dens, bvm)
+  mu = Fmu(alpha, W, par_Fmu)
+  p_Omega(x, mu, bvm, par_Omega)
 }
 
 #' The quantile function for parasite densities in a simple malaria infection of age alpha
@@ -72,8 +72,8 @@ p_alpha2density = function(x, alpha, W=0, a=0,
 #' @param W the immune tracking variables
 #' @param a host cohort age
 #' @param par_RBC parameters to compute [log10RBC]
-#' @param par_Fmu parameters to compute [alpha2mu]
-#' @param par_mu2dens parameters to compute [q_mu2density]
+#' @param par_Fmu parameters to compute [Fmu]
+#' @param par_Omega parameters to compute [q_Omega]
 #'
 #' @return a [numeric] vector of length(x)
 #' @export
@@ -81,9 +81,9 @@ p_alpha2density = function(x, alpha, W=0, a=0,
 q_alpha2density = function(x, alpha, W=0, a=0,
                            par_RBC = par_lRBC_static(),
                            par_Fmu = par_Fmu_base(),
-                           par_mu2dens = par_mu2dens_beta()){
+                           par_Omega = par_Omega_beta()){
   bvm = log10RBC(a, par_RBC)
-  mu = alpha2mu(alpha, W, par_Fmu)
-  q_mu2density(x, mu, par_mu2dens, bvm)
+  mu = Fmu(alpha, W, par_Fmu)
+  q_Omega(x, mu, bvm, par_Omega)
 }
 

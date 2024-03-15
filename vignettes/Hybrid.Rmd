@@ -188,7 +188,7 @@ While this is interesting, and while it solves the problem of modeling clearance
 
 Code exists in `pf.memory` to compute prevalence in three ways:
 
-+ Using the function `truePRa`
++ Using the function `truePR`
 
 + Using the hybrid equations `solve_dpda`
 
@@ -198,7 +198,7 @@ Code exists in `pf.memory` to compute prevalence in three ways:
 foiP3 = list(hbar=1, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
 tm = 0:1825
 Xt= solve_dpda(5/365, foiP3, Amax=5*365)
-tPR = truePRa(tm, foiP3, hhat=5/365)
+tPR = truePR(tm, foiP3, hhat=5/365)
 plot(tm, tPR, type = "l", ylab = expression(p(a)), xlab = "Age (Days)", lwd=5, col = "red")
 lines(Xt$time, 1-exp(-Xt$m), col = "white", lwd=2)
 lines(Xt$time, Xt$p, col = "blue", lwd=2, lty=2)
@@ -285,7 +285,7 @@ y_\tau(a) = \int_0^a \alpha \; f_Y(\alpha, a, \tau) \; d\alpha $$
 A differential equation for $y_\tau(a)$ is:
 
 $$
-\frac{dy}{da} = 1 - \frac{h}{p} y + \phi(r,m) \frac{x}{p}
+\frac{dy}{da} = 1 - \frac{h}{p} y + \phi(r,m) x 
 $$
 
 Where $\phi$ computes the probability that an infection with MoI$\geq 2$ *increases* with a loss. 

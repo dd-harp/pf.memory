@@ -13,6 +13,8 @@ navbar:
       href: articles/Dynamics.html
     - text: Hybrid Models
       href: articles/Hybrid.html
+    - text: MoI
+      href: articles/MoI.html
   - text: Parasite
     menu:
     - text: Parasite Densities
@@ -40,7 +42,7 @@ reference:
     Dynamics of MoI, AoI, and the AoY
   contents:
   - zda
-  - truePRa
+  - truePR
 - subtitle: Multiplicity of Infection (MoI)
   desc: |
     Methods to compute the MoI
@@ -88,35 +90,42 @@ reference:
 - title: Parasite Densities
   desc: |
     Expected densities by AoI
-- subtitle: mu(alpha)
+- subtitle: F_mu(alpha)
   desc: |
     Expected log10 parasites (mu) from the AoI (alpha)
   contents:
-  - alpha2mu
-  - salpha2mu
-  - alpha2mu.W
+  - Fmu
+  - sFmu
+  - Fmu.W
   - par_Fmu_W
-  - alpha2mu.base
+  - Fmu.base
   - par_Fmu_base
-  - alpha2mu.chronic
+  - Fmu.chronic
   - par_Fmu_chronic
 - subtitle: P(mu)
   desc: |
     log10 parasites distributions from mu
   contents:
-  - d_mu2density
-  - p_mu2density
-  - q_mu2density
-  - r_mu2density
-  - par_mu2dens_beta
+  - d_Omega
+  - p_Omega
+  - q_Omega
+  - r_Omega
+  - par_Omega_beta
 - subtitle: P(mu)
   desc: |
     log10 parasites distributions from mu
   contents:
-  - d_mu2density.beta
-  - p_mu2density.beta
-  - q_mu2density.beta
-  - r_mu2density.beta
+  - d_Omega.beta
+  - dbeta1
+  - p_Omega.beta
+  - pbeta1
+  - q_Omega.beta
+  - qbeta1
+  - r_Omega.beta
+  - rbeta1
+  - sigma_mu
+  - sigma_mu.abc
+  - par_sigma_abc
 - subtitle: P(alpha)
   desc: |
     log10 parasites from AoI (alpha)
@@ -129,15 +138,17 @@ reference:
   desc: |
     Parasite density distributions by host cohort age
   contents:
-  - d_Pdensity
+  - d_clone_density
+  - moments_clone_density
 - subtitle: Complex Infections
   desc: |
     Expected densities by AoI
   contents:
-  - Bdensity
-  - d_Bdensity
-  - p_Bdensity
-  - r_Bdensity
+  - parasite_density
+  - d_parasite_density
+  - p_parasite_density
+  - r_parasite_density
+  - moments_parasite_density
   - rRda
 - subtitle: Convolutions
   desc: |
@@ -147,43 +158,55 @@ reference:
   - cdfConvolve2
   - cdfConvolve2a
   - cdfConvolve2b
-- title: Parasite Detection
-- subtitle: Observed prevalence
+- title: Sampling
+- subtitle: Generic Functions
   desc: |
     Parasite positivity
   contents:
-  - Detect
-  - Detect.nb
-  - Detect.pois
-  - DetectBda
-  - DetectPM
-  - DetectPa
-  - par_nbCounts
-  - par_poisCounts
-- subtitle: Observed multiplicity of Infection
-  desc: |
-    Unique parasite types
+  - d_detect
+  - d_counts
+  - p_counts
+  - d_nz_counts_log
+  - p_nz_counts_log
+  - d_nz_counts_log_binned
+  - p_nz_counts_log_binned
+- subtitle: Poisson Sampling
   contents:
-  - MoIPM
+  - par_pois
+  - d_detect.pois
+  - p_counts.pois
+  - d_counts.pois
+- subtitle: Negative Binomial Sampling
+  contents:
+  - par_nb
+  - d_detect.nb
+  - p_counts.nb
+  - d_counts.nb
+- title: Parasite Detection and Counts
+- subtitle: Observed Prevalence
+  desc: |
+    Detection and observed prevalence
+  contents:
+  - d_detect_mesh
+  - d_clone_detect
+  - d_parasite_detect_moi
+  - d_parasite_detect
+  - FQ
+- subtitle: Observed MoI
+  desc: |
+    Number of Clones Counted
+  contents:
+  - d_moi_count
 - subtitle: Counts
   desc: |
     Parasite counts
   contents:
-  - pCounts
-  - pCounts.nb
-  - pCounts.pois
-  - dCounts
-  - dCountsPa
-  - pCountsPa
-  - meanCountsPa
-  - dCounts.nb
-  - dCounts.pois
-  - dCountsBa
-  - pCountsBa
-  - meanCountsBa
-  - binnedCounts
-  - binnedCounts.nb
-  - binnedCounts.pois
+  - d_clone_counts
+  - p_clone_counts
+  - mean_clone_counts
+  - d_parasite_counts
+  - p_parasite_counts
+  - mean_parasite_counts
 - title: Force of Infection
   desc: |
     Methods to set up FoI trace functions
@@ -237,14 +260,4 @@ reference:
   - log10RBC
   - log10RBC.static
   - par_lRBC_static
-- subtitle: beta distribution
-  desc: |
-    A modified beta distribution
-  contents:
-  - dbeta1
-  - pbeta1
-  - qbeta1
-  - rbeta1
-  - sigma_mu
-  - sigma_mu.abc
-  - par_sigma_abc
+
