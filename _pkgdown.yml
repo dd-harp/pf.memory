@@ -1,4 +1,4 @@
-url: https://dd-harp.github.io/pf.memory/
+url: https://dd-harp.github.io/ramp.pf.infection/
 template:
   bootstrap: 5
 navbar:
@@ -21,7 +21,7 @@ navbar:
       href: articles/Parasite_Densities.html
   right:
   - icon: fa-github
-    href: https://github.com/dd-harp/pf.memory/
+    href: https://github.com/dd-harp/ramp.pf.infection/
 home:
   sidebar:
     structure:

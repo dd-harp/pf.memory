@@ -13,7 +13,7 @@
 #' @param r the clearance rate for a simple infection
 #'
 #' @return a [numeric] vector of length(alpha)
-#' @seealso [pf.memory::FoI()]
+#' @seealso [ramp.pf.infection::FoI()]
 #' @export
 #'
 zda = function(alpha, a, FoIpar, tau=0, hhat=1, r=1/200){

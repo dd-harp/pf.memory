@@ -1,4 +1,4 @@
-# `pf.memory` <br><br> The Age of Infection, Immunity & Malaria Epidemiology 
+# `ramp.pf.infection` <br><br> The Age of Infection, Immunity & Malaria Epidemiology 
 
 This software is a set of computational algorithms that implements a synthetic approach to malaria epidemiology, defined narrowly to include exposure to the bites of infective mosquitoes, the dynamics of infection (including superinfection).  
 

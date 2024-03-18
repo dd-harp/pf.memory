@@ -9,7 +9,7 @@ vignette: >
 
 
 ```{r}
-library(pf.memory)
+library(ramp.pf.infection)
 library(deSolve)
 library(knitr)
 library(viridisLite)
@@ -186,7 +186,7 @@ $$
 
 While this is interesting, and while it solves the problem of modeling clearance under superinfection, the equation depends on $m$. Since we can compute $p(t)$ directly from $m(t)$, the equation is redundant.  
 
-Code exists in `pf.memory` to compute prevalence in three ways:
+Code exists in `ramp.pf.infection` to compute prevalence in three ways:
 
 + Using the function `truePR`
 

@@ -8,7 +8,7 @@ vignette: >
 ---
 
 ```{r suppressMessages=T}
-library(pf.memory)
+library(ramp.pf.infection)
 library(viridisLite)
 ```
 
@@ -30,7 +30,7 @@ The software is modular, in the sense that $F_\mu$ and $\Omega$ can use any suit
 
 ## Expected Logged Densities 
 
-In `pf.memory,` a `S3` function family was developed to model the relationship between the age of infection (AoI) for a parasite infection, $\alpha$, and the mean, $\mu(\alpha).$ 
+In `ramp.pf.infection,` a `S3` function family was developed to model the relationship between the age of infection (AoI) for a parasite infection, $\alpha$, and the mean, $\mu(\alpha).$ 
 
 ### `Fmu.base` 
 
@@ -54,7 +54,7 @@ l + (b - l) e^{-s_\alpha (\alpha-\delta)}
 \end{equation}
 
 
-In `pf.memory,` there are functions to set up the parameters for each case, with over-writable defaults: 
+In `ramp.pf.infection,` there are functions to set up the parameters for each case, with over-writable defaults: 
 
 ```{r}
 base_pars = par_Fmu_base()

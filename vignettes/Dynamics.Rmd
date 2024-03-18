@@ -9,13 +9,13 @@ vignette: >
 ---
 
 ```{r suppressMessages=T}
-library(pf.memory)
+library(ramp.pf.infection)
 library(viridisLite)
 ```
 
 We have derived mathematical formulas that describe the dynamics of malaria infections as random variables in cohorts of humans as they age (Henry JM, *et al.*, 2024)^[Henry JM, Carter AR, Wu SL, Smith DL (in preparation). A Probabilistic Synthesis of Malaria Epidemiology: Exposure, Infection, Parasite Densities, and Detection.] This R package is the computational companion. 
 
-In the following, we review the mathematical formulas and the functions in `pf.memory` that compute the multiplicity of infection (MoI), the age of infection (AoI), and the age of the youngest infection (AoY). 
+In the following, we review the mathematical formulas and the functions in `ramp.pf.infection` that compute the multiplicity of infection (MoI), the age of infection (AoI), and the age of the youngest infection (AoY). 
 
 ## Formulas and Computation
 
@@ -148,7 +148,7 @@ text(100, 0.008, "Cohort", col = "darkred")
 
 ### Computing `zda` 
 
-The function `pf.memory::zda(alpha, a, FoIpar, ...)` uses the formula in Eq. 1 to compute the density of parasite infections in a cohort of humans as it ages.
+The function `ramp.pf.infection::zda(alpha, a, FoIpar, ...)` uses the formula in Eq. 1 to compute the density of parasite infections in a cohort of humans as it ages.
 
 Using `zda,` we can compute the density of parasites in a cohort of any age without solving a full system of equations. Given a function describing the FoI in the population, $h(t)$, and the cohort birthday, $\tau.$
 

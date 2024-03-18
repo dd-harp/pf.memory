@@ -12,13 +12,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(pf.memory)
+library(ramp.pf.infection)
 ```
 
 ```{r}
 library(knitr)
 library(deSolve)
-library(pf.memory)
+library(ramp.pf.infection)
 ```
 
 George Maccdonald published a model of superinfection in 1950^[G Macdonald (1950). The analysis of infection rates in diseases in which superinfection occurs. Trop. Dis. Bull. 47, 907–915.].

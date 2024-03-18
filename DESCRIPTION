@@ -5,7 +5,7 @@ Authors@R: c(
       person("David L.", "Smith", email = "smitdave@uw.edu", role = "aut", comment = c(ORCID = "0000-0003-4367-3849")),
       person("John M.", "Henry", email = "henry529@uw.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-8684-2003"))
     )
-Description: .
+Description: Robust Analytics for Malaria Policy (RAMP) - A Probabilistic Synthesis of Plasmodium falciparum Infection and Immunity   
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -9,13 +9,13 @@ vignette: >
 ---
 
 ```{r suppressMessages=T}
-library(pf.memory)
+library(ramp.pf.infection)
 library(viridisLite)
 ```
 
 
 ```{r}
-library(pf.memory)
+library(ramp.pf.infection)
 library(deSolve)
 library(knitr)
 library(viridisLite)
@@ -32,9 +32,9 @@ $$\frac{h}{e^{h/r} -1}$$
 
 Dietz's function was based on a *steady state* solution to a model from queuing theory, called $M/M/\infty$. 
 
-An elegant solution to the problem of superinfection was proposed by Nåsell, who developed a hybrid modeling approach [@NasellI1985HybridModels]. The random variables approach to the problem was formulated by Henry, *et al.,* and this hybrid approach figures prominently in `pf.memory.`
+An elegant solution to the problem of superinfection was proposed by Nåsell, who developed a hybrid modeling approach [@NasellI1985HybridModels]. The random variables approach to the problem was formulated by Henry, *et al.,* and this hybrid approach figures prominently in `ramp.pf.infection.`
 
-The following is a demonstration of software in `pf.memory.`  Using the software, we show that all three approaches give identical answers. 
+The following is a demonstration of software in `ramp.pf.infection.`  Using the software, we show that all three approaches give identical answers. 
 
 Finally, we derive a correct formula for the clearance rate under superinfection.  
 
@@ -62,7 +62,7 @@ $$\frac{d \zeta_0}{dt} = r \zeta _1 - h \zeta_0.$$
 For those who are infected (with MoI$=i$), the dynamics are: 
 
 $$\frac{d \zeta_i}{dt} = h \zeta_{i-1} + r(i+1) \zeta_{i+1} - (r+h) \zeta_i$$ 
-The software in `pf.memory` includes functions to set up and solve the queuing model $M/M/\infty.$  
+The software in `ramp.pf.infection` includes functions to set up and solve the queuing model $M/M/\infty.$  
 
 ```{r, echo=F}
 aa = 0:1095
@@ -129,7 +129,7 @@ From these equations, we derive random variables describing the MoI, the AoI, an
 m_\tau(a | h) = \int_0^a z_\tau(\alpha, a |h) d \alpha 
 \end{equation}
 
-In `pf.memory,` this is computed with the function `meanMoI`
+In `ramp.pf.infection,` this is computed with the function `meanMoI`
 
 ```{r}
 ```

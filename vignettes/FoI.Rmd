@@ -10,7 +10,7 @@ vignette: >
 
 ```{r, include = FALSE}
 library(knitr) 
-library(pf.memory)
+library(ramp.pf.infection)
 ```
 
 We want to be able to simulate arbitrary patterns of exposure in cohorts as they age, with the ability to compare two cohorts of different ages in the same population. We let $h(t)$ denote the average daily FoI in a population, the hazard rate for infection. Notably, knowing the birth day for a cohort, $\tau,$ we can convert between age and time using the identity $$t = a + \tau.$$  We let $\omega(a)$ be a function that computes a *frailty* term associated with age, so we can write the FoI for any cohort as:

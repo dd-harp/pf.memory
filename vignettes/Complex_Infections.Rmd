@@ -8,6 +8,6 @@ vignette: >
 ---
 
 ```{r suppressMessages=T}
-library(pf.memory)
+library(ramp.pf.infection)
 library(viridisLite)
 ```

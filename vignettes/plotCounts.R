@@ -1,23 +1,11 @@
----
-title: "Plot Parasite Counts"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Plot Parasite Counts}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r, include = FALSE}
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 library(ramp.pf.infection)
-```
 
-
-
-```{r}
+## -----------------------------------------------------------------------------
 plotContour=function(surfObj, ylb, mlb, alim=NULL, blim=NULL,nclr=20, bks=NULL, dd=1){with(surfObj,{
  if(!is.null(alim)) {
     surf = surf[,1:alim]
@@ -41,11 +29,8 @@ plotContour=function(surfObj, ylb, mlb, alim=NULL, blim=NULL,nclr=20, bks=NULL, 
     filled.contour(surf, main = mlb, xlab = expression(list(alpha, "Parasite Cohort Age (in Days)")), ylab = ylb, xaxt = "n", yaxt = "n", levels=bks, col = clrs, plot.axes={axis(2, Ytk, labY); axis(1,Xtk, labX)})
   }
 })}
-```
 
-
-
-```{r}
+## -----------------------------------------------------------------------------
 mufig = function(){
   aa5 = 8:200
   plot(aa5, alpha2mu(aa5, 0, parMu.0()), type = "l", ylim = c(0,13), xlim = c(-10, 200), lwd=2, xlab = expression(list(alpha, "Parasite Cohort Age (in Days)")), ylab= expression(mu(alpha)))
@@ -66,11 +51,8 @@ mufig = function(){
   points(0,0, pch = 19, col = "purple")
   text(-2, 1, "Bite", col = "purple")
 }
-```
 
-
-
-```{r}
+## -----------------------------------------------------------------------------
 Pfig = function(){
   par(mfrow = c(1,2), mar = c(5,4,2,5))
   aa5 = 8:400
@@ -92,8 +74,4 @@ Pfig = function(){
   plot( dDensityPa(meshX, 5*365, foiP3), meshX, type = "l", ylim = c(0,13), lwd=2, ylab = expression(log[10](xi)), xlab= expression(list(P, "Parasite Cohort Density")))
   mtext("b)", 3, 1, at=0)
 }
-```
-
-
-
 
